@@ -9,11 +9,13 @@
 
 <nav>
   <div class="nav-wrapper green">
+    <a [routerLink]="['/notes']">
     <img class="logo" src="https://www.usherbrooke.ca/res/fileadmin/logo/logo_udes-carre-couleur.png">
-    <a href="#" class="brand-logo">Notes pour Bob Testeur</a>
+    <a class="brand-logo">Notes pour Bob Testeur</a>
+    </a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <li><a>Liste des notes</a></li>
-      <li>
+      <li> 
         <a materialize="dropdown" class="dropdown-button" href="#!" data-activates="notifs" data-belowOrigin="true" data-alignment="right" data-constrainWidth="false">
         <i class="material-icons">notifications</i>
         </a>
