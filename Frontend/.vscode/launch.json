@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        { // Launch Chrome against localhost, with sourcemaps
+          // You must run 'ng serve' before starting the debug
+            "name": "Debug with Chrome",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:4200",
+            "sourceMaps": true,
+            "webRoot": "${workspaceRoot}"
+        },
+        { // Test with Chrome against localhost, with sourcemaps
+          // You must run 'ng test' before starting the debug
+            "name": "Test with Chrome",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:9876/debug.html",
+            "sourceMaps": true,
+            "webRoot": "${workspaceRoot}"
+        }
+    ]
+}
