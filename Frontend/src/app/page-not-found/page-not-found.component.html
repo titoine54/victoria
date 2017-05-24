@@ -1,3 +1,17 @@
-<p>
-  page-not-found works!
-</p>
+<div class="container">
+  <div class="error-message center-align">
+    <h2 class="light">Oops!</h2>
+    <h4 class="light">404 Page non trouvée</h4>
+    <div class="error-details">
+      <img src="/assets/img/unicorn.png" width="180" height="180"><br>Désolé, cette page, comme les licornes, n'existent pas!
+    </div>
+    <div class="error-actions">
+      <a [routerLink]="['/notes']" class="waves-effect waves-light btn-large green">
+          <i class="material-icons left">home</i> Retourner à l'accueil
+        </a>
+      <a href="#" class="waves-effect waves-light btn-large grey">
+          <i class="material-icons left">mail</i> Contacter le support
+        </a>
+    </div>
+  </div>
+</div>
