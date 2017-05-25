@@ -8,10 +8,12 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { GradesComponent } from './grades/grades.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/notes', pathMatch: 'full' },
   { path: 'notes', component: MainComponent },
+  { path: 'grades', component: GradesComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -20,7 +22,8 @@ const appRoutes: Routes = [
     AppComponent,
     MainComponent,
     NavbarComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    GradesComponent
   ],
   imports: [
     BrowserModule,
