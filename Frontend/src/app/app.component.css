@@ -1,0 +1,14 @@
+main {
+    flex: 1 0 auto;
+}
+
+footer {
+    padding: 0;
+}
+
+footer p {
+    color: #505050;
+    margin: 10px;
+    font-weight: bold;
+    text-align: center;
+}
