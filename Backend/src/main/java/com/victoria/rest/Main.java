@@ -4,9 +4,11 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Context;
+import javax.servlet.http.HttpServletRequest;
 
 /**
- * Created by marom on 27/09/16.
+ * Temp test page
  */
 @Path("/")
 public class Main {
@@ -19,7 +21,7 @@ public class Main {
      */
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String getIt() {
-        return "Victoria!";
+    public String getIt(@Context HttpServletRequest req) {
+        return "victoria welcomes " + req.getRemoteUser();
     }
 }
