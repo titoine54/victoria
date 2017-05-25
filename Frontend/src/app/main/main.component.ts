@@ -1,13 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Note } from "app/classes/note";
 import { Ap } from "app/classes/ap";
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css']
+  styleUrls: ['./main.component.css'],
+  providers: [ModalComponent]
 })
+
 export class MainComponent implements OnInit {
+
   apList: Ap[] = [
     { ap_code: 'GEN 501', titre: 'Droit', description: null, credit: 2, competences: [] },
     { ap_code: 'GEN 500', titre: 'Conception d\'un système embarqué et réseauté', description: null, credit: 3, competences: [] },
@@ -37,6 +41,13 @@ export class MainComponent implements OnInit {
   ];
   
   constructor() { }
+
+  @ViewChild(ModalComponent)
+  private modal: ModalComponent;
+
+  openModal() {
+    this.modal.modalOpen();
+  }
 
   ngOnInit() {
   }
