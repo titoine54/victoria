@@ -9,6 +9,7 @@ import { MainComponent } from './main/main.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { GradesComponent } from './grades/grades.component';
+import { GetApTotalPipe } from "app/pipes/get-ap-total/get-ap-total.pipe";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/notes', pathMatch: 'full' },
@@ -23,7 +24,8 @@ const appRoutes: Routes = [
     MainComponent,
     NavbarComponent,
     PageNotFoundComponent,
-    GradesComponent
+    GradesComponent,
+    GetApTotalPipe
   ],
   imports: [
     BrowserModule,

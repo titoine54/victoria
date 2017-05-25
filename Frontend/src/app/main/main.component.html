@@ -2,7 +2,7 @@
   <li *ngFor="let ap of apList">
     <div class="collapsible-header">
       <b>{{ap.code}}</b> - {{ap.titre}} ( {{ap.credit}} cr.)
-      <span class="badge">--/300</span>
+      <span class="badge">{{ ap | getApTotal:notes }}</span>
     </div>
     <div class="collapsible-body active grey lighten-5">
       <blockquote *ngIf="ap.description" class="caption">
@@ -19,7 +19,8 @@
             <ng-container *ngFor="let note of notes">
               <li *ngIf="note.competence == competence.numero && note.ap == ap.code" href="#!" class="collection-item">
                 <a href="#">{{note.titre}}</a>
-                <span materialize="tooltip" data-delay="50" class="badge tooltipped" data-position="left" [attr.data-tooltip]="'Moyenne: ' + note.moyenne + ' Écart-type: ' + note.ecartType">{{note.note}}/{{note.ponderation}} (<b>{{(note.note / note.ponderation) * 100}}%</b>)</span>
+                <span *ngIf="note.note; else elseBlock" materialize="tooltip" data-delay="50" class="badge tooltipped" data-position="left" [attr.data-tooltip]="'Moyenne: ' + note.moyenne + ' Écart-type: ' + note.ecartType">{{note.note}}/{{note.ponderation}}
+                  <b>({{(note.note / note.ponderation) * 100}}%)</b></span><ng-template #elseBlock><span class="badge tooltipped" data-position="left">--/{{note.ponderation}}</span></ng-template>
               </li>
             </ng-container>
           </ul>
