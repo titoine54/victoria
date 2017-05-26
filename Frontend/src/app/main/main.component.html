@@ -18,7 +18,7 @@
             </li>
             <ng-container *ngFor="let note of notes">
               <li *ngIf="note.competence_numero == competence.competence_numero && note.ap_code == ap.ap_code" href="#!" class="collection-item">
-                <a (click)="openModal()">{{note.titre}}</a>
+                <a href="javascript:void(0)" (click)="noteModal.show()">{{note.titre}}</a>
                 <span *ngIf="note.note; else elseBlock" materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: ' + note.moyenne + ' Écart-type: ' + note.ecartType">{{note.note}}/{{note.ponderation}}
                   <b>({{ (note.note / note.ponderation) * 100 }}%)</b></span><ng-template #elseBlock><span class="badge tooltipped" data-position="left">--/{{ note.ponderation }}</span></ng-template>
               </li>
