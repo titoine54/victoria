@@ -7,4 +7,5 @@ declare var $: any;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  currentYear: number = new Date().getFullYear();
 }

@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PageNotFoundComponent } from './page-not-found.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('PageNotFoundComponent', () => {
   let component: PageNotFoundComponent;
@@ -8,7 +9,8 @@ describe('PageNotFoundComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PageNotFoundComponent ]
+      declarations: [ PageNotFoundComponent ],
+      imports:[ RouterTestingModule ]
     })
     .compileComponents();
   }));
@@ -21,5 +23,10 @@ describe('PageNotFoundComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should show a 404 error message', () => {
+    var message = window.document.getElementsByTagName('h4')[0];
+    expect(message.textContent).toContain('404');
   });
 });

@@ -2,3 +2,10 @@
 .green {
     background-color: #109a5d !important;
 }
+
+app-root {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
