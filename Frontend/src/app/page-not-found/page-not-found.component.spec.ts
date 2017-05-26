@@ -26,7 +26,8 @@ describe('PageNotFoundComponent', () => {
   });
 
   it('should show a 404 error message', () => {
-    var message = window.document.getElementsByTagName('h4')[0];
-    expect(message.textContent).toContain('404');
+    const compiled = fixture.debugElement.nativeElement;
+    // var message = window.document.getElementsByTagName('h4')[0];
+    expect(compiled.querySelector('h4').textContent).toContain('404');
   });
 });
