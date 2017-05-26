@@ -1,13 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Note } from "app/classes/note";
 import { Ap } from "app/classes/ap";
+import { NoteModalComponent } from "app/note-modal/note-modal.component";
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css']
+  styleUrls: ['./main.component.css'],
 })
+
 export class MainComponent implements OnInit {
+
+  @ViewChild(NoteModalComponent)
+  private noteModal: NoteModalComponent;
+
+  constructor() { }
+
   apList: Ap[] = [
     { ap_code: 'GEN 501', titre: 'Droit', description: null, credit: 2, competences: [] },
     { ap_code: 'GEN 500', titre: 'Conception d\'un système embarqué et réseauté', description: null, credit: 3, competences: [] },
@@ -35,8 +43,6 @@ export class MainComponent implements OnInit {
     { ap_code: 'GEN 510', competence_numero: 2, titre: 'Examen sommatif de l\'APP 2', note: 85, ponderation: 100, moyenne: 82, ecartType: 16 },
     { ap_code: 'GEN 510', competence_numero: 2, titre: 'Examen Final',                note: 60, ponderation: 60,  moyenne: 55, ecartType: 8 }
   ];
-  
-  constructor() { }
 
   ngOnInit() {
   }

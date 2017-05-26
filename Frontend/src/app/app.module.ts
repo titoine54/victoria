@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { MaterializeModule } from "angular2-materialize";
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
+import { NoteModalComponent } from './note-modal/note-modal.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { GradesComponent } from './grades/grades.component';
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     MainComponent,
+    NoteModalComponent,
     NavbarComponent,
     PageNotFoundComponent,
     GradesComponent,
@@ -34,7 +36,7 @@ const appRoutes: Routes = [
     MaterializeModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [NoteModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
