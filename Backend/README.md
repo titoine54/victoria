@@ -21,8 +21,16 @@ Install IntelliJ
    4. Click on the artifact and on the list on the right, double click on every options
    5. Apply
 4. 
-   1. Créé une nouvelle configuration
+   1. Create a new configuration
    2. **+** > **Tomcat** > **Local**
-   3. **Deployment** > **+** (Vous êtes censé voir l'artifact que vous venez de créer)
+   3. **Deployment** > **+** (You are suppose to see the artifact that you just created.)
    4. Apply
 5. Have fun :) (Run the program)
+
+
+## Set up the Run/Debug configuration to run in local
+
+1. Click on **Run** > **Edit configuration**
+2. Click on the previously created configuration > (on the tab on the right) **Startup/Connection**
+3. On **Run and/or Debug** make sure that `Pass environment variables` is checked
+4. **+** > Name : `CATALINA_OPTS` AND Value: `-DserviceURL=http://localhost:8080`
