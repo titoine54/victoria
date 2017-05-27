@@ -34,6 +34,7 @@ Install IntelliJ
 2. Click on the previously created configuration > (on the tab on the right) **Startup/Connection**
 3. On **Run and/or Debug** make sure that `Pass environment variables` is checked
 4. **+** > Name : `CATALINA_OPTS` AND Value: `-DserviceURL=http://localhost:8080`
+5. **IMPORTANT - Rebuild Project AND Rebuild Artifact**
 
 As image below
 ![capture](https://cloud.githubusercontent.com/assets/19333898/26511805/9dcda312-4231-11e7-9d36-02d7ea75952a.PNG)
