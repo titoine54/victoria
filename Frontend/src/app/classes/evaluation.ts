@@ -1,12 +1,12 @@
-import { Note } from "app/classes/note";
+import { EvaluationNote } from "app/classes/evaluation-note";
 
 /** Represent an "Evaluation" */
 export class Evaluation {
     titre: string;
-    notes: Note[];
+    evaluationNotes: EvaluationNote[];
 
-    constructor(titre: string, notes: Note[]) {
+    constructor(titre: string, evaluationNotes: EvaluationNote[]) {
         this.titre = titre;
-        this.notes = notes;
+        this.evaluationNotes = evaluationNotes;
     }
 }

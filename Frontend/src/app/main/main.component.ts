@@ -35,33 +35,38 @@ export class MainComponent implements OnInit {
 
   evaluations: Evaluation[] = [
     {
-      titre: 'Rapport de l\'APP 1', notes: [
-        { ap_code: 'GEN 510', competence_numero: 1, note: 35, ponderation: 40, moyenne: 30, ecartType: 8 },
-        { ap_code: 'GEN 510', competence_numero: 2, note: 35, ponderation: 40, moyenne: 32, ecartType: 10 },
+      titre: 'Rapport de l\'APP 1', evaluationNotes: [
+        {
+          ap_code: 'GEN 510', apNotes: [
+            { competence_numero: 1, note: 35, ponderation: 40, moyenne: 30, ecartType: 8 },
+            { competence_numero: 2, note: 35, ponderation: 40, moyenne: 32, ecartType: 10 }
+          ]
+        }
       ]
     },
     {
-      titre: 'Examen sommatif de l\'APP 1', notes: [
-        { ap_code: 'GEN 510', competence_numero: 1, note: 90, ponderation: 100, moyenne: 85, ecartType: 14 },
-        { ap_code: 'GEN 510', competence_numero: 2, note: 70, ponderation: 80, moyenne: 68, ecartType: 22 },
+      titre: 'Rapport de l\'APP 2', evaluationNotes: [
+        {
+          ap_code: 'GEN 510', apNotes: [
+            { competence_numero: 1, note: 35, ponderation: 40, moyenne: 30, ecartType: 8 },
+          ]
+        },
+        {
+          ap_code: 'GEN 530', apNotes: [
+            { competence_numero: 1, note: 35, ponderation: 40, moyenne: 30, ecartType: 8 },
+          ]
+        }
       ]
     },
     {
-      titre: 'Rapport de l\'APP 2', notes: [
-        { ap_code: 'GEN 510', competence_numero: 2, note: 12, ponderation: 20, moyenne: 15, ecartType: 4 },
+      titre: 'Examen final', evaluationNotes: [
+        {
+          ap_code: 'GEN 510', apNotes: [
+            { competence_numero: 1, note: 35, ponderation: 40, moyenne: 30, ecartType: 8 },
+          ]
+        }
       ]
-    },
-    {
-      titre: 'Examen sommatif de l\'APP 2', notes: [
-        { ap_code: 'GEN 510', competence_numero: 2, note: 85, ponderation: 100, moyenne: 82, ecartType: 12 },
-      ]
-    },
-    {
-      titre: 'Examen final', notes: [
-        { ap_code: 'GEN 510', competence_numero: 1, note: 85, ponderation: 100, moyenne: 82, ecartType: 16 },
-        { ap_code: 'GEN 510', competence_numero: 2, note: 60, ponderation: 60, moyenne: 55, ecartType: 8 },
-      ]
-    },
+    }
   ];
 
   ngOnInit() {

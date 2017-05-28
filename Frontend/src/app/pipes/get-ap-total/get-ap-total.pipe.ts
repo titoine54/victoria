@@ -18,19 +18,21 @@ export class GetApTotalPipe implements PipeTransform {
     var isFinal = true;
 
     for (let evaluation of evaluations) {
-      for (let note of evaluation.notes) {
-        if (ap.ap_code == note.ap_code) {
-          total += note.ponderation;
-          if (note.note) {
-            noteTotal += note.note;
+      for (let evaluationNote of evaluation.evaluationNotes) {
+        for (let note of evaluationNote.apNotes) {
+          if (ap.ap_code == evaluationNote.ap_code) {
+            total += note.ponderation;
+            if (note.note) {
+              noteTotal += note.note;
+            }
+            else isFinal = false;
           }
-          else isFinal = false;
         }
       }
     }
 
     if (noteTotal <= 0) {
-      return "-- /" + total;
+      return "--/" + total;
     }
     else if (isFinal == true) {
       return noteTotal + "/" + total + " (" + Math.round((noteTotal / total) * 100) + "%)";

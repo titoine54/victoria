@@ -1,44 +1,24 @@
-<div id="modal1" class="modal modal-fixed-footer" materialize="modal" [materializeActions]="modalActions">
+<div *ngIf="evaluation" id="modal1" class="modal modal-fixed-footer" materialize="modal" [materializeActions]="modalActions">
     <div class="modal-content">
         <div class="modal-header">
-            <h4>Rapport de l'APP1
+            <h4>{{ evaluation.titre }}
                 <span materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: 60/80; Écart-type: 5'"
                     class="right">
                     105/120 (<b>90%</b>)
                 </span>
             </h4>
         </div>
-        <ul class="collection with-header">
+        <ul *ngFor="let evaluationNote of evaluation.evaluationNotes" class="collection with-header">
             <li class="collection-header">
-                <b>GIF 530</b> - Circuits d'entrées/sorties et d'interfaces (1 cr.)
+                <b>{{ evaluationNote.ap_code }}</b> - {{ getSelectedAp(evaluationNote.ap_code).titre }}
                 <span materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: 62/80; Écart-type: 4'" class="right">
                     70/80 (<b>88%</b>)
                 </span>
             </li>
-            <li class="collection-item">
-                <b>Compétence 1 <i materialize="tooltip" data-delay="50" class="material-icons" data-position="bottom" [attr.data-tooltip]="'description...'">info_outline</i></b>
-                <span materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: 32/40; Écart-type: 4'">
-                    35/40 (<b>85%</b>)
-                </span>
-            </li>
-            <li class="collection-item">
-                <b>Compétence 2 <i materialize="tooltip" data-delay="50" class="material-icons" data-position="bottom" [attr.data-tooltip]="'description...'">info_outline</i></b>
-                <span materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: 32/40; Écart-type: 4'">
-                    35/40 (<b>85%</b>)
-                </span>
-            </li>
-        </ul>
-        <ul class="collection with-header">
-            <li class="collection-header">
-                <b>GIF 550</b> - Systèmes embarqués réseautés
-                <span materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: 33/40; Écart-type: 5'" class="right">
-                    35/40 (<b>88%</b>)
-                </span>
-            </li>
-            <li class="collection-item">
-                <b>Compétence 1 <i materialize="tooltip" data-delay="50" class="material-icons" data-position="bottom" [attr.data-tooltip]="'description...'">info_outline</i></b>
-                <span materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: 12/40; Écart-type: 4'">
-                    35/40 (<b>85%</b>)
+            <li *ngFor="let note of evaluationNote.apNotes" class="collection-item">
+                <b>Compétence {{ note.competence_numero }}<i materialize="tooltip" data-delay="50" class="material-icons" data-position="bottom" [attr.data-tooltip]="getCompetenceDescription(evaluationNote.ap_code, note.competence_numero)">info_outline</i></b>
+                <span materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: ' + note.moyenne + ' Écart-type: ' + note.ecartType">
+                    {{ note.note }}/{{ note.ponderation }} <b>({{ (note.note/note.ponderation) * 100 }}%)</b>
                 </span>
             </li>
         </ul>
