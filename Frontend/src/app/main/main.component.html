@@ -2,7 +2,7 @@
   <li *ngFor="let ap of apList">
     <div class="collapsible-header">
       <b>{{ ap.ap_code }}</b> - {{ ap.titre }} ( {{ ap.credit }} cr.)
-      <span class="badge">{{ ap | getApTotal:notes }}</span>
+      <span class="badge">{{ ap | getApTotal:evaluations }}</span>
     </div>
     <div class="collapsible-body active grey lighten-5">
       <blockquote *ngIf="ap.description" class="caption">
@@ -13,16 +13,19 @@
         <div *ngFor="let competence of ap.competences" class="col s12 m6">
           <ul class="collection with-header">
             <li class="collection-header">
-              <b>Compétence {{ competence.competence_numero }}</b> <i *ngIf="competence.description" materialize="tooltip" data-delay="50"
-                class="material-icons" data-position="bottom" [attr.data-tooltip]="competence.description">info_outline</i>
+              <b>Compétence {{ competence.competence_numero }}</b> <i *ngIf="competence.description" materialize="tooltip"
+                data-delay="50" class="material-icons" data-position="bottom" [attr.data-tooltip]="competence.description">info_outline</i>
             </li>
-            <ng-container *ngFor="let note of notes">
-              <li *ngIf="note.competence_numero == competence.competence_numero && note.ap_code == ap.ap_code" href="#!" class="collection-item">
-                <a href="javascript:void(0)" (click)="noteModal.show()">{{note.titre}}</a>
-                <span *ngIf="note.note; else elseBlock" materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: ' + note.moyenne + ' Écart-type: ' + note.ecartType">{{note.note}}/{{note.ponderation}}
-                  <b>({{ (note.note / note.ponderation) * 100 }}%)</b></span><ng-template #elseBlock><span class="badge tooltipped" data-position="left">--/{{ note.ponderation }}</span></ng-template>
-              </li>
-            </ng-container>
+            <div *ngFor="let evaluation of evaluations">
+              <ng-container *ngFor="let note of evaluation.notes">
+                <li *ngIf="note.competence_numero == competence.competence_numero && note.ap_code == ap.ap_code" href="#!" class="collection-item">
+                  <a href="javascript:void(0)" (click)="noteModal.show(evaluation)">{{evaluation.titre}}</a>
+                  <span *ngIf="note.note; else elseBlock" materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: ' + note.moyenne + ' Écart-type: ' + note.ecartType">{{note.note}}/{{note.ponderation}}
+                    <b>({{ (note.note / note.ponderation) * 100 }}%)</b></span>
+                  <ng-template #elseBlock><span class="badge tooltipped" data-position="left">--/{{ note.ponderation }}</span></ng-template>
+                </li>
+              </ng-container>
+            </div>
           </ul>
         </div>
       </div>

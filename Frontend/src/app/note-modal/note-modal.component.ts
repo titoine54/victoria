@@ -11,7 +11,8 @@ export class NoteModalComponent implements OnInit {
 
     modalActions = new EventEmitter<string | MaterializeAction>();
 
-    show() {
+    show(evaluation) {
+        console.log(evaluation);
         this.modalActions.emit({ action: "modal", params: ['open'] });
     }
 

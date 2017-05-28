@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Ap } from "app/classes/ap";
-import { Note } from "app/classes/note";
+import { Evaluation } from "app/classes/evaluation";
 
 @Pipe({
   name: 'getApTotal'
@@ -9,21 +9,23 @@ export class GetApTotalPipe implements PipeTransform {
 
   /** Calculates the total of a selected Ap from its associated Notes
    * @param {Ap} Ap The "Activité Pédagogique" to cumulate
-   * @param {Note[]} notes The list of all notes
+   * @param {Evaluation[]} evaluations The list of all evaluations
    * @return {string} The compiled value
    */
-  transform(ap: Ap, notes: Note[]): any {
+  transform(ap: Ap, evaluations: Evaluation[]): any {
     var total = 0;
     var noteTotal = 0;
     var isFinal = true;
 
-    for (let note of notes) {
-      if (ap.ap_code == note.ap_code) {
-        total += note.ponderation;
-        if (note.note) {
-          noteTotal += note.note;
+    for (let evaluation of evaluations) {
+      for (let note of evaluation.notes) {
+        if (ap.ap_code == note.ap_code) {
+          total += note.ponderation;
+          if (note.note) {
+            noteTotal += note.note;
+          }
+          else isFinal = false;
         }
-        else isFinal = false;
       }
     }
 

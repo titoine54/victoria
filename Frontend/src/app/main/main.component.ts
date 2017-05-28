@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Note } from "app/classes/note";
+import { Evaluation } from "app/classes/evaluation";
 import { Ap } from "app/classes/ap";
 import { NoteModalComponent } from "app/note-modal/note-modal.component";
 
@@ -33,15 +33,35 @@ export class MainComponent implements OnInit {
     { ap_code: 'GEN 560', titre: 'Statistiques et fiabilité des systèmes', description: null, credit: 2, competences: [] }
   ];
 
-  notes: Note[] = [
-    { ap_code: 'GEN 510', competence_numero: 1, titre: 'Rapport de l\'APP 1',         note: 35, ponderation: 40,  moyenne: 30, ecartType: 8 },
-    { ap_code: 'GEN 510', competence_numero: 1, titre: 'Examen sommatif de l\'APP 1', note: 90, ponderation: 100, moyenne: 85, ecartType: 14 },
-    { ap_code: 'GEN 510', competence_numero: 1, titre: 'Examen Final',                note: 85, ponderation: 100, moyenne: 82, ecartType: 16 },
-    { ap_code: 'GEN 510', competence_numero: 2, titre: 'Rapport de l\'APP 1',         note: 35, ponderation: 40,  moyenne: 32, ecartType: 10 },
-    { ap_code: 'GEN 510', competence_numero: 2, titre: 'Examen sommatif de l\'APP 1', note: 70, ponderation: 80,  moyenne: 68, ecartType: 22 },
-    { ap_code: 'GEN 510', competence_numero: 2, titre: 'Rapport de l\'APP 2',         note: 12, ponderation: 20,  moyenne: 15, ecartType: 4 },
-    { ap_code: 'GEN 510', competence_numero: 2, titre: 'Examen sommatif de l\'APP 2', note: 85, ponderation: 100, moyenne: 82, ecartType: 16 },
-    { ap_code: 'GEN 510', competence_numero: 2, titre: 'Examen Final',                note: 60, ponderation: 60,  moyenne: 55, ecartType: 8 }
+  evaluations: Evaluation[] = [
+    {
+      titre: 'Rapport de l\'APP 1', notes: [
+        { ap_code: 'GEN 510', competence_numero: 1, note: 35, ponderation: 40, moyenne: 30, ecartType: 8 },
+        { ap_code: 'GEN 510', competence_numero: 2, note: 35, ponderation: 40, moyenne: 32, ecartType: 10 },
+      ]
+    },
+    {
+      titre: 'Examen sommatif de l\'APP 1', notes: [
+        { ap_code: 'GEN 510', competence_numero: 1, note: 90, ponderation: 100, moyenne: 85, ecartType: 14 },
+        { ap_code: 'GEN 510', competence_numero: 2, note: 70, ponderation: 80, moyenne: 68, ecartType: 22 },
+      ]
+    },
+    {
+      titre: 'Rapport de l\'APP 2', notes: [
+        { ap_code: 'GEN 510', competence_numero: 2, note: 12, ponderation: 20, moyenne: 15, ecartType: 4 },
+      ]
+    },
+    {
+      titre: 'Examen sommatif de l\'APP 2', notes: [
+        { ap_code: 'GEN 510', competence_numero: 2, note: 85, ponderation: 100, moyenne: 82, ecartType: 12 },
+      ]
+    },
+    {
+      titre: 'Examen final', notes: [
+        { ap_code: 'GEN 510', competence_numero: 1, note: 85, ponderation: 100, moyenne: 82, ecartType: 16 },
+        { ap_code: 'GEN 510', competence_numero: 2, note: 60, ponderation: 60, moyenne: 55, ecartType: 8 },
+      ]
+    },
   ];
 
   ngOnInit() {
