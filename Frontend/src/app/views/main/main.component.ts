@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Evaluation } from "app/classes/evaluation";
 import { Ap } from "app/classes/ap";
-import { NoteModalComponent } from "app/note-modal/note-modal.component";
+import { NoteModalComponent } from "app/components/note-modal/note-modal.component";
 
 @Component({
   selector: 'app-main',

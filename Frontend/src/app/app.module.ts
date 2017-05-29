@@ -5,12 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterializeModule } from "angular2-materialize";
 import { AppComponent } from './app.component';
-import { MainComponent } from './main/main.component';
-import { NoteModalComponent } from './note-modal/note-modal.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { GradesComponent } from './grades/grades.component';
 import { GetApTotalPipe } from "app/pipes/get-ap-total/get-ap-total.pipe";
+import { MainComponent } from "app/views/main/main.component";
+import { NoteModalComponent } from "app/components/note-modal/note-modal.component";
+import { PageNotFoundComponent } from "app/views/page-not-found/page-not-found.component";
+import { NavbarComponent } from "app/components/navbar/navbar.component";
+import { GradesComponent } from "app/views/grades/grades.component";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/notes', pathMatch: 'full' },
