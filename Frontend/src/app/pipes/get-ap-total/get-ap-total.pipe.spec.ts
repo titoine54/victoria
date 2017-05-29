@@ -12,12 +12,12 @@ let apList: Ap[] = [
 
 let evaluations: Evaluation[] = [
   new Evaluation('Rapport de l\'APP 1', {
-    'GEN 500': [new Note(1, 35, 40), new Note(2, 35, 40)],
+    'GEN 500': [new Note(1, null, 40), new Note(2, 35, 40)],
     'GEN 510': [new Note(1, 85, 100)]
   }),
   new Evaluation('Examen Sommatif de l\'APP 1', {
     'GEN 500': [new Note(1, 35, 40)],
-    'GEN 510': [new Note(1, null, 40)]
+    'GEN 510': [new Note(1, 35, 40)]
   })
 ];
 
@@ -36,11 +36,11 @@ describe('GetApTotalPipe', () => {
 
   it('get should display "{note}/{total}" for available notes in GEN 500', () => {
     var output = pipe.transform(apList[1], evaluations);
-    expect(output).toEqual('35/80')
+    expect(output).toEqual('70/120')
   });
 
   it('get should display "{note}/{total} {percentage}%" for all notes in GEN 510', () => {
     var output = pipe.transform(apList[2], evaluations);
-    expect(output).toEqual('155/180 (86%)')
+    expect(output).toEqual('120/140 (86%)')
   });
 });

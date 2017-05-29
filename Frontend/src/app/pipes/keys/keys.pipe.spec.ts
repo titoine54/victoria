@@ -1,8 +1,22 @@
 import { KeysPipe } from './keys.pipe';
 
-describe('KeysPipePipe', () => {
+let pipe: KeysPipe;
+beforeEach(() => pipe = new KeysPipe());
+
+describe('KeysPipe', () => {
   it('create an instance', () => {
-    const pipe = new KeysPipe();
     expect(pipe).toBeTruthy();
+  });
+
+  it('extract all keys from map', () => {
+    var input = { key1: 'value1', key2: 'value2', key3: 'value3' };
+    var output = pipe.transform(input);
+    expect(output).toEqual(['key1', 'key2', 'key3']);
+  });
+
+  it('extract nothing from null', () => {
+    var input = null;
+    var output = pipe.transform(input);
+    expect(output).toEqual([]);
   });
 });

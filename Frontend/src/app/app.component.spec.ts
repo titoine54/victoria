@@ -1,8 +1,8 @@
 import { TestBed, async } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
-import { NavbarComponent } from "app/navbar/navbar.component";
 import { RouterTestingModule } from '@angular/router/testing';
+import { NavbarComponent } from "app/components/navbar/navbar.component";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {

@@ -10,10 +10,27 @@ import { Evaluation } from "app/classes/evaluation";
   styleUrls: ['./ap-competences.component.css']
 })
 export class ApCompetencesComponent {
+  gridLayout: string = 's12'; // Layout used for the placement of each competence
 
-  @Input() ap: Ap;
+  private _ap;
+  @Input()
+  set ap(ap: Ap) {
+    this.gridLayout = this.getBestGridLayout(ap.competences.length);
+    this._ap = ap;
+  }
+  get ap(): Ap { return this._ap }
 
   @Output() onRequestNoteModal = new EventEmitter<Evaluation>();
+
+  /** Get the best grid layout from the number of elements to show
+   * @param {number} length The number of elements
+   * @return {string} The best layout
+   */
+  getBestGridLayout(length: number) {
+    var layout = 's12 ';
+    layout += (length == 1 ? 'm12' : length == 2 ? 'm6' : length == 3 ? 'm4' : 'm6');
+    return layout;
+  }
 
   constructor(private global: GlobalVariablesService) { }
 
