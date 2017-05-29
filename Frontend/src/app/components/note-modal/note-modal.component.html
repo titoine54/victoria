@@ -8,15 +8,15 @@
                 </span>
             </h4>
         </div>
-        <ul *ngFor="let evaluationNote of evaluation.evaluationNotes" class="collection with-header">
+        <ul *ngFor="let apCode of evaluation.associatedAps | keys" class="collection with-header">
             <li class="collection-header">
-                <b>{{ evaluationNote.ap_code }}</b> - {{ getSelectedAp(evaluationNote.ap_code).titre }}
+                <b>{{ apCode }}</b> - {{ getSelectedAp(apCode).titre }}
                 <span materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: 62/80; Écart-type: 4'" class="right">
                     70/80 (<b>88%</b>)
                 </span>
             </li>
-            <li *ngFor="let note of evaluationNote.apNotes" class="collection-item">
-                <b>Compétence {{ note.competence_numero }}<i materialize="tooltip" data-delay="50" class="material-icons" data-position="bottom" [attr.data-tooltip]="getCompetenceDescription(evaluationNote.ap_code, note.competence_numero)">info_outline</i></b>
+            <li *ngFor="let note of evaluation.associatedAps[apCode]" class="collection-item">
+                <b>Compétence {{ note.competenceNumero }}<i materialize="tooltip" data-delay="50" class="material-icons" data-position="bottom" [attr.data-tooltip]="getCompetenceDescription(apCode, note.competenceNumero)">info_outline</i></b>
                 <span materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: ' + note.moyenne + ' Écart-type: ' + note.ecartType">
                     {{ note.note }}/{{ note.ponderation }} <b>({{ (note.note/note.ponderation) * 100 }}%)</b>
                 </span>

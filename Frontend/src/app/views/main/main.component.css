@@ -7,19 +7,3 @@
 .caption {
     font-style: italic;
 }
-
-.collection-item span.badge {
-    margin-top: calc(.75rem - 11px) !important;
-}
-
-.collection-header,
-.collection-header i {
-    font-size: 1.3rem !important;
-}
-
-span.new {
-    color: red;
-    font-size: 2rem;
-    position: absolute;
-    margin-left: 0.5rem;
-}

@@ -11,6 +11,9 @@ import { NoteModalComponent } from "app/components/note-modal/note-modal.compone
 import { PageNotFoundComponent } from "app/views/page-not-found/page-not-found.component";
 import { NavbarComponent } from "app/components/navbar/navbar.component";
 import { GradesComponent } from "app/views/grades/grades.component";
+import { ApCompetencesComponent } from "app/components/ap-competences/ap-competences.component";
+import { GlobalVariablesService } from "app/services/global-variables/global-variables.service";
+import { KeysPipe } from "app/pipes/keys/keys.pipe";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/notes', pathMatch: 'full' },
@@ -27,7 +30,9 @@ const appRoutes: Routes = [
     NavbarComponent,
     PageNotFoundComponent,
     GradesComponent,
-    GetApTotalPipe
+    GetApTotalPipe,
+    ApCompetencesComponent,
+    KeysPipe
   ],
   imports: [
     BrowserModule,
@@ -36,7 +41,7 @@ const appRoutes: Routes = [
     MaterializeModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [NoteModalComponent],
+  providers: [GlobalVariablesService, NoteModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

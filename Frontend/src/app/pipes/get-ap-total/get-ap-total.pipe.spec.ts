@@ -1,7 +1,6 @@
 import { GetApTotalPipe } from './get-ap-total.pipe';
 import { Ap } from "app/classes/ap";
 import { Evaluation } from "app/classes/evaluation";
-import { EvaluationNote } from "app/classes/evaluation-note";
 import { Note } from "app/classes/note";
 import { Competence } from "app/classes/competence";
 
@@ -12,31 +11,14 @@ let apList: Ap[] = [
 ];
 
 let evaluations: Evaluation[] = [
-  new Evaluation('Rapport de l\'APP 1', [
-    new EvaluationNote('GEN 500', [
-      new Note(1, 35, 40)
-    ])
-  ]),
-  new Evaluation('Rapport de l\'APP 1', [
-    new EvaluationNote('GEN 500', [
-      new Note(1, null, 40)
-    ])
-  ]),
-  new Evaluation('Rapport de l\'APP 1', [
-    new EvaluationNote('GEN 510', [
-      new Note(1, 35, 40)
-    ])
-  ]),
-  new Evaluation('Rapport de l\'APP 1', [
-    new EvaluationNote('GEN 510', [
-      new Note(1, 85, 100)
-    ])
-  ]),
-  new Evaluation('Rapport de l\'APP 1', [
-    new EvaluationNote('GEN 510', [
-      new Note(2, 35, 40)
-    ])
-  ])
+  new Evaluation('Rapport de l\'APP 1', {
+    'GEN 500': [new Note(1, 35, 40), new Note(2, 35, 40)],
+    'GEN 510': [new Note(1, 85, 100)]
+  }),
+  new Evaluation('Examen Sommatif de l\'APP 1', {
+    'GEN 500': [new Note(1, 35, 40)],
+    'GEN 510': [new Note(1, null, 40)]
+  })
 ];
 
 let pipe: GetApTotalPipe;
