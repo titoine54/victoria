@@ -1,11 +1,13 @@
 /** Represent a user */
 export class UserSettings {
-    enableNotifications: boolean;
-    notificationsSmsNumber: string;
-    notificationsEmail: string;
+    enableEmailNotif: boolean;
+    enableSmsNotif: boolean;
+    smsNumber: string;
+    notifEmail: string;
 
     constructor(email?: string) {
-        this.enableNotifications = false;
-        this.notificationsEmail = email;
+        this.enableEmailNotif = false;
+        this.enableSmsNotif = false;
+        this.notifEmail = email;
     }
 }
