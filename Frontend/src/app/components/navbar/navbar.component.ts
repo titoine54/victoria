@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GlobalVariablesService } from "app/services/global-variables/global-variables.service";
+import { GlobalVariablesService } from "app/services/global-variables.service";
 
 @Component({
   selector: 'app-navbar',

@@ -2,7 +2,7 @@ import { Component, EventEmitter } from "@angular/core"
 import { MaterializeAction } from "angular2-materialize";
 import { Ap } from "app/classes/ap";
 import { Evaluation } from "app/classes/evaluation";
-import { GlobalVariablesService } from "app/services/global-variables/global-variables.service";
+import { GlobalVariablesService } from "app/services/global-variables.service";
 
 @Component({
     selector: "app-note-modal",

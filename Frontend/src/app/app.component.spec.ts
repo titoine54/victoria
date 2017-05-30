@@ -3,6 +3,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NavbarComponent } from "app/components/navbar/navbar.component";
+import { GlobalVariablesService } from "app/services/global-variables.service";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -11,7 +12,8 @@ describe('AppComponent', () => {
         AppComponent,
         NavbarComponent
       ],
-      imports:[ RouterTestingModule ]
+      imports: [RouterTestingModule],
+      providers: [GlobalVariablesService]
     }).compileComponents();
   }));
 
