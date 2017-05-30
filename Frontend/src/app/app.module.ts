@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { MaterializeModule } from "angular2-materialize";
 import { AppComponent } from './app.component';
 import { GetApTotalPipe } from "app/pipes/get-ap-total/get-ap-total.pipe";
+import { GetCompetenceTotalPipe } from "app/pipes/get-competence-total/get-competence-total.pipe";
 import { MainComponent } from "app/views/main/main.component";
 import { NoteModalComponent } from "app/components/note-modal/note-modal.component";
 import { PageNotFoundComponent } from "app/views/page-not-found/page-not-found.component";
@@ -31,6 +32,7 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     GradesComponent,
     GetApTotalPipe,
+    GetCompetenceTotalPipe,
     ApCompetencesComponent,
     KeysPipe
   ],

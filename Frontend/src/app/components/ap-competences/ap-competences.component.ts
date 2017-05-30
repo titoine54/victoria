@@ -1,8 +1,8 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { NoteModalComponent } from "app/components/note-modal/note-modal.component";
-import { Ap } from "app/classes/ap";
 import { GlobalVariablesService } from "app/services/global-variables/global-variables.service";
+import { NoteModalComponent } from "app/components/note-modal/note-modal.component";
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Evaluation } from "app/classes/evaluation";
+import { Ap } from "app/classes/ap";
 
 @Component({
   selector: 'app-ap-competences',
