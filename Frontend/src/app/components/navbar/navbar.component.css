@@ -2,3 +2,12 @@ nav .logo {
     margin: 0.8rem;
     height: 40px;
 }
+
+nav .sub-title {
+    color: #f1ee6f;
+    font-size: 1.4rem;
+}
+
+nav .sub-title::before {
+    content: ' - ';
+}

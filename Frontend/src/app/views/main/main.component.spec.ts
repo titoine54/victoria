@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GetCompetenceTotalPipe } from "app/pipes/get-competence-total/get-competence-total.pipe";
-import { GlobalVariablesService } from "app/services/global-variables/global-variables.service";
+import { GlobalVariablesService } from "app/services/global-variables.service";
 import { ApCompetencesComponent } from "app/components/ap-competences/ap-competences.component";
 import { NoteModalComponent } from "app/components/note-modal/note-modal.component";
 import { GetApTotalPipe } from "app/pipes/get-ap-total/get-ap-total.pipe";

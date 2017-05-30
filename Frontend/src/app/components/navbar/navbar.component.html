@@ -12,11 +12,13 @@
 <nav>
   <div class="nav-wrapper green">
     <a [routerLink]="['/notes']">
-    <img class="logo" src="https://www.usherbrooke.ca/res/fileadmin/logo/logo_udes-carre-couleur.png">
-    <a class="brand-logo">Notes pour Bob Testeur</a>
+      <img class="logo hide-on-small-only" src="https://www.usherbrooke.ca/res/fileadmin/logo/logo_udes-carre-couleur.png">
+      <span class="brand-logo">
+        Notes de {{ global.user.fullName }}
+        <span class="sub-title hide-on-small-only">{{ global.trimestre }}</span>
+      </span>
     </a>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a [routerLink]="['/grades']">Liste des notes</a></li>
+    <ul id="nav-mobile" class="right">
       <li> 
         <a materialize="dropdown" class="dropdown-button" href="#!" data-activates="notifs" data-belowOrigin="true" data-alignment="right" data-constrainWidth="false">
         <i class="material-icons">notifications</i>

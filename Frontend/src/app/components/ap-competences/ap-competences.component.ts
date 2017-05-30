@@ -1,4 +1,4 @@
-import { GlobalVariablesService } from "app/services/global-variables/global-variables.service";
+import { GlobalVariablesService } from "app/services/global-variables.service";
 import { NoteModalComponent } from "app/components/note-modal/note-modal.component";
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Evaluation } from "app/classes/evaluation";

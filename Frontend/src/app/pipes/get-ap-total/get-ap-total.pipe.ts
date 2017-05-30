@@ -12,7 +12,7 @@ export class GetApTotalPipe implements PipeTransform {
    * @param {Evaluation[]} evaluations The list of all evaluations
    * @return {string} The compiled value
    */
-  transform(ap: Ap, evaluations: Evaluation[]): any {
+  transform(ap: Ap, evaluations: Evaluation[]): string {
     var total = 0;
     var noteTotal = 0;
 
