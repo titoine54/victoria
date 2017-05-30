@@ -13,8 +13,7 @@ export class GetCompetenceTotalPipe implements PipeTransform {
    * @param {Evaluation[]} evaluations The list of all evaluations
    * @return {string} The compiled value
    */
-
-  transform(competence: Competence, evaluations: Evaluation[]): any {
+  transform(competence: Competence, evaluations: Evaluation[]): string {
     var total = 0;
     var noteTotal = 0;
 

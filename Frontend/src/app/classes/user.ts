@@ -5,6 +5,7 @@ export class User {
     cip: string;
     firstName: string;
     lastName: string;
+    fullName: string;
     email: string;
 
     loginToken: string;
@@ -14,6 +15,7 @@ export class User {
         this.cip = cip;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.fullName = `${this.firstName} ${this.lastName}`;
         this.email = email;
 
         this.loginToken = loginToken;

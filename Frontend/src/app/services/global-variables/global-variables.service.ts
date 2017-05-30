@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Ap } from "app/classes/ap";
 import { Evaluation } from "app/classes/evaluation";
+import { User } from "app/classes/user";
 
 @Injectable()
 export class GlobalVariablesService {
 
   /** This service contains all the global variables of the application */
   constructor() { }
+
+  user: User = new User('tesb1234', 'Bob', 'Testeur', 'bob.testeur@usherbrooke.ca');
   
+  trimestre: string = 'Trimestre été 2017';
   apList: Ap[] = [
     { apCode: 'GEN 501', titre: 'Droit', description: null, credit: 2, competences: [] },
     { apCode: 'GEN 500', titre: 'Conception d\'un système embarqué et réseauté', description: null, credit: 3, competences: [] },
