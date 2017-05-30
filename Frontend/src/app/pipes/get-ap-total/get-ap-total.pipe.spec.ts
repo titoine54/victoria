@@ -34,11 +34,6 @@ describe('GetApTotalPipe', () => {
     expect(output).toEqual('--/0')
   });
 
-  it('get should display "{note}/{total}" for available notes in GEN 500', () => {
-    var output = pipe.transform(apList[1], evaluations);
-    expect(output).toEqual('70/120')
-  });
-
   it('get should display "{note}/{total} {percentage}%" for all notes in GEN 510', () => {
     var output = pipe.transform(apList[2], evaluations);
     expect(output).toEqual('120/140 (86%)')

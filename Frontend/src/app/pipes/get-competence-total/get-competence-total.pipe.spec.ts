@@ -32,11 +32,6 @@ describe('GetCompetenceTotalPipe', () => {
     expect(output).toEqual('--/0')
   });
 
-  it('get should display "{note}/{total}" for available notes in competence 1 of GEN 500', () => {
-    var output = pipe.transform(competence[1], evaluations);
-    expect(output).toEqual('65/115')
-  });
-
   it('get should display "{note}/{total} {percentage}%" for all notes in competence 1 of GEN 500', () => {
     var output = pipe.transform(competence[0], evaluations);
     expect(output).toEqual('113/125 (90%)')

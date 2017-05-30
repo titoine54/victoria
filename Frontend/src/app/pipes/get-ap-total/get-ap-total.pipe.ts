@@ -15,17 +15,13 @@ export class GetApTotalPipe implements PipeTransform {
   transform(ap: Ap, evaluations: Evaluation[]): any {
     var total = 0;
     var noteTotal = 0;
-    var isFinal = true;
 
     for (let evaluation of evaluations) {
       for (var apCode in evaluation.associatedAps) {
         for (let note of evaluation.associatedAps[apCode]) {
           if (ap.apCode == apCode) {
             total += note.ponderation;
-            if (note.note) {
-              noteTotal += note.note;
-            }
-            else isFinal = false;
+            noteTotal += note.note;
           }
         }
       }
@@ -34,12 +30,8 @@ export class GetApTotalPipe implements PipeTransform {
     if (noteTotal <= 0) {
       return "--/" + total;
     }
-    else if (isFinal == true) {
+    else {
       return noteTotal + "/" + total + " (" + Math.round((noteTotal / total) * 100) + "%)";
     }
-    else {
-      return noteTotal + "/" + total;
-    }
   }
-
 }
