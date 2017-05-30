@@ -18,9 +18,9 @@ export class GetApTotalPipe implements PipeTransform {
     var isFinal = true;
 
     for (let evaluation of evaluations) {
-      for (let evaluationNote of evaluation.evaluationNotes) {
-        for (let note of evaluationNote.apNotes) {
-          if (ap.ap_code == evaluationNote.ap_code) {
+      for (var apCode in evaluation.associatedAps) {
+        for (let note of evaluation.associatedAps[apCode]) {
+          if (ap.apCode == apCode) {
             total += note.ponderation;
             if (note.note) {
               noteTotal += note.note;

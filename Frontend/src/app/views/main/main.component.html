@@ -1,0 +1,17 @@
+<ul materialize="collapsible" class="collapsible" data-collapsible="accordion">
+  <li *ngFor="let ap of global.apList">
+    <div class="collapsible-header">
+      <b>{{ ap.apCode }}</b> - {{ ap.titre }} ( {{ ap.credit }} cr.)
+      <span class="badge">{{ ap | getApTotal:global.evaluations }}</span>
+    </div>
+    <div class="collapsible-body active grey lighten-5">
+      <blockquote *ngIf="ap.description" class="caption">
+        {{ ap.description }}
+      </blockquote>
+
+      <app-ap-competences [ap]="ap" (onRequestNoteModal)="noteModal.show($event)"></app-ap-competences>
+    </div>
+  </li>
+</ul>
+
+<app-note-modal></app-note-modal>

@@ -1,13 +1,13 @@
 /** Represent a "Note" */
 export class Note {
-    competence_numero: number;
+    competenceNumero: number;
     note: number;
     ponderation: number;
     moyenne: number;
     ecartType: number;
 
-    constructor(competence_numero: number, note: number, ponderation: number, moyenne?: number, ecartType?: number) {
-        this.competence_numero = competence_numero;
+    constructor(competenceNumero: number, note: number, ponderation: number, moyenne?: number, ecartType?: number) {
+        this.competenceNumero = competenceNumero;
         this.note = note;
         this.ponderation = ponderation;
         this.moyenne = moyenne;

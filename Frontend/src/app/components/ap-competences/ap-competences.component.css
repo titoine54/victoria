@@ -1,0 +1,8 @@
+.collection-item span.badge {
+    margin-top: calc(.75rem - 11px) !important;
+}
+
+.collection-header,
+.collection-header i {
+    font-size: 1.3rem !important;
+}

@@ -1,0 +1,9 @@
+.collapsible-body {
+    padding: 1rem;
+    padding-top: 1px;
+    background-color: #fafafa !important;
+}
+
+.caption {
+    font-style: italic;
+}
