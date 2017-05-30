@@ -1,8 +1,8 @@
 import { GetApTotalPipe } from './get-ap-total.pipe';
-import { Ap } from "app/classes/ap";
+import { Competence } from "app/classes/competence";
 import { Evaluation } from "app/classes/evaluation";
 import { Note } from "app/classes/note";
-import { Competence } from "app/classes/competence";
+import { Ap } from "app/classes/ap";
 
 let apList: Ap[] = [
   new Ap('GEN 501', 'Empty AP'),
@@ -43,4 +43,5 @@ describe('GetApTotalPipe', () => {
     var output = pipe.transform(apList[2], evaluations);
     expect(output).toEqual('120/140 (86%)')
   });
+
 });
