@@ -1,5 +1,10 @@
+.dark li a i {
+    color: #444;
+}
+
 nav .logo {
-    margin: 0.8rem;
+    vertical-align: middle;
+    padding-bottom: 5px;
     height: 40px;
 }
 
@@ -10,4 +15,18 @@ nav .sub-title {
 
 nav .sub-title::before {
     content: ' - ';
+}
+
+.brand-logo {
+  margin-left: 1rem;
+  position: inherit;
+}
+
+@media only screen and (max-width: 992px) {
+  nav .brand-logo {
+    margin-left: 0;
+    left: 0;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
 }

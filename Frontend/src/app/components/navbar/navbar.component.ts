@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { GlobalVariablesService } from "app/services/global-variables.service";
 
 @Component({
@@ -6,11 +6,13 @@ import { GlobalVariablesService } from "app/services/global-variables.service";
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
-
+export class NavbarComponent {
+  useBlackIcon: boolean = false;
+  
   constructor(private global: GlobalVariablesService) { }
 
-  ngOnInit() {
+  @HostListener('window:resize')onResize() {
+    var header = document.getElementById('navBar').parentElement.parentElement;
+    this.useBlackIcon = (header.offsetHeight > 100);
   }
-
 }
