@@ -9,23 +9,25 @@
   <li><a href="http://materializecss.com/" target="_blank">Materialize CSS</a></li>
 </ul>
 
-<nav>
+<nav id="navBar">
   <div class="nav-wrapper green">
-    <a [routerLink]="['/notes']">
-      <img class="logo hide-on-small-only" src="https://www.usherbrooke.ca/res/fileadmin/logo/logo_udes-carre-couleur.png">
-      <span class="brand-logo">
+    <a [routerLink]="['/notes']" class="brand-logo">
+      <img class="logo material-icons" src="https://www.usherbrooke.ca/res/fileadmin/logo/logo_udes-carre-couleur.png">
+    </a>
+    <a class="brand-logo">
+      <span>
         Notes de {{ global.user.fullName }}
         <span class="sub-title hide-on-small-only">{{ global.trimestre }}</span>
       </span>
     </a>
-    <ul id="nav-mobile" class="right">
+    <ul id="nav-mobile" class="right" [class.dark]="useBlackIcon">
       <li> 
-        <a materialize="dropdown" class="dropdown-button" href="#!" data-activates="notifs" data-belowOrigin="true" data-alignment="right" data-constrainWidth="false">
+        <a materialize="dropdown" class="dropdown-button" data-activates="notifs" data-belowOrigin="true" data-alignment="right" data-constrainWidth="false">
         <i class="material-icons">notifications</i>
         </a>
       </li>
       <li>
-        <a materialize="dropdown" class="dropdown-button" href="#!" data-activates="params" data-belowOrigin="true" data-alignment="right" data-constrainWidth="false">
+        <a materialize="dropdown" class="dropdown-button" data-activates="params" data-belowOrigin="true" data-alignment="right" data-constrainWidth="false">
         <i class="material-icons">settings</i>
         </a>
       </li>
