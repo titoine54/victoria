@@ -20,11 +20,25 @@ export class ApiService {
   }
 
   /** Fetch all the user data from the server
-   *  Which is: Evaluations, Aps, Notifications Settings, etc.
+   *  Which is: User, UserConfiguration, etc.
    * @return {Observable} The observable for the caller
    */
   public getUserData(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/get-user-data`, this.getHeaders())
+    return this.http.get(`${this.apiUrl}/user`, this.getHeaders())
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error._body || 'Server error'));
+  }
+
+  /** Fetch all note of the user for the user
+   *  Which is: Evaluations, Aps, Notifications Settings, etc.
+   * @param {string} trimestre The trimestre to fetch
+   * @return {Observable} The observable for the caller
+   */
+  public getNotes(trimestre?: string): Observable<any> {
+    var url = `${this.apiUrl}/notes`;
+    if (trimestre) { url += `?trimestre=${trimestre}` }
+
+    return this.http.get(url, this.getHeaders())
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error._body || 'Server error'));
   }
@@ -34,17 +48,17 @@ export class ApiService {
    * @return {Observable} The observable for the caller
    */
   public saveUserSettings(userSettings: UserSettings): Observable<any> {
-    return this.http.post(`${this.apiUrl}/save-user-settings`, JSON.stringify(userSettings), this.getHeaders())
+    return this.http.post(`${this.apiUrl}/user`, JSON.stringify(userSettings), this.getHeaders())
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error._body || 'Server error'));
   }
 
-  /** Warn api that the user has viewed his evaluation notes
-   * @param {number} evaluationId The id of the evaluation to mark as read
+  /** Warn api that the user has viewed a notification
+   * @param {number} notificationId The id of the notification to mark as read
    * @return {Observable} The observable for the caller
    */
-  public markEvaluationAsRead(evaluationId: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/mark-evaluation-as-read/${evaluationId}`, this.getHeaders())
+  public markEvaluationAsRead(notificationId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/notify/${notificationId}`, this.getHeaders())
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error._body || 'Server error'));
   }
