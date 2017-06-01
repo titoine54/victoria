@@ -1,6 +1,6 @@
 <div class="row">
   <div *ngFor="let competence of ap.competences" class="col {{ gridLayout }}">
-    <ul class="collection with-header">
+    <ul class="collection with-header z-depth-1">
       <li class="collection-header">
         <b>Compétence {{ competence.competenceNumero }}</b>
         <span class="badge">{{ competence | getCompetenceTotal:global.evaluations }}</span>
