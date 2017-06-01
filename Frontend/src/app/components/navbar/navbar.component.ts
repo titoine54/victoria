@@ -9,7 +9,7 @@ import { GlobalVariablesService } from "app/services/global-variables.service";
 export class NavbarComponent {
   useBlackIcon: boolean = false;
   
-  constructor(private global: GlobalVariablesService) { }
+  constructor(public global: GlobalVariablesService) { }
 
   @HostListener('window:resize')onResize() {
     var header = document.getElementById('navBar').parentElement.parentElement;
