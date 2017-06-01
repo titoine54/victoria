@@ -9,6 +9,7 @@ import { GetApTotalPipe } from "app/pipes/get-ap-total/get-ap-total.pipe";
 import { GetCompetenceTotalPipe } from "app/pipes/get-competence-total/get-competence-total.pipe";
 import { MainComponent } from "app/views/main/main.component";
 import { NoteModalComponent } from "app/components/note-modal/note-modal.component";
+import { SettingsModalComponent } from "app/components/settings-modal/settings-modal.component";
 import { PageNotFoundComponent } from "app/views/page-not-found/page-not-found.component";
 import { NavbarComponent } from "app/components/navbar/navbar.component";
 import { ApCompetencesComponent } from "app/components/ap-competences/ap-competences.component";
@@ -26,6 +27,7 @@ const appRoutes: Routes = [
     AppComponent,
     MainComponent,
     NoteModalComponent,
+    SettingsModalComponent,
     NavbarComponent,
     PageNotFoundComponent,
     GetApTotalPipe,
@@ -40,7 +42,7 @@ const appRoutes: Routes = [
     MaterializeModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [GlobalVariablesService, NoteModalComponent],
+  providers: [GlobalVariablesService, NoteModalComponent, SettingsModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
