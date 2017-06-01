@@ -16,7 +16,7 @@ export class MainComponent implements OnInit {
   @ViewChild(NoteModalComponent)
   private noteModal: NoteModalComponent;
 
-  constructor(private global: GlobalVariablesService) { }
+  constructor(public global: GlobalVariablesService) { }
 
   ngOnInit() { }
 
