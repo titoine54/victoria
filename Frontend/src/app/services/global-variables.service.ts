@@ -12,6 +12,7 @@ export class GlobalVariablesService {
   /** This service contains all the global variables of the application */
   constructor() { }
 
+  // TODO: Fetch data from backend
   user: User = MockUser;
   
   trimestre: string = 'Trimestre été 2017';
