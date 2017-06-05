@@ -15,6 +15,7 @@ import { NavbarComponent } from "app/components/navbar/navbar.component";
 import { ApCompetencesComponent } from "app/components/ap-competences/ap-competences.component";
 import { GlobalVariablesService } from "app/services/global-variables.service";
 import { KeysPipe } from "app/pipes/keys/keys.pipe";
+import { ApiService } from "app/services/api.service";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/notes', pathMatch: 'full' },
@@ -42,7 +43,7 @@ const appRoutes: Routes = [
     MaterializeModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [GlobalVariablesService, NoteModalComponent, SettingsModalComponent],
+  providers: [ApiService, GlobalVariablesService, NoteModalComponent, SettingsModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
