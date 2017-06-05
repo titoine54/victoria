@@ -15,6 +15,7 @@ import { NavbarComponent } from "app/components/navbar/navbar.component";
 import { ApCompetencesComponent } from "app/components/ap-competences/ap-competences.component";
 import { GlobalVariablesService } from "app/services/global-variables.service";
 import { KeysPipe } from "app/pipes/keys/keys.pipe";
+import { CompetenceTooltipInfoPipe } from "app/pipes/competence-tooltip-info/competence-tooltip-info.pipe";
 import { ApiService } from "app/services/api.service";
 
 const appRoutes: Routes = [
@@ -34,7 +35,8 @@ const appRoutes: Routes = [
     GetApTotalPipe,
     GetCompetenceTotalPipe,
     ApCompetencesComponent,
-    KeysPipe
+    KeysPipe,
+    CompetenceTooltipInfoPipe
   ],
   imports: [
     BrowserModule,
