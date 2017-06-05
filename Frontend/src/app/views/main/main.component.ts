@@ -13,8 +13,7 @@ import { GlobalVariablesService } from "app/services/global-variables.service";
 
 export class MainComponent implements OnInit {
 
-  @ViewChild(NoteModalComponent)
-  private noteModal: NoteModalComponent;
+  @ViewChild(NoteModalComponent) noteModal: NoteModalComponent
 
   constructor(public global: GlobalVariablesService) { }
 

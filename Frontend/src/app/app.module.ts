@@ -9,13 +9,14 @@ import { GetApTotalPipe } from "app/pipes/get-ap-total/get-ap-total.pipe";
 import { GetCompetenceTotalPipe } from "app/pipes/get-competence-total/get-competence-total.pipe";
 import { MainComponent } from "app/views/main/main.component";
 import { NoteModalComponent } from "app/components/note-modal/note-modal.component";
+import { SettingsModalComponent } from "app/components/settings-modal/settings-modal.component";
 import { PageNotFoundComponent } from "app/views/page-not-found/page-not-found.component";
 import { NavbarComponent } from "app/components/navbar/navbar.component";
 import { ApCompetencesComponent } from "app/components/ap-competences/ap-competences.component";
 import { GlobalVariablesService } from "app/services/global-variables.service";
 import { KeysPipe } from "app/pipes/keys/keys.pipe";
 import { CompetenceTooltipInfoPipe } from "app/pipes/competence-tooltip-info/competence-tooltip-info.pipe";
-
+import { ApiService } from "app/services/api.service";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/notes', pathMatch: 'full' },
@@ -28,6 +29,7 @@ const appRoutes: Routes = [
     AppComponent,
     MainComponent,
     NoteModalComponent,
+    SettingsModalComponent,
     NavbarComponent,
     PageNotFoundComponent,
     GetApTotalPipe,
@@ -43,7 +45,7 @@ const appRoutes: Routes = [
     MaterializeModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [GlobalVariablesService, NoteModalComponent],
+  providers: [ApiService, GlobalVariablesService, NoteModalComponent, SettingsModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

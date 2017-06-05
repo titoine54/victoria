@@ -5,9 +5,10 @@ export class UserSettings {
     smsNumber: string;
     notifEmail: string;
 
-    constructor(email?: string) {
+    constructor(email?: string, smsNumber?:string) {
         this.enableEmailNotif = false;
         this.enableSmsNotif = false;
         this.notifEmail = email;
+        this.smsNumber = smsNumber;
     }
 }
