@@ -15,3 +15,11 @@ span.new {
     position: absolute;
     margin-left: 0.5rem;
 }
+
+#loading-app {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    margin-top: -32px;
+    margin-left: -32px;
+}
