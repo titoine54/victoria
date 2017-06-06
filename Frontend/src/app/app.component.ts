@@ -19,7 +19,7 @@ export class AppComponent {
         //global.user = new User();
         this.loadUserNotes();
       },
-      err => Materialize.toast('Impossible de télécharger les données de l\'utilisateur', 4000));
+      err => { console.log(err); Materialize.toast('Impossible de télécharger les données de l\'utilisateur', 4000)});
   }
 
   loadUserNotes() {

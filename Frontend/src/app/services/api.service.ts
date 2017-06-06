@@ -16,7 +16,7 @@ export class ApiService {
   private getHeaders(token?: String, noToken?: boolean) {
     let headers: Headers = new Headers();
     headers.append("Content-Type", "application/json");
-    return { headers: headers };
+    return new RequestOptions({ headers: headers, withCredentials: true });
   }
 
   /** Fetch all the user data from the server
