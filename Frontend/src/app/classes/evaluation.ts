@@ -1,16 +1,12 @@
 import { Competence } from "app/classes/competence";
 import { Ap } from "app/classes/ap";
 import { Note } from "app/classes/note";
-
-/** Map interface of a dict */
-interface Map<T> {
-    [K: string]: T;
-}
+import { Dict } from "app/classes/dict.interface";
 
 /** Represent an "Evaluation" */
 export class Evaluation {
     titre: string;
-    associatedAps: Map<Note[]>;
+    associatedAps: Dict<Note[]>;
 
     /** Search for a note associated with a certain Ap and Compentence
      * @param {string} apCode The code of the "Activité Pédagogique"
@@ -28,7 +24,7 @@ export class Evaluation {
         return null;
     }
 
-    constructor(titre: string, associatedAps: Map<Note[]>) {
+    constructor(titre: string, associatedAps: Dict<Note[]>) {
         this.titre = titre;
         this.associatedAps = associatedAps;
     }

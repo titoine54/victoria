@@ -8,17 +8,15 @@ export class User {
     fullName: string;
     email: string;
 
-    loginToken: string;
     settings: UserSettings;
 
-    constructor(cip: string, firstName: string, lastName: string, email: string, loginToken?: string, userSettings?: UserSettings) {
+    constructor(cip: string, firstName: string, lastName: string, email: string, userSettings?: UserSettings) {
         this.cip = cip;
         this.firstName = firstName;
         this.lastName = lastName;
         this.fullName = `${this.firstName} ${this.lastName}`;
         this.email = email;
 
-        this.loginToken = loginToken;
         this.settings = userSettings || new UserSettings(this.email);
     }
 }

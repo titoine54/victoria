@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { UserSettings } from "app/classes/user-settings";
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class ApiService {
@@ -16,7 +17,7 @@ export class ApiService {
   private getHeaders(token?: String, noToken?: boolean) {
     let headers: Headers = new Headers();
     headers.append("Content-Type", "application/json");
-    return { headers: headers };
+    return new RequestOptions({ headers: headers, withCredentials: true });
   }
 
   /** Fetch all the user data from the server
@@ -24,9 +25,9 @@ export class ApiService {
    * @return {Observable} The observable for the caller
    */
   public getUserData(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/user`, this.getHeaders())
+    return this.http.get(`${this.apiUrl}/mock/user`, this.getHeaders())
       .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error._body || 'Server error'));
+      .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   /** Fetch all note of the user for the user
@@ -35,7 +36,7 @@ export class ApiService {
    * @return {Observable} The observable for the caller
    */
   public getNotes(trimestre?: string): Observable<any> {
-    var url = `${this.apiUrl}/notes`;
+    var url = `${this.apiUrl}/mock/notes/e17`;
     if (trimestre) { url += `?trimestre=${trimestre}` }
 
     return this.http.get(url, this.getHeaders())
@@ -48,7 +49,7 @@ export class ApiService {
    * @return {Observable} The observable for the caller
    */
   public saveUserSettings(userSettings: UserSettings): Observable<any> {
-    return this.http.post(`${this.apiUrl}/user`, JSON.stringify(userSettings), this.getHeaders())
+    return this.http.post(`${this.apiUrl}/mock/user`, JSON.stringify(userSettings), this.getHeaders())
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error._body || 'Server error'));
   }
@@ -58,7 +59,7 @@ export class ApiService {
    * @return {Observable} The observable for the caller
    */
   public markEvaluationAsRead(notificationId: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/notify/${notificationId}`, this.getHeaders())
+    return this.http.get(`${this.apiUrl}/mock/notify/${notificationId}`, this.getHeaders())
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error._body || 'Server error'));
   }
