@@ -13,16 +13,16 @@ export class GetCompetenceTotalPipe implements PipeTransform {
    * @param {Evaluation[]} evaluations The list of all evaluations
    * @return {string} The compiled value
    */
-  transform(competence: Competence, evaluations: Evaluation[]): string {
+  transform(competence: Competence, apCode: string, evaluations: Evaluation[]): string {
     var total = 0;
     var noteTotal = 0;
 
     for (let evaluation of evaluations) {
-      for (var apCode in evaluation.associatedAps) {
+      if (evaluation.associatedAps[apCode] != undefined) {
         for (let note of evaluation.associatedAps[apCode]) {
           if (competence.competenceNumero == note.competenceNumero) {
-            total += note.ponderation;
-            noteTotal += note.note;
+            total += +note.ponderation;
+            noteTotal += +note.note;
           }
         }
       }

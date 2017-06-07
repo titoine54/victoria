@@ -4,7 +4,7 @@
       <li class="collection-header">
         <b>Compétence {{ competence.competenceNumero }}</b>
         <i *ngIf="competence.description" materialize="tooltip" data-delay="50" class="material-icons" data-position="bottom" [attr.data-tooltip]="competence.description">info_outline</i>
-        <span materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="competence | CompetenceTooltipInfoPipe:global.evaluations">{{ competence | getCompetenceTotal:global.evaluations }}</span>
+        <span materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="competence | CompetenceTooltipInfoPipe:global.evaluations">{{ competence | getCompetenceTotal:ap.apCode:global.evaluations }}</span>
       </li>
 
       <ng-container *ngFor="let evaluation of global.evaluations">

@@ -1,7 +1,7 @@
 <ul materialize="collapsible" class="collapsible margins" data-collapsible="accordion">
   <li *ngFor="let ap of global.apList">
     <div class="collapsible-header">
-      <b>{{ ap.apCode }}</b> - {{ ap.titre }} ( {{ ap.credit }} cr.)
+      <b>{{ ap.apCode }}</b> - {{ ap.titre }} ({{ ap.credit }} cr.)
       <span class="badge">{{ ap | getApTotal:global.evaluations }}</span>
     </div>
     <div class="collapsible-body active grey lighten-4">
