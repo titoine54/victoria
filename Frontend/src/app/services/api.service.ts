@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { UserSettings } from "app/classes/user-settings";
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class ApiService {

@@ -13,10 +13,10 @@ export class GlobalVariablesService {
   constructor() { }
 
   // TODO: Fetch data from backend
-  user: User = MockUser;
+  user: User; // = MockUser;
   
   trimestre: string = 'Trimestre été 2017';
   
-  apList: Ap[] = MockApList;
-  evaluations: Evaluation[] = MockEvaluations;
+  apList: Ap[]; // = MockApList;
+  evaluations: Evaluation[]; // = MockEvaluations;
 }

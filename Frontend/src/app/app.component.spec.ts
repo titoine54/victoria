@@ -11,7 +11,7 @@ import { ApiService } from "app/services/api.service";
 import { HttpModule } from '@angular/http';
 
 describe('AppComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
@@ -21,13 +21,13 @@ describe('AppComponent', () => {
       imports: [RouterTestingModule, MaterializeModule, FormsModule, HttpModule],
       providers: [GlobalVariablesService, ApiService]
     }).compileComponents();
-  }));
+  });
 
-  it('should create the app', async(() => {
+  it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  }));
+  });
 
   // it(`should have as title 'app works!'`, async(() => {
   //   const fixture = TestBed.createComponent(AppComponent);
@@ -35,10 +35,10 @@ describe('AppComponent', () => {
   //   expect(app.title).toEqual('app works!');
   // }));
 
-  it('should render footer with copyrights', async(() => {
+  it('should render footer with copyrights', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('footer').textContent).toContain('©');
-  }));
+  });
 });
