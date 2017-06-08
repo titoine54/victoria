@@ -1,15 +1,15 @@
 <div class="row">
   <div *ngFor="let competence of ap.competences" class="col {{ gridLayout }}">
-    <ul class="collection with-header">
+    <ul class="collection with-header z-depth-1">
       <li class="collection-header">
         <b>Compétence {{ competence.competenceNumero }}</b>
-        <span materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="competence | CompetenceTooltipInfoPipe:global.evaluations">{{ competence | getCompetenceTotal:global.evaluations }}</span>
         <i *ngIf="competence.description" materialize="tooltip" data-delay="50" class="material-icons" data-position="bottom" [attr.data-tooltip]="competence.description">info_outline</i>
+        <span materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="competence | CompetenceTooltipInfoPipe:global.evaluations">{{ competence | getCompetenceTotal:ap.apCode:global.evaluations }}</span>
       </li>
 
       <ng-container *ngFor="let evaluation of global.evaluations">
         <ng-container *ngIf="evaluation.getNote(ap.apCode, competence.competenceNumero); let note">
-          <li href="#!" class="collection-item">
+          <li class="collection-item">
             <a href="javascript:void(0)" (click)="onRequestNoteModal.emit(evaluation)">{{evaluation.titre}}</a>
             <span *ngIf="note.note; else elseBlock" materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: ' + note.moyenne + ' Écart-type: ' + note.ecartType">{{note.note}}/{{note.ponderation}}
                     <b>({{ (note.note / note.ponderation) * 100 }}%)</b></span>

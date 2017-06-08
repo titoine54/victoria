@@ -1,0 +1,60 @@
+{
+  "aps": [
+    {
+      "apCode": "GIF500",
+      "titre": "Chasser",
+      "credit": 2,
+      "description": "Devenir un maître chasseur",
+      "competences": [
+          {"competenceNumero": 1, "description": "Bien viser"},
+          {"competenceNumero": 2, "description": "Bien se cacher"}
+      ]
+    },
+    {
+      "apCode": "GIF510",
+      "titre": "Cuisiner",
+      "credit": 3,
+      "description": "Devenir un maître cuisinier",
+      "competences": [
+          {"competenceNumero": 1, "description": "Bien préparer"},
+          {"competenceNumero": 2, "description": "Bien cuire"}
+    ]
+    }
+  ],
+  "evaluations": [
+    {
+      "nom": "Rapport APP1",
+      "activites": [
+        {
+          "GIF500": [
+            {
+              "competenceNumero": "1",
+              "note": "35",
+              "ponderation": "40",
+              "moyenne": "30",
+              "ecartType": "8"
+            }
+          ]
+        },
+        {
+          "GIF510": [
+            {
+              "competenceNumero": "1",
+              "note": "64",
+              "ponderation": "100",
+              "moyenne": "56",
+              "ecartType": "9"
+            },
+            {
+              "competenceNumero": "2",
+              "note": "56",
+              "ponderation": "70",
+              "moyenne": "47",
+              "ecartType": "4"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -4,6 +4,8 @@
 </ul>
 
 <ul id="params" class="dropdown-content">
+  <li><a href="javascript:void(0)" (click)="settingsModal.show()">Paramètres</a></li>
+  <li class="divider"></li>
   <li><a href="#!">Déconnexion</a></li>
   <li class="divider"></li>
   <li><a href="http://materializecss.com/" target="_blank">Materialize CSS</a></li>
@@ -15,12 +17,12 @@
       <img class="logo material-icons" src="https://www.usherbrooke.ca/res/fileadmin/logo/logo_udes-carre-couleur.png">
     </a>
     <a class="brand-logo">
-      <span>
+      <span *ngIf="global.user">
         Notes de {{ global.user.fullName }}
         <span class="sub-title hide-on-small-only">{{ global.trimestre }}</span>
       </span>
     </a>
-    <ul id="nav-mobile" class="right" [class.dark]="useBlackIcon">
+    <ul *ngIf="global.user" id="nav-mobile" class="right" [class.dark]="useBlackIcon">
       <li> 
         <a materialize="dropdown" class="dropdown-button" data-activates="notifs" data-belowOrigin="true" data-alignment="right" data-constrainWidth="false">
         <i class="material-icons">notifications</i>
@@ -34,3 +36,5 @@
     </ul>
   </div>
 </nav>
+
+<app-settings-modal></app-settings-modal>

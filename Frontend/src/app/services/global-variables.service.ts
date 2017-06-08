@@ -12,10 +12,11 @@ export class GlobalVariablesService {
   /** This service contains all the global variables of the application */
   constructor() { }
 
-  user: User = MockUser;
+  // TODO: Fetch data from backend
+  user: User; // = MockUser;
   
   trimestre: string = 'Trimestre été 2017';
   
-  apList: Ap[] = MockApList;
-  evaluations: Evaluation[] = MockEvaluations;
+  apList: Ap[]; // = MockApList;
+  evaluations: Evaluation[]; // = MockEvaluations;
 }

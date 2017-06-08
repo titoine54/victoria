@@ -22,11 +22,11 @@ export class CompetenceTooltipInfoPipe implements PipeTransform {
         for (let note of evaluation.associatedAps[apCode]) {
           if (competence.competenceNumero == note.competenceNumero) {
             if (note.note == null) {
-              leftPoints += note.ponderation;
+              leftPoints += +note.ponderation;
             }
             else {
-              total += note.ponderation;
-              moyenneTotal += note.moyenne;
+              total += +note.ponderation;
+              moyenneTotal += +note.moyenne;
             }
           }
         }
