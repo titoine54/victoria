@@ -7,7 +7,7 @@ import { ApiService } from 'app/services/api.service';
 @Component({
     selector: "app-settings-modal",
     templateUrl: './settings-modal.component.html',
-    styleUrls: ['./settings-modal.component.css']
+    styleUrls: ['./settings-modal.component.scss']
 })
 
 export class SettingsModalComponent implements OnInit {

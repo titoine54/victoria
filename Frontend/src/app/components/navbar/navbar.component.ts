@@ -5,7 +5,7 @@ import { SettingsModalComponent } from "app/components/settings-modal/settings-m
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
   useBlackIcon: boolean = false;
