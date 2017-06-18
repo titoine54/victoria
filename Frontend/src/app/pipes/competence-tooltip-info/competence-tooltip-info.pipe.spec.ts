@@ -30,7 +30,7 @@ describe('CompetenceTooltipInfoPipe', () => {
 
   it('get should display: "Moyenne: 70/80, Points restants: 40" for competence 1 of GEN 500', () => {
     var output = pipe.transform(competence[0], evaluations);
-    expect(output).toEqual('Moyenne: 60/80, Points restants: 40')
+    expect(output).toEqual('Moyenne: 60/80, Points à combler: 40')
   });
 
   it('get should display: "Moyenne: 62/80, Note finale" for competence 2 of GEN 500', () => {

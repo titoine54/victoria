@@ -17,6 +17,7 @@ import { GlobalVariablesService } from "app/services/global-variables.service";
 import { KeysPipe } from "app/pipes/keys/keys.pipe";
 import { CompetenceTooltipInfoPipe } from "app/pipes/competence-tooltip-info/competence-tooltip-info.pipe";
 import { ApiService } from "app/services/api.service";
+import { GetApStatsPipe } from "app/pipes/get-ap-stats/get-ap-stats.pipe";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/notes', pathMatch: 'full' },
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
     GetCompetenceTotalPipe,
     ApCompetencesComponent,
     KeysPipe,
-    CompetenceTooltipInfoPipe
+    CompetenceTooltipInfoPipe,
+    GetApStatsPipe
   ],
   imports: [
     BrowserModule,

@@ -5,10 +5,10 @@ import { GetCompetenceTotalPipe } from "app/pipes/get-competence-total/get-compe
 import { GlobalVariablesService } from "app/services/global-variables.service";
 import { ApCompetencesComponent } from "app/components/ap-competences/ap-competences.component";
 import { NoteModalComponent } from "app/components/note-modal/note-modal.component";
-import { GetApTotalPipe } from "app/pipes/get-ap-total/get-ap-total.pipe";
 import { MaterializeModule } from "angular2-materialize";
 import { KeysPipe } from "app/pipes/keys/keys.pipe";
 import { MainComponent } from './main.component';
+import { GetApStatsPipe } from "app/pipes/get-ap-stats/get-ap-stats.pipe";
 
 describe('MainComponent', () => {
   let component: MainComponent;
@@ -16,7 +16,7 @@ describe('MainComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MainComponent, ApCompetencesComponent, GetApTotalPipe, GetCompetenceTotalPipe, CompetenceTooltipInfoPipe, NoteModalComponent, KeysPipe],
+      declarations: [MainComponent, ApCompetencesComponent, GetApStatsPipe, GetCompetenceTotalPipe, CompetenceTooltipInfoPipe, NoteModalComponent, KeysPipe],
       providers: [GlobalVariablesService],
       imports: [MaterializeModule]
     })
