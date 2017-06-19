@@ -1,0 +1,34 @@
+nav {
+    .logo {
+        vertical-align: middle;
+        padding-bottom: 5px;
+        height: 40px;
+    }
+
+    .sub-title {
+        color: #f1ee6f;
+        font-size: 1.4rem;
+    }
+
+    .sub-title::before {
+        content: ' - ';
+    }
+    
+    .brand-logo {
+        margin-left: 1rem;
+        position: inherit;
+    }
+
+    @media only screen and (max-width: 992px) {
+        .brand-logo {
+            margin-left: 0;
+            left: 0;
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+        }
+    }
+}
+
+.dark li a i {
+    color: #444;
+}
