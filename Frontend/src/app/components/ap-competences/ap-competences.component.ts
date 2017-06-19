@@ -7,7 +7,7 @@ import { Ap } from "app/classes/ap";
 @Component({
   selector: 'app-ap-competences',
   templateUrl: './ap-competences.component.html',
-  styleUrls: ['./ap-competences.component.css']
+  styleUrls: ['./ap-competences.component.scss']
 })
 export class ApCompetencesComponent {
   gridLayout: string = 's12'; // Layout used for the placement of each competence
