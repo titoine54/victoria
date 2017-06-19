@@ -48,6 +48,6 @@ export class AppComponent {
   }
 
   openWebsiteForLogin() {
-    window.location.replace("https://cas.usherbrooke.ca/?service=" + window.location.protocol + "//" + window.location.host);
+    window.location.replace("https://cas.usherbrooke.ca/login?service=" + window.location.protocol + "//" + window.location.host);
   }
 }
