@@ -1,12 +1,24 @@
+.collapsible-header {
+    .badge.blue-badge {
+        background-color: #2196F3;
+        color: white;
+        font-weight: 300;
+        font-size: 0.8rem;
+        margin-left: 0.5rem;
+        border-radius: 2px;
+    }
+}
+
 .collapsible-body {
     padding: 1rem;
     padding-top: 1px;
     background-color: #fafafa !important;
+
+    .caption {
+        font-style: italic;
+    }
 }
 
-.caption {
-    font-style: italic;
-}
 
 .margins {
     margin: 15px;
@@ -14,8 +26,19 @@
 
 .progress {
     background-color: #dedede;
+    margin: 0 0 1rem 0;
+    height: 5px;
+
+    .bareme-progress {
+        background-color: red;
+        $barem-width: 0.5rem;
+        width: $barem-width;
+        margin-left: -$barem-width;
+    }
+
     .user-progress {
         background-color: #00a5ff;
+        pointer-events: none;
     }
 
     .ap-progress {

@@ -37,7 +37,7 @@ export class CompetenceTooltipInfoPipe implements PipeTransform {
       return "Points restants: " + leftPoints;
     }
     if (leftPoints > 0) {
-      return "Moyenne: " + moyenneTotal + "/" + total + ", Points restants: " + leftPoints;
+      return "Moyenne: " + moyenneTotal + "/" + total + ", Points à combler: " + leftPoints;
     }
     else {
       return "Moyenne: " + moyenneTotal + "/" + total + ", Note finale";
