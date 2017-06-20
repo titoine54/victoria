@@ -27,6 +27,19 @@
     </servlet-mapping>
 
     <filter>
+        <filter-name>CorsFilter</filter-name>
+        <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+        <init-param>
+            <param-name>cors.exposed.headers</param-name>
+            <param-value>Access-Control-Allow-Origin,Access-Control-Allow-Credentials</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CorsFilter</filter-name>
+        <url-pattern>/api/mock/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
         <filter-name>CAS Authentication Filter</filter-name>
         <filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class>
         <init-param>
@@ -36,6 +49,10 @@
         <init-param>
             <param-name>service</param-name>
             <param-value>${serviceURL}</param-value>
+        </init-param>
+        <init-param>
+            <param-name>ignorePattern</param-name>
+            <param-value>(/api/mock/*)|(/assets/*)</param-value>
         </init-param>
     </filter>
     <filter>
