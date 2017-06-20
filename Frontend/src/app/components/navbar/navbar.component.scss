@@ -29,6 +29,16 @@ nav {
     }
 }
 
+.userView > span {
+    margin-top: 0;
+}
+
+li a.notification {
+    line-height: 24px;
+    padding-right: 10px;
+    padding: 10px 10px 10px 32px;
+}
+
 .dark li a i {
     color: #444;
 }

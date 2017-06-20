@@ -1,35 +1,68 @@
 <ul id="notifs" class="dropdown-content">
-  <li><a href="#!">Nouvelle note disponible pour <b>GEN502</b></a></li>
-  <li><a href="#!">Nouvelle note disponible pour <b>GEN521</b></a></li>
+  <li><a href="javascript:void(0)">Nouvelle note disponible pour <b>GEN502</b></a></li>
+  <li><a href="javascript:void(0)">Nouvelle note disponible pour <b>GEN521</b></a></li>
 </ul>
 
 <ul id="params" class="dropdown-content">
   <li><a href="javascript:void(0)" (click)="settingsModal.show()">Paramètres</a></li>
   <li class="divider"></li>
   <li><a href="#!">Déconnexion</a></li>
+  <li *ngIf="isDevEnv" class="divider"></li>
+  <li *ngIf="isDevEnv">
+    <a href="http://materializecss.com/" target="_blank"><i class="material-icons">dashboard</i>Materialize CSS</a>
+  </li>
+</ul>
+
+<ul id="slide-out" class="side-nav">
+  <li *ngIf="global.user">
+    <div class="userView">
+      <div class="background green"></div>
+      <span class="white-text name">{{ global.user.fullName }}</span>
+      <span class="white-text email">{{ global.user.email }}</span>
+    </div>
+  </li>
+  <li *ngIf="isDevEnv">
+    <a href="http://materializecss.com/" target="_blank"><i class="material-icons">dashboard</i>Materialize CSS</a>
+  </li>
+  <li *ngIf="isDevEnv" class="divider"></li>
+  <li><a class="subheader">
+    <i class="material-icons">notifications</i>Notifications</a>
+  </li>
+  <li><a class="waves-effect notification" href="javascript:void(0)">Nouvelle note disponible pour <b>GEN502</b></a></li>
+  <li><a class="waves-effect notification" href="javascript:void(0)">Nouvelle note disponible pour <b>GEN521</b></a></li>
+
   <li class="divider"></li>
-  <li><a href="http://materializecss.com/" target="_blank">Materialize CSS</a></li>
+  <li><a href="javascript:void(0)" (click)="settingsModal.show()">
+    <i class="material-icons">settings</i>Paramètres</a>
+  </li>
+  <li><a href="#!">
+    <i class="material-icons">exit_to_app</i>Déconnexion</a>
+  </li>
 </ul>
 
 <nav id="navBar">
   <div class="nav-wrapper green">
+    <a href="javascript:void(0)" materialize="sideNav" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
     <a [routerLink]="['/notes']" class="brand-logo">
-      <img class="logo material-icons" src="https://www.usherbrooke.ca/res/fileadmin/logo/logo_udes-carre-couleur.png">
+      <img class="logo material-icons" src="/assets/img/logo-udes.png">
     </a>
     <a class="brand-logo">
       <span *ngIf="global.user">
-        Notes de {{ global.user.fullName }}
-        <span class="sub-title hide-on-small-only">{{ global.trimestre }}</span>
+        Notes
+        <span class="hide-on-small-only">de {{ global.user.fullName }}</span>
+        <span class="sub-title">{{ global.trimestre }}</span>
       </span>
     </a>
-    <ul *ngIf="global.user" id="nav-mobile" class="right" [class.dark]="useBlackIcon">
-      <li> 
-        <a materialize="dropdown" class="dropdown-button" data-activates="notifs" data-belowOrigin="true" data-alignment="right" data-constrainWidth="false">
+    <ul *ngIf="global.user" id="nav-mobile" class="right hide-on-med-and-down" [class.dark]="useBlackIcon">
+      <li>
+        <a materialize="dropdown" class="dropdown-button" data-activates="notifs" data-belowOrigin="true" data-alignment="right"
+          data-constrainWidth="false">
         <i class="material-icons">notifications</i>
         </a>
       </li>
       <li>
-        <a materialize="dropdown" class="dropdown-button" data-activates="params" data-belowOrigin="true" data-alignment="right" data-constrainWidth="false">
+        <a materialize="dropdown" class="dropdown-button" data-activates="params" data-belowOrigin="true" data-alignment="right"
+          data-constrainWidth="false">
         <i class="material-icons">settings</i>
         </a>
       </li>
