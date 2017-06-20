@@ -3,6 +3,7 @@ import { MaterializeAction } from "angular2-materialize";
 import { GlobalVariablesService } from "app/services/global-variables.service";
 import { UserSettings } from "app/classes/user-settings";
 import { ApiService } from 'app/services/api.service';
+declare var Materialize: any;
 
 @Component({
     selector: "app-settings-modal",
@@ -30,7 +31,11 @@ export class SettingsModalComponent implements OnInit {
     /** Closes the user settings modal and saves any changes */
     saveUserSettings() {
         console.log(this.userSettings);
-        this.apiService.saveUserSettings(this.userSettings);
+        this.apiService.saveUserSettings(this.userSettings).subscribe(
+            (data: any) => {
+                console.log(data);
+            },
+            err => Materialize.toast('Une erreur est survenue lors de la sauvegarde des paramètres.', 4000));
         this.actions.emit({ action: "modal", params: ['close'] });
     }
 
