@@ -23,13 +23,7 @@ export class AppComponent {
         global.user = new User(data.cip, data.firstName, data.lastName, data.email, data.settings);
         this.loadUserNotes();
       },
-      err => {
-        if (environment.production) {
-          Materialize.toast('Impossible de télécharger les données de l\'utilisateur', 4000);
-        } else {
-          this.openWebsiteForLogin();
-        }
-      });
+      err => this.openWebsiteForLogin());
   }
 
   loadUserNotes() {
@@ -54,9 +48,6 @@ export class AppComponent {
   }
 
   openWebsiteForLogin() {
-    Materialize.toast('Veuillez vous connecter sur le site afin d\'activer la communication.', 10000);
-    var url = 'https://s6ie1704.gel.usherbrooke.ca';
-    var icon = '<i class="material-icons">launch</i>';
-    Materialize.toast(`<a href="${url}" target="_blank">${icon}Cliquez ici pour vous connecter</a>, puis revenez sur cette onglet.`, 10000);
+    window.location.replace("https://cas.usherbrooke.ca/login?service=" + window.location.protocol + "//" + window.location.host);
   }
 }
