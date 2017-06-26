@@ -1,8 +1,10 @@
+<!--Notifications-->
 <ul id="notifs" class="dropdown-content">
   <li><a href="javascript:void(0)">Nouvelle note disponible pour <b>GEN502</b></a></li>
   <li><a href="javascript:void(0)">Nouvelle note disponible pour <b>GEN521</b></a></li>
 </ul>
 
+<!--Parameters dropdown-->
 <ul id="params" class="dropdown-content">
   <li><a href="javascript:void(0)" (click)="settingsModal.show()">Paramètres</a></li>
   <li class="divider"></li>
@@ -13,6 +15,7 @@
   </li>
 </ul>
 
+<!--Left slide menu for smaller devices-->
 <ul id="slide-out" class="side-nav">
   <li *ngIf="global.user">
     <div class="userView">
@@ -28,6 +31,8 @@
   <li><a class="subheader">
     <i class="material-icons">notifications</i>Notifications</a>
   </li>
+  
+  <!--Notifications-->
   <li><a class="waves-effect notification" href="javascript:void(0)">Nouvelle note disponible pour <b>GEN502</b></a></li>
   <li><a class="waves-effect notification" href="javascript:void(0)">Nouvelle note disponible pour <b>GEN521</b></a></li>
 
@@ -42,17 +47,17 @@
 
 <nav id="navBar">
   <div class="nav-wrapper green">
+    <!--Hamburger menu-->
     <a href="javascript:void(0)" materialize="sideNav" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+    <!--UdeS logo-->
     <a [routerLink]="['/notes']" class="brand-logo">
       <img class="logo material-icons" src="/assets/img/logo-udes.png">
     </a>
-    <a class="brand-logo">
-      <span *ngIf="global.user">
-        Notes
-        <span class="hide-on-small-only">de {{ global.user.fullName }}</span>
-        <span class="sub-title">{{ global.trimestre }}</span>
-      </span>
-    </a>
+    <!--Title-->
+    <span class="brand-logo" *ngIf="global.user">
+        Notes <span class="hide-on-small-only">de {{ global.user.fullName }}</span>
+    </span>
+    <!--Right options-->
     <ul *ngIf="global.user" id="nav-mobile" class="right hide-on-med-and-down" [class.dark]="useBlackIcon">
       <li>
         <a materialize="dropdown" class="dropdown-button" data-activates="notifs" data-belowOrigin="true" data-alignment="right"
@@ -65,6 +70,21 @@
           data-constrainWidth="false">
         <i class="material-icons">settings</i>
         </a>
+      </li>
+    </ul>
+    <!--Trimestre selection-->
+    <ul *ngIf="global.selectedTrimestre" id="nav-mobile" class="right" [class.dark]="useBlackIcon">
+      <li>
+        <a materialize="dropdown" class="dropdown-button sub-title" data-activates="trimestres" data-belowOrigin="true" data-alignment="right"
+          data-constrainWidth="false">
+          {{ global.selectedTrimestre.title }}
+        <i class="material-icons right">arrow_drop_down</i>
+        </a>
+      </li>
+    </ul>
+    <ul id="trimestres" class="dropdown-content">
+      <li *ngFor="let trimestre of global.trimestres">
+        <a (click)="selectTrimestre(trimestre)">{{ trimestre.title }} (<b>{{ trimestre.value}}</b>)</a>
       </li>
     </ul>
   </div>
