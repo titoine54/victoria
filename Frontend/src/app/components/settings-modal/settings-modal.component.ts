@@ -30,7 +30,6 @@ export class SettingsModalComponent implements OnInit {
 
     /** Closes the user settings modal and saves any changes */
     saveUserSettings() {
-        console.log(this.userSettings);
         this.apiService.saveUserSettings(this.userSettings).subscribe(
             (data: any) => {
                 console.log(data);
