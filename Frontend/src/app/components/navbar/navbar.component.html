@@ -6,9 +6,9 @@
 
 <!--Parameters dropdown-->
 <ul id="params" class="dropdown-content">
-  <li><a href="javascript:void(0)" (click)="settingsModal.show()"><i class="material-icons">settings</i>Paramètres</a></li>
+  <li><a href="javascript:void(0)" (click)="settingsModal.show()">Paramètres</a></li>
   <li class="divider"></li>
-  <li><a href="#!"><i class="material-icons">exit_to_app</i>Déconnexion</a></li>
+  <li><a href="#!">Déconnexion</a></li>
   <li *ngIf="isDevEnv" class="divider"></li>
   <li *ngIf="isDevEnv">
     <a href="http://materializecss.com/" target="_blank"><i class="material-icons">dashboard</i>Materialize CSS</a>
@@ -54,11 +54,11 @@
       <img class="logo material-icons" src="/assets/img/logo-udes.png">
     </a>
     <!--Title-->
-    <span id="nav-nom-utilisateur" class="truncateName brand-logo" *ngIf="global.user">
+    <span class="brand-logo" *ngIf="global.user">
         Notes <span class="hide-on-small-only">de {{ global.user.fullName }}</span>
     </span>
     <!--Right options-->
-    <ul *ngIf="global.user" id="nav-mobile-options" class="right hide-on-med-and-down" [class.dark]="useBlackIcon">
+    <ul *ngIf="global.user" id="nav-mobile" class="right hide-on-med-and-down" [class.dark]="useBlackIcon">
       <li>
         <a materialize="dropdown" class="dropdown-button" data-activates="notifs" data-belowOrigin="true" data-alignment="right"
           data-constrainWidth="false">
@@ -73,7 +73,7 @@
       </li>
     </ul>
     <!--Trimestre selection-->
-    <ul *ngIf="global.selectedTrimestre" id="nav-mobile-trimestres" class="right" [class.dark]="useBlackIcon">
+    <ul *ngIf="global.selectedTrimestre" id="nav-mobile" class="right" [class.dark]="useBlackIcon">
       <li>
         <a materialize="dropdown" class="dropdown-button sub-title" data-activates="trimestres" data-belowOrigin="true" data-alignment="right"
           data-constrainWidth="false">
