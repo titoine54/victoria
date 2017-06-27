@@ -13,6 +13,12 @@ nav {
     .brand-logo {
         margin-left: 1rem;
         position: inherit;
+        /* .truncateName */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: calc(100% - 420px);
+        padding-right: 5px;
     }
 
     @media only screen and (max-width: 992px) {
@@ -21,6 +27,14 @@ nav {
             left: 0;
             -webkit-transform: translateX(0);
             transform: translateX(0);
+            /* .truncateName */
+            max-width: calc(100% - 350px);
+        }
+    }
+
+    @media only screen and (max-width: 600px) {
+        .brand-logo {
+            max-width: none;
         }
     }
 }
@@ -37,4 +51,8 @@ li a.notification {
 
 .dark li a i {
     color: #444;
+}
+
+.dropdown-content {
+    min-width: 200px;
 }

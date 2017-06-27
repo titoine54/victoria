@@ -6,9 +6,8 @@
 
 <!--Parameters dropdown-->
 <ul id="params" class="dropdown-content">
-  <li><a href="javascript:void(0)" (click)="settingsModal.show()">Paramètres</a></li>
-  <li class="divider"></li>
-  <li><a href="#!">Déconnexion</a></li>
+  <li><a href="javascript:void(0)" (click)="settingsModal.show()"><i class="material-icons">settings</i>Paramètres</a></li>
+  <li><a href="#!"><i class="material-icons">exit_to_app</i>Déconnexion</a></li>
   <li *ngIf="isDevEnv" class="divider"></li>
   <li *ngIf="isDevEnv">
     <a href="http://materializecss.com/" target="_blank"><i class="material-icons">dashboard</i>Materialize CSS</a>
@@ -31,7 +30,7 @@
   <li><a class="subheader">
     <i class="material-icons">notifications</i>Notifications</a>
   </li>
-  
+
   <!--Notifications-->
   <li><a class="waves-effect notification" href="javascript:void(0)">Nouvelle note disponible pour <b>GEN502</b></a></li>
   <li><a class="waves-effect notification" href="javascript:void(0)">Nouvelle note disponible pour <b>GEN521</b></a></li>
@@ -42,6 +41,13 @@
   </li>
   <li><a href="#!">
     <i class="material-icons">exit_to_app</i>Déconnexion</a>
+  </li>
+</ul>
+
+<!--Trimestre selection-->
+<ul id="trimestres" class="dropdown-content">
+  <li *ngFor="let trimestre of global.trimestres">
+    <a (click)="selectTrimestre(trimestre)">{{ trimestre.title }} (<b>{{ trimestre.value}}</b>)</a>
   </li>
 </ul>
 
@@ -57,34 +63,29 @@
     <span class="brand-logo" *ngIf="global.user">
         Notes <span class="hide-on-small-only">de {{ global.user.fullName }}</span>
     </span>
-    <!--Right options-->
-    <ul *ngIf="global.user" id="nav-mobile" class="right hide-on-med-and-down" [class.dark]="useBlackIcon">
-      <li>
+    <ul class="right" [class.dark]="useBlackIcon">
+      <!--Trimestre selection dropdown-->
+      <li *ngIf="global.selectedTrimestre">
+        <a materialize="dropdown" class="dropdown-button sub-title" data-activates="trimestres" data-belowOrigin="true" data-alignment="right"
+          data-constrainWidth="false">
+          <span class="hide-on-small-only">{{ global.selectedTrimestre.title }}</span>
+          <span class="hide-on-med-and-up">{{ global.selectedTrimestre.value }}</span>
+        <i class="material-icons right">arrow_drop_down</i>
+        </a>
+      </li>
+      <!--Notifications-->
+      <li *ngIf="global.user" class="hide-on-med-and-down">
         <a materialize="dropdown" class="dropdown-button" data-activates="notifs" data-belowOrigin="true" data-alignment="right"
           data-constrainWidth="false">
         <i class="material-icons">notifications</i>
         </a>
       </li>
-      <li>
+      <!--Options-->
+      <li *ngIf="global.user" class="hide-on-med-and-down">
         <a materialize="dropdown" class="dropdown-button" data-activates="params" data-belowOrigin="true" data-alignment="right"
           data-constrainWidth="false">
         <i class="material-icons">settings</i>
         </a>
-      </li>
-    </ul>
-    <!--Trimestre selection-->
-    <ul *ngIf="global.selectedTrimestre" id="nav-mobile" class="right" [class.dark]="useBlackIcon">
-      <li>
-        <a materialize="dropdown" class="dropdown-button sub-title" data-activates="trimestres" data-belowOrigin="true" data-alignment="right"
-          data-constrainWidth="false">
-          {{ global.selectedTrimestre.title }}
-        <i class="material-icons right">arrow_drop_down</i>
-        </a>
-      </li>
-    </ul>
-    <ul id="trimestres" class="dropdown-content">
-      <li *ngFor="let trimestre of global.trimestres">
-        <a (click)="selectTrimestre(trimestre)">{{ trimestre.title }} (<b>{{ trimestre.value}}</b>)</a>
       </li>
     </ul>
   </div>
