@@ -48,11 +48,9 @@ public class XsrfPreventionFilter implements Filter {
             String receivedNonce = request.getHeader(XSRF_HEADER_NAME);
             String nonce = (String) session.getAttribute(XSRF_COOKIE_NAME);
 
-            if(nonce == null || receivedNonce == null) {
-                return;
-            }
-
-            if(!receivedNonce.equals(nonce)) {
+            if(nonce == null || receivedNonce == null
+               || !receivedNonce.equals(nonce)) {
+                response.sendError(403);
                 return;
             }
         }
