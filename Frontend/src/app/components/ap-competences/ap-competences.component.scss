@@ -10,6 +10,13 @@
 }
 
 .collection-item {
+    span.new {
+        color: red;
+        font-size: 2rem;
+        position: absolute;
+        margin-left: 0.5rem;
+    }
+
     span.badge {
         margin-top: calc(.75rem - 11px) !important;
     }
