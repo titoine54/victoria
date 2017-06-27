@@ -1,5 +1,5 @@
-<div *ngIf="evaluation" id="modal1" class="modal" materialize="modal" [materializeActions]="modalActions">
-    <div class="modal-content">
+<div id="modal1" class="modal" materialize="modal" [materializeActions]="modalActions">
+    <div *ngIf="evaluation" class="modal-content">
         <div class="modal-header">
             <h4>{{ evaluation.titre }}
                 <span *ngIf="getEvaluationStats(); let stats" materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: ' + stats.groupMean + ' Écart-type: ' + stats.standardDeviation" class="right">
