@@ -11,7 +11,7 @@
             </p>
             <p class="input-field col s6">
                 <input id="emailNotifInput" type="email" [disabled]="!userSettings.enableEmailNotif" [(ngModel)]="userSettings.notifEmail"
-                    name="emailNotifInput" class="validate" required />
+                    name="emailNotifInput" class="validate" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" />
                 <label for="emailNotifInput">Adresse électronique</label>
             </p>
             <p>
