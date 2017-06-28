@@ -1,18 +1,17 @@
-<div *ngIf="evaluation" id="modal1" class="modal" materialize="modal" [materializeActions]="modalActions">
-    <div class="modal-content">
+<div id="modal1" class="modal" materialize="modal" [materializeActions]="modalActions">
+    <div *ngIf="evaluation" class="modal-content">
         <div class="modal-header">
             <h4>{{ evaluation.titre }}
-                <span materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: 60/80; Écart-type: 5'"
-                    class="right">
-                    105/120 (<b>90%</b>)
+                <span *ngIf="getEvaluationStats(); let stats" materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: ' + stats.groupMean + ' Écart-type: ' + stats.standardDeviation" class="right">
+                    {{ stats.accumulatedPoints }}/{{ stats.accumulatedTotals }} <b>({{ stats.note }}%)</b>
                 </span>
             </h4>
         </div>
         <ul *ngFor="let apCode of evaluation.associatedAps | keys" class="collection with-header">
             <li class="collection-header">
                 <b>{{ apCode }}</b> - {{ getSelectedAp(apCode).titre }}
-                <span materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: 62/80; Écart-type: 4'" class="right">
-                    70/80 (<b>88%</b>)
+                <span *ngIf="getApStats(apCode); let apStats" materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: ' + apStats.groupMean + ' Écart-type: ' + apStats.standardDeviation" class="right">
+                    {{ apStats.accumulatedPoints }}/{{ apStats.accumulatedTotals }} <b>({{ apStats.note }}%)</b>
                 </span>
             </li>
             <li *ngFor="let note of evaluation.associatedAps[apCode]" class="collection-item">
