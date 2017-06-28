@@ -20,7 +20,8 @@ public class XsrfPreventionFilter implements Filter {
         random = new SecureRandom();
 
         String pattern = filterConfig.getInitParameter("ignorePattern");
-        ignorePattern = Pattern.compile(pattern);
+        if(pattern != null)
+            ignorePattern = Pattern.compile(pattern);
     }
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
