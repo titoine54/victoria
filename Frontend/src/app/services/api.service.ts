@@ -49,7 +49,7 @@ export class ApiService {
    * @return {Observable} The observable for the caller
    */
   public saveUserSettings(userSettings: UserSettings): Observable<any> {
-    return this.http.post(`${this.apiUrl}/mock/user`, JSON.stringify(userSettings), this.getHeaders())
+    return this.http.put(`${this.apiUrl}/mock/user`, JSON.stringify(userSettings), this.getHeaders())
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error._body || 'Server error'));
   }
