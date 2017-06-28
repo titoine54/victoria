@@ -7,16 +7,18 @@ nav {
 
     .sub-title {
         color: #f1ee6f;
-        font-size: 1.4rem;
-    }
-
-    .sub-title::before {
-        content: ' - ';
+        font-size: 1.2rem;
     }
     
     .brand-logo {
         margin-left: 1rem;
         position: inherit;
+        /* .truncateName */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: calc(100% - 420px);
+        padding-right: 5px;
     }
 
     @media only screen and (max-width: 992px) {
@@ -25,10 +27,40 @@ nav {
             left: 0;
             -webkit-transform: translateX(0);
             transform: translateX(0);
+            /* .truncateName */
+            max-width: calc(100% - 350px);
+        }
+    }
+
+    @media only screen and (max-width: 600px) {
+        .brand-logo {
+            max-width: none;
         }
     }
 }
 
+.userView {
+    background: rgba(7, 49, 9, 0.35);
+    > span {
+        margin-top: 0;
+    }
+
+    .name {
+        font-size: 20px;
+        margin-bottom: 6px;
+    }
+}
+
+li a.notification {
+    line-height: 24px;
+    padding-right: 10px;
+    padding: 10px 10px 10px 32px;
+}
+
 .dark li a i {
     color: #444;
+}
+
+.dropdown-content {
+    min-width: 200px;
 }
