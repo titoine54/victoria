@@ -18,7 +18,9 @@
 <ul id="slide-out" class="side-nav">
   <li *ngIf="global.user">
     <div class="userView">
-      <div class="background green"></div>
+      <div class="background green">
+        <img src="assets/img/menu-bg.png">
+      </div>
       <span class="white-text name">{{ global.user.fullName }}</span>
       <span class="white-text email">{{ global.user.email }}</span>
     </div>
