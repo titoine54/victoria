@@ -1,5 +1,5 @@
 <div id="settingsModal" class="modal" materialize="modal" [materializeActions]="actions">
-    <form #optionsForm="ngForm" materialize>
+    <form #optionsForm="ngForm" (ngSubmit)="saveUserSettings()" materialize>
         <div class="modal-content">
             <div class="modal-header">
                 <h4>Paramètres de notification</h4>
@@ -26,7 +26,7 @@
             </p>
         </div>
         <div class="modal-footer">
-            <button [disabled]="!optionsForm.form.valid" type="submit" class="waves-effect waves-green btn-flat" (click)="saveUserSettings()">OK</button>
+            <button [disabled]="!optionsForm.form.valid" type="submit" class="waves-effect waves-green btn-flat">OK</button>
             <button class="waves-effect waves-green btn-flat" (click)="hide()">Cancel</button>
         </div>
     </form>
