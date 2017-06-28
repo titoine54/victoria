@@ -13,10 +13,31 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>com.victoria.servlets.Logout</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Victoria API</servlet-name>
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>CorsFilter</filter-name>
+        <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+        <init-param>
+            <param-name>cors.exposed.headers</param-name>
+            <param-value>Access-Control-Allow-Origin,Access-Control-Allow-Credentials</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CorsFilter</filter-name>
+        <url-pattern>/api/mock/*</url-pattern>
+    </filter-mapping>
 
     <filter>
         <filter-name>CAS Authentication Filter</filter-name>
@@ -28,6 +49,10 @@
         <init-param>
             <param-name>service</param-name>
             <param-value>${serviceURL}</param-value>
+        </init-param>
+        <init-param>
+            <param-name>ignorePattern</param-name>
+            <param-value>(/api/mock/*)|(/assets/*)</param-value>
         </init-param>
     </filter>
     <filter>

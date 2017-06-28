@@ -7,7 +7,9 @@ import { Ap } from "app/classes/ap";
 })
 export class GetApTotalPipe implements PipeTransform {
 
-  /** Calculates the total of a selected Ap from its associated Notes
+  /** @deprecated Use getApStats
+   * 
+   * Calculates the total of a selected Ap from its associated Notes
    * @param {Ap} Ap The "Activité Pédagogique" to cumulate
    * @param {Evaluation[]} evaluations The list of all evaluations
    * @return {string} The compiled value
