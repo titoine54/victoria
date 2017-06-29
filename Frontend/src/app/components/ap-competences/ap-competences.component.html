@@ -1,5 +1,5 @@
 <div class="row">
-  <div *ngFor="let competence of ap.competences" class="col {{ gridLayout }}">
+  <div *ngFor="let competence of ap.competences" class="col {{ gridLayout }} marginBotton">
     <ul class="collection with-header z-depth-1">
       <li class="collection-header">
         <b>Compétence {{ competence.competenceNumero }}</b>
@@ -11,8 +11,9 @@
         <ng-container *ngIf="evaluation.getNote(ap.apCode, competence.competenceNumero); let note">
           <li class="collection-item">
             <a href="javascript:void(0)" (click)="onRequestNoteModal.emit(evaluation)">{{evaluation.titre}}</a>
+            <span class="new" *ngIf="evaluation.estNouveau">&bull;</span>
             <span *ngIf="note.note; else elseBlock" materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: ' + note.moyenne + ' Écart-type: ' + note.ecartType">{{note.note}}/{{note.ponderation}}
-                    <b>({{ (note.note / note.ponderation) * 100 }}%)</b></span>
+                    <b>({{ (note.note / note.ponderation) * 100 | number : '1.0-0' }}%)</b></span>
             <ng-template #elseBlock><span class="badge tooltipped" data-position="left">--/{{ note.ponderation }}</span></ng-template>
           </li>
         </ng-container>

@@ -18,6 +18,8 @@ import { KeysPipe } from "app/pipes/keys/keys.pipe";
 import { CompetenceTooltipInfoPipe } from "app/pipes/competence-tooltip-info/competence-tooltip-info.pipe";
 import { ApiService } from "app/services/api.service";
 import { GetApStatsPipe } from "app/pipes/get-ap-stats/get-ap-stats.pipe";
+import { HasNewEvaluationPipe } from "app/pipes/has-new-evaluation/has-new-evaluation.pipe";
+import { LoadingComponent } from "app/components/loading/loading.component";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/notes', pathMatch: 'full' },
@@ -38,7 +40,9 @@ const appRoutes: Routes = [
     ApCompetencesComponent,
     KeysPipe,
     CompetenceTooltipInfoPipe,
-    GetApStatsPipe
+    GetApStatsPipe,
+    HasNewEvaluationPipe,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

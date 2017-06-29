@@ -1,27 +1,33 @@
 <div id="settingsModal" class="modal" materialize="modal" [materializeActions]="actions">
-    <div class="modal-content">
-        <div class="modal-header"><h4>Paramètres de notification</h4></div>
-        <form action="#">
+    <form #optionsForm="ngForm" (ngSubmit)="saveUserSettings()" materialize>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Paramètres de notification</h4>
+            </div>
             <p>
-                <input id="emailNotifChkbox" type="checkbox" [(ngModel)]="userSettings.enableEmailNotif" name="emailNotifChkbox" class="filled-in" checked="checked" />
+                <input id="emailNotifChkbox" type="checkbox" [(ngModel)]="userSettings.enableEmailNotif" name="emailNotifChkbox" class="filled-in"
+                    checked="checked" />
                 <label for="emailNotifChkbox">Activer les notifications par email</label>
             </p>
             <p class="input-field col s6">
-                <input id="emailNotifInput" type="email" [disabled]="!userSettings.enableEmailNotif" [(ngModel)]="userSettings.notifEmail" name="emailNotifInput" class="validate"/>
+                <input id="emailNotifInput" type="email" [disabled]="!userSettings.enableEmailNotif" [(ngModel)]="userSettings.notifEmail"
+                    name="emailNotifInput" class="validate" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" />
                 <label for="emailNotifInput">Adresse électronique</label>
             </p>
             <p>
-                <input id="smsNotifChkbox" type="checkbox" [(ngModel)]="userSettings.enableSmsNotif" name="smsNotifChkbox" class="filled-in" checked="checked" />
+                <input id="smsNotifChkbox" type="checkbox" [(ngModel)]="userSettings.enableSmsNotif" name="smsNotifChkbox" class="filled-in"
+                    checked="checked" />
                 <label for="smsNotifChkbox">Activer les notifications SMS</label>
             </p>
             <p class="input-field col s6">
-                <input id="smsNotifInput" type="number" [disabled]="!userSettings.enableSmsNotif" [(ngModel)]="userSettings.smsNumber" name="smsNotifInput" class="validate" />
+                <input id="smsNotifInput" type="number" [disabled]="!userSettings.enableSmsNotif" [(ngModel)]="userSettings.smsNumber" name="smsNotifInput"
+                    class="validate" required />
                 <label for="smsNotifInput">Numéro de l'appareil mobile</label>
             </p>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <a class="waves-effect waves-green btn-flat" (click)="saveUserSettings()">OK</a>
-        <a class="waves-effect waves-green btn-flat" (click)="hide()">Cancel</a>
-    </div>
+        </div>
+        <div class="modal-footer">
+            <button [disabled]="!optionsForm.form.valid" type="submit" class="waves-effect waves-green btn-flat">OK</button>
+            <button class="waves-effect waves-green btn-flat" (click)="hide()">Cancel</button>
+        </div>
+    </form>
 </div>

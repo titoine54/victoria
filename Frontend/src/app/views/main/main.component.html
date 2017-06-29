@@ -1,10 +1,11 @@
-<ul materialize="collapsible" class="collapsible margins" data-collapsible="accordion">
+<ul *ngIf="global.apList?.length > 0" materialize="collapsible" class="collapsible margins" data-collapsible="accordion">
   <li *ngFor="let ap of global.apList">
 
     <div *ngIf="ap | getApStats:global.evaluations; let apStats" class="collapsible-header waves-effect">
       <b>{{ ap.apCode }}</b> - {{ ap.titre }} ({{ ap.credit }} cr.)
       <span class="badge blue-badge">Points à combler: {{ apStats.remaining }}</span>
       <span class="badge">{{ apStats.string }}</span>
+      <span class="new" *ngIf="ap | hasNewEvaluation:global.evaluations">&bull;</span>
 
       <div class="progress">
         <div class="ap-progress determinate" [style.width]="apStats.remainingPercent" [attr.data-tooltip]="apStats.string" materialize="tooltip" data-delay="30" data-position="top"></div>
@@ -22,5 +23,7 @@
     </div>
   </li>
 </ul>
+
+<loading *ngIf="global.apList == undefined || global.apList.length == 0"></loading>
 
 <app-note-modal></app-note-modal>

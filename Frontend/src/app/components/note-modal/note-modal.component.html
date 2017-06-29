@@ -1,27 +1,30 @@
-<div *ngIf="evaluation" id="modal1" class="modal" materialize="modal" [materializeActions]="modalActions">
-    <div class="modal-content">
+<div id="modal1" class="modal" materialize="modal" [materializeActions]="modalActions">
+    <div *ngIf="evaluation" class="modal-content">
         <div class="modal-header">
             <h4>{{ evaluation.titre }}
-                <span materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: 60/80; Écart-type: 5'"
+                <span *ngIf="getEvaluationStats(); let stats" materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: ' + stats.groupMean + ' Écart-type: ' + stats.standardDeviation"
                     class="right">
-                    105/120 (<b>90%</b>)
+                    {{ stats.accumulatedPoints }}/{{ stats.accumulatedTotals }} <b>({{ stats.note }}%)</b>
                 </span>
             </h4>
         </div>
-        <ul *ngFor="let apCode of evaluation.associatedAps | keys" class="collection with-header">
-            <li class="collection-header">
-                <b>{{ apCode }}</b> - {{ getSelectedAp(apCode).titre }}
-                <span materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: 62/80; Écart-type: 4'" class="right">
-                    70/80 (<b>88%</b>)
+        <div>
+            <ul *ngFor="let apCode of evaluation.associatedAps | keys" class="collection with-header">
+                <li class="collection-header">
+                    <b>{{ apCode }}</b> - {{ getSelectedAp(apCode).titre }}
+                    <span *ngIf="getApStats(apCode); let apStats" materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: ' + apStats.groupMean + ' Écart-type: ' + apStats.standardDeviation"
+                        class="right">
+                    {{ apStats.accumulatedPoints }}/{{ apStats.accumulatedTotals }} <b>({{ apStats.note }}%)</b>
                 </span>
-            </li>
-            <li *ngFor="let note of evaluation.associatedAps[apCode]" class="collection-item">
-                <b>Compétence {{ note.competenceNumero }}<i materialize="tooltip" data-delay="50" class="material-icons" data-position="bottom" [attr.data-tooltip]="getCompetenceDescription(apCode, note.competenceNumero)">info_outline</i></b>
-                <span materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: ' + note.moyenne + ' Écart-type: ' + note.ecartType">
-                    {{ note.note }}/{{ note.ponderation }} <b>({{ (note.note/note.ponderation) * 100 }}%)</b>
+                </li>
+                <li *ngFor="let note of evaluation.associatedAps[apCode]" class="collection-item">
+                    <b>Compétence {{ note.competenceNumero }}<i materialize="tooltip" data-delay="50" class="material-icons" data-position="bottom" [attr.data-tooltip]="getCompetenceDescription(apCode, note.competenceNumero)">info_outline</i></b>
+                    <span materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: ' + note.moyenne + ' Écart-type: ' + note.ecartType">
+                    {{ note.note }}/{{ note.ponderation }} <b>({{ (note.note/note.ponderation) * 100 | number : '1.0-0' }}%)</b>
                 </span>
-            </li>
-        </ul>
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="modal-footer">
         <a class="waves-effect waves-green btn-flat" (click)="hide()">OK</a>

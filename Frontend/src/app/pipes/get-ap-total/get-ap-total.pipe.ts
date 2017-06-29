@@ -33,6 +33,7 @@ export class GetApTotalPipe implements PipeTransform {
       return "--/" + total;
     }
     else {
+      noteTotal = Math.round((noteTotal / 100) * 100);
       return noteTotal + "/" + total + " (" + Math.round((noteTotal / total) * 100) + "%)";
     }
   }

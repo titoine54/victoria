@@ -6,7 +6,6 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class ApiService {
-  apiUrl: string = 'https://s6ie1704.gel.usherbrooke.ca/api';
 
   /** This class will be used to make all the requests with the backend */
   constructor(private http: Http) { }
@@ -25,7 +24,7 @@ export class ApiService {
    * @return {Observable} The observable for the caller
    */
   public getUserData(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/mock/user`, this.getHeaders())
+    return this.http.get(`${environment.apiUrl}/user`, this.getHeaders())
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
@@ -36,7 +35,7 @@ export class ApiService {
    * @return {Observable} The observable for the caller
    */
   public getNotes(trimestre?: string): Observable<any> {
-    var url = `${this.apiUrl}/mock/notes/e17`;
+    var url = `${environment.apiUrl}/notes`;
     if (trimestre) { url += `?trimestre=${trimestre}` }
 
     return this.http.get(url, this.getHeaders())
@@ -49,7 +48,7 @@ export class ApiService {
    * @return {Observable} The observable for the caller
    */
   public saveUserSettings(userSettings: UserSettings): Observable<any> {
-    return this.http.post(`${this.apiUrl}/mock/user`, JSON.stringify(userSettings), this.getHeaders())
+    return this.http.put(`${environment.apiUrl}/user`, JSON.stringify(userSettings), this.getHeaders())
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error._body || 'Server error'));
   }
@@ -59,7 +58,7 @@ export class ApiService {
    * @return {Observable} The observable for the caller
    */
   public markEvaluationAsRead(notificationId: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/mock/notify/${notificationId}`, this.getHeaders())
+    return this.http.get(`${environment.apiUrl}/notify/${notificationId}`, this.getHeaders())
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error._body || 'Server error'));
   }
