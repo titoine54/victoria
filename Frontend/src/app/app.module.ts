@@ -19,6 +19,7 @@ import { CompetenceTooltipInfoPipe } from "app/pipes/competence-tooltip-info/com
 import { ApiService } from "app/services/api.service";
 import { GetApStatsPipe } from "app/pipes/get-ap-stats/get-ap-stats.pipe";
 import { HasNewEvaluationPipe } from "app/pipes/has-new-evaluation/has-new-evaluation.pipe";
+import { LoadingComponent } from "app/components/loading/loading.component";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/notes', pathMatch: 'full' },
@@ -41,6 +42,7 @@ const appRoutes: Routes = [
     CompetenceTooltipInfoPipe,
     GetApStatsPipe,
     HasNewEvaluationPipe,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,7 @@ import { KeysPipe } from "app/pipes/keys/keys.pipe";
 import { MainComponent } from './main.component';
 import { GetApStatsPipe } from "app/pipes/get-ap-stats/get-ap-stats.pipe";
 import { HasNewEvaluationPipe } from "app/pipes/has-new-evaluation/has-new-evaluation.pipe";
+import { LoadingComponent } from "app/components/loading/loading.component";
 
 describe('MainComponent', () => {
   let component: MainComponent;
@@ -17,7 +18,7 @@ describe('MainComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MainComponent, ApCompetencesComponent, HasNewEvaluationPipe, GetApStatsPipe, GetCompetenceTotalPipe, CompetenceTooltipInfoPipe, NoteModalComponent, KeysPipe],
+      declarations: [MainComponent, ApCompetencesComponent, HasNewEvaluationPipe, GetApStatsPipe, GetCompetenceTotalPipe, CompetenceTooltipInfoPipe, NoteModalComponent, KeysPipe, LoadingComponent],
       providers: [GlobalVariablesService],
       imports: [MaterializeModule]
     })
