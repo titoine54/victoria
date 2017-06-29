@@ -99,11 +99,13 @@ public class ApiRoute {
             activities.put(apCode, activity);
         }
         JSONObject competenceNote = new JSONObject();
+
+        // TODO : clean up rounding
         competenceNote.put("competenceNumero", currentLine.get("competence"));
-        competenceNote.put("note", currentLine.get("note"));
+        competenceNote.put("note", (Double) (Math.floor((Double) currentLine.get("note")*100)/100.0));
         competenceNote.put("ponderation", currentLine.get("ponderation"));
-        competenceNote.put("moyenne", currentLine.get("moyenne"));
-        competenceNote.put("ecartType", currentLine.get("ecart_type"));
+        competenceNote.put("moyenne", (Double) (Math.floor((Double) currentLine.get("moyenne")*100)/100.0));
+        competenceNote.put("ecartType", (Double) (Math.floor((Double) currentLine.get("ecart_type")*100)/100.0));
         activity.add(competenceNote);
     }
 
