@@ -24,6 +24,11 @@
   </li>
 </ul>
 
-<loading *ngIf="global.apList == undefined || global.apList.length == 0"></loading>
+<loading *ngIf="global.apList == undefined"></loading>
+<div *ngIf="global.apList?.length == 0" class="container">
+  <br>
+  <h5>Un problème est survenu lors de la récupération de vos notes.</h5>
+  <p>Veuillez réessayer plus tard.</p>
+</div>
 
 <app-note-modal></app-note-modal>
