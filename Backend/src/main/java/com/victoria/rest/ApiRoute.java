@@ -27,7 +27,7 @@ public class ApiRoute {
     public String getNotes(@Context HttpServletRequest req) {
 
         try {
-            URL url = new URL("http://10.43.158.107:9090/v_notes_etudiants?cip=eq." + req.getRemoteUser() + "&trimestre=eq.H17");
+            URL url = new URL("http://127.0.0.1:9090/v_notes_etudiants?cip=eq." + req.getRemoteUser() + "&trimestre=eq.H17");
             InputStream is = url.openStream();
 
             JSONParser jsonParser = new JSONParser();
@@ -154,7 +154,7 @@ public class ApiRoute {
     public String getUsers(@Context HttpServletRequest req) {
 
         try{
-            URL url =  new URL("http://10.43.158.107:9090/membre?cip=eq." + req.getRemoteUser());
+            URL url =  new URL("http://127.0.0.1:9090/membre?cip=eq." + req.getRemoteUser());
             InputStream is = url.openStream();
 
             JSONParser jsonParser = new JSONParser();
@@ -167,8 +167,8 @@ public class ApiRoute {
             JSONObject result = (JSONObject)resultArray.get(0);
             JSONObject response = new JSONObject();
             response.put("cip", result.get("cip"));
-            response.put("firstName", result.get("nom"));
-            response.put("lastName", result.get("prenom"));
+            response.put("firstName", result.get("prenom"));
+            response.put("lastName", result.get("nom"));
             response.put("email", result.get("courriel"));
             response.put("settings", new JSONObject());//TODO ITERATION 3 : fill json object with user settings
 

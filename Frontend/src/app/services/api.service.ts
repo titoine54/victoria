@@ -35,7 +35,7 @@ export class ApiService {
    * @return {Observable} The observable for the caller
    */
   public getNotes(trimestre?: string): Observable<any> {
-    var url = `${environment.apiUrl}/notes/e17`;
+    var url = `${environment.apiUrl}/notes`;
     if (trimestre) { url += `?trimestre=${trimestre}` }
 
     return this.http.get(url, this.getHeaders())
