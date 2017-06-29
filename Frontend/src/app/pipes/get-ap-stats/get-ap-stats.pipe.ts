@@ -40,6 +40,7 @@ export class GetApStatsPipe implements PipeTransform {
     }
 
     if (output.total > 0) {
+      output.points = Math.round(output.points * 100) / 100;
       output.percent = Math.round((output.points / output.total) * 100) + '%';
       output.string = `${output.points}/${output.total} (${output.percent})`;
       output.remainingPercent = Math.round((output.total/(output.total+output.remaining)) * 100) + '%';

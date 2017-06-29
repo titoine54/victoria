@@ -68,6 +68,7 @@ export class NoteModalComponent {
             evaluationStats.accumulatedTotals += +apStats.accumulatedTotals;
             evaluationStats.standardDeviation = Math.sqrt(Math.pow(evaluationStats.standardDeviation, 2) + Math.pow(+apStats.standardDeviation, 2));
         }
+        evaluationStats.accumulatedPoints = +evaluationStats.accumulatedPoints.toFixed(2);
         evaluationStats.note = +((evaluationStats.accumulatedPoints/evaluationStats.accumulatedTotals) * 100).toFixed(2);
         evaluationStats.standardDeviation =  +(evaluationStats.standardDeviation.toFixed(2));
         return evaluationStats;

@@ -17,7 +17,7 @@
             <li *ngFor="let note of evaluation.associatedAps[apCode]" class="collection-item">
                 <b>Compétence {{ note.competenceNumero }}<i materialize="tooltip" data-delay="50" class="material-icons" data-position="bottom" [attr.data-tooltip]="getCompetenceDescription(apCode, note.competenceNumero)">info_outline</i></b>
                 <span materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: ' + note.moyenne + ' Écart-type: ' + note.ecartType">
-                    {{ note.note }}/{{ note.ponderation }} <b>({{ (note.note/note.ponderation) * 100 }}%)</b>
+                    {{ note.note }}/{{ note.ponderation }} <b>({{ (note.note/note.ponderation) * 100 | number : '1.0-0' }}%)</b>
                 </span>
             </li>
         </ul>
