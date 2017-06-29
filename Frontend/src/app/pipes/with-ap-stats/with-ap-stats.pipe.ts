@@ -13,7 +13,7 @@ export class WithApStatsPipe implements PipeTransform {
    * Calculates the total of a selected Ap from its associated Notes
    * @param {Ap[]} aps The list of "Activité Pédagogique"
    * @param {Evaluation[]} evaluations The list of all evaluations
-   * @return {any} The compiled value
+   * @return {any[]} The compiled list with stats
    */
   transform(aps: Ap[], evaluations: Evaluation[]): Dict<any> {
     // Creating a literal copy of aps with stats 
@@ -58,7 +58,7 @@ export class WithApStatsPipe implements PipeTransform {
         ap.stats.remainingPercent = ap.stats.percent;
       }
     }
-    
+
     return apsWithStats;
   }
 }
