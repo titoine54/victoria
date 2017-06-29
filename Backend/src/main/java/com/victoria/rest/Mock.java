@@ -45,7 +45,7 @@ public class Mock {
     }
 
     @GET
-    @Path("/notes/{trimestre}")
+    @Path("/notes")
     @Produces(MediaType.APPLICATION_JSON)
     public String getNotes(@Context HttpServletRequest req) {
         return "{\n" +
