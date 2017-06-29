@@ -1,7 +1,7 @@
 <nav>
   <div class="nav-wrapper green">
     <div class="input-field">
-      <input id="search" type="search" [(ngModel)]="searchValue">
+      <input id="search" type="search" [(ngModel)]="searchValue" (ngModelChange)="updateCollapsible()" placeholder="Nom de l'AP ou de la compétence">
       <label class="label-icon" for="search"><i class="material-icons">search</i></label>
       <i class="material-icons">close</i>
     </div>
@@ -9,40 +9,43 @@
 </nav>
 
 <div class="note-wrapper">
+  <!--Check if apList exists-->
   <ng-container *ngIf="global.apList?.length > 0">
-  <ng-container *ngIf="global.apList | filterAps:searchValue | withApStats:global.evaluations; let apList">
-  <ul *ngIf="apList.length > 0" materialize="collapsible" class="collapsible" data-collapsible="accordion">
-    <li *ngFor="let ap of apList">
+    <!--Apply pipes of apList-->
+    <ng-container *ngIf="global.apList | filterAps:searchValue | withApStats:global.evaluations; let apList">
+      <!--Display filtered Aps-->
+      <ul *ngIf="apList.length > 0" materialize="collapsible" class="collapsible" data-collapsible="expandable">
+        <li *ngFor="let ap of apList">
+          <div class="collapsible-header waves-effect">
+            <b>{{ ap.apCode }}</b> - {{ ap.titre }} ({{ ap.credit }} cr.)
+            <span *ngIf="ap.stats.remaining > 0" class="badge blue-badge">Points à combler: {{ ap.stats.remaining }}</span>
+            <span class="badge">{{ ap.stats.string }}</span>
+            <span class="new" *ngIf="ap | hasNewEvaluation:global.evaluations">&bull;</span>
 
-      <div class="collapsible-header waves-effect">
-        <b>{{ ap.apCode }}</b> - {{ ap.titre }} ({{ ap.credit }} cr.)
-        <span *ngIf="ap.stats.remaining > 0" class="badge blue-badge">Points à combler: {{ ap.stats.remaining }}</span>
-        <span class="badge">{{ ap.stats.string }}</span>
-        <span class="new" *ngIf="ap | hasNewEvaluation:global.evaluations">&bull;</span>
+            <div class="progress">
+              <div class="ap-progress determinate" [style.width]="ap.stats.remainingPercent" [attr.data-tooltip]="ap.stats.string" materialize="tooltip"
+                data-delay="30" data-position="top"></div>
+              <div class="user-progress determinate" [style.width]="ap.stats.percent"></div>
+              <div class="bareme-progress determinate" [style.left]="ap.bareme+'%'" [attr.data-tooltip]="'Barème: '+ap.bareme+'%'" materialize="tooltip"
+                data-delay="30" data-position="top"></div>
+            </div>
+          </div>
 
-        <div class="progress">
-          <div class="ap-progress determinate" [style.width]="ap.stats.remainingPercent" [attr.data-tooltip]="ap.stats.string" materialize="tooltip"
-            data-delay="30" data-position="top"></div>
-          <div class="user-progress determinate" [style.width]="ap.stats.percent"></div>
-          <div class="bareme-progress determinate" [style.left]="ap.bareme+'%'" [attr.data-tooltip]="'Barème: '+ap.bareme+'%'" materialize="tooltip"
-            data-delay="30" data-position="top"></div>
-        </div>
+          <div class="collapsible-body active grey lighten-4">
+            <blockquote *ngIf="ap.description" class="caption">
+              {{ ap.description }}
+            </blockquote>
+
+            <app-ap-competences [ap]="ap" (onRequestNoteModal)="noteModal.show($event)"></app-ap-competences>
+          </div>
+        </li>
+      </ul>
+
+      <div *ngIf="apList.length == 0" class="container">
+        <br>
+        <p class="center-align">Aucune activité pédagogique notes ne correspond aux critères recherchés.</p>
       </div>
-
-      <div class="collapsible-body active grey lighten-4">
-        <blockquote *ngIf="ap.description" class="caption">
-          {{ ap.description }}
-        </blockquote>
-
-        <app-ap-competences [ap]="ap" (onRequestNoteModal)="noteModal.show($event)"></app-ap-competences>
-      </div>
-    </li>
-  </ul>
-  
-  <div *ngIf="apList.length == 0" class="container">
-    <br><p class="center-align">Aucune activité pédagogique notes ne correspond aux critères recherchés.</p>
-  </div>
-  </ng-container>
+    </ng-container>
   </ng-container>
 
   <!--When loading notes-->
