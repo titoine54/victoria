@@ -1,4 +1,4 @@
-<ul materialize="collapsible" class="collapsible margins" data-collapsible="accordion">
+<ul *ngIf="global.apList?.length > 0" materialize="collapsible" class="collapsible margins" data-collapsible="accordion">
   <li *ngFor="let ap of global.apList">
 
     <div *ngIf="ap | getApStats:global.evaluations; let apStats" class="collapsible-header waves-effect">
@@ -23,5 +23,7 @@
     </div>
   </li>
 </ul>
+
+<loading *ngIf="global.apList == undefined || global.apList.length == 0"></loading>
 
 <app-note-modal></app-note-modal>

@@ -17,9 +17,9 @@ export class GlobalVariablesService {
   user: User; // = MockUser;
   
   trimestres: Dict<string>[] = [
-    {title:'Trimestre été 2017', value:'e17'},
     {title:'Trimestre hiver 2017', value:'h17'},
-    {title:'Trimestre automne 2016', value:'a16'}
+    {title:'Trimestre automne 2016', value:'a16'},
+    {title:'Trimestre été 2016', value:'e16'}
   ];
   selectedTrimestre = this.trimestres[0];
   
