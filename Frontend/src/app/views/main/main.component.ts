@@ -1,8 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Evaluation } from "app/classes/evaluation";
-import { Ap } from "app/classes/ap";
+import { Component, ViewChild } from '@angular/core';
 import { NoteModalComponent } from "app/components/note-modal/note-modal.component";
-import { Competence } from "app/classes/competence";
 import { GlobalVariablesService } from "app/services/global-variables.service";
 
 @Component({
@@ -11,12 +8,10 @@ import { GlobalVariablesService } from "app/services/global-variables.service";
   styleUrls: ['./main.component.scss'],
 })
 
-export class MainComponent implements OnInit {
+export class MainComponent {
 
   @ViewChild(NoteModalComponent) noteModal: NoteModalComponent
 
   constructor(public global: GlobalVariablesService) { }
-
-  ngOnInit() { }
 
 }

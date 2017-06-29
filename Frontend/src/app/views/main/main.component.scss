@@ -1,34 +1,33 @@
-.collapsible-header {
-    .badge.blue-badge {
-        background-color: #2196F3;
-        color: white;
-        font-weight: 300;
-        font-size: 0.8rem;
-        margin-left: 0.5rem;
-        border-radius: 2px;
-    }
-    
-    .new {
-        color: red;
-        font-size: 2rem;
-        position: absolute;
-        margin-left: 0.5rem;
-    }
-}
-
-.collapsible-body {
-    padding: 1rem;
-    padding-top: 1px;
-    background-color: #fafafa !important;
-
-    .caption {
-        font-style: italic;
-    }
-}
-
-
-.margins {
+.collapsible {
     margin: 15px;
+
+    .collapsible-header {
+        .badge.blue-badge {
+            background-color: #2196F3;
+            color: white;
+            font-weight: 300;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+            border-radius: 2px;
+        }
+        
+        .new {
+            color: red;
+            font-size: 2rem;
+            position: absolute;
+            margin-left: 0.5rem;
+        }
+    }
+
+    .collapsible-body {
+        padding: 1rem;
+        padding-top: 1px;
+        background-color: #fafafa !important;
+
+        .caption {
+            font-style: italic;
+        }
+    }
 }
 
 .progress {
