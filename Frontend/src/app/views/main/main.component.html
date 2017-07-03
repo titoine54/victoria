@@ -1,29 +1,62 @@
-<ul *ngIf="global.apList?.length > 0" materialize="collapsible" class="collapsible margins" data-collapsible="accordion">
-  <li *ngFor="let ap of global.apList">
+<nav>
+  <div class="nav-wrapper green">
+    <div class="input-field">
+      <input id="search" type="search" [(ngModel)]="searchValue" (ngModelChange)="updateCollapsible()" placeholder="Recherche (Code d'AP, compétence, évaluation, etc)">
+      <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+      <i (click)="searchValue = ''" class="material-icons">close</i>
+    </div>
+  </div>
+</nav>
 
-    <div *ngIf="ap | getApStats:global.evaluations; let apStats" class="collapsible-header waves-effect">
-      <b>{{ ap.apCode }}</b> - {{ ap.titre }} ({{ ap.credit }} cr.)
-      <span class="badge blue-badge">Points à combler: {{ apStats.remaining }}</span>
-      <span class="badge">{{ apStats.string }}</span>
-      <span class="new" *ngIf="ap | hasNewEvaluation:global.evaluations">&bull;</span>
+<div class="note-wrapper">
+  <!--Check if apList exists-->
+  <ng-container *ngIf="global.apList?.length > 0">
+    <!--Apply pipes of apList-->
+    <ng-container *ngIf="global.apList | filterAps:searchValue:global.evaluations | withApStats:global.evaluations; let apList">
+      <!--Display filtered Aps-->
+      <ul *ngIf="apList.length > 0" materialize="collapsible" class="collapsible" data-collapsible="expandable">
+        <li *ngFor="let ap of apList">
+          <div class="collapsible-header waves-effect">
+            <b>{{ ap.apCode }}</b> - {{ ap.titre }} ({{ ap.credit }} cr.)
+            <span *ngIf="ap.stats.remaining > 0" class="badge blue-badge">Points à combler: {{ ap.stats.remaining }}</span>
+            <span class="badge">{{ ap.stats.string }}</span>
+            <span class="new" *ngIf="ap | hasNewEvaluation:global.evaluations">&bull;</span>
 
-      <div class="progress">
-        <div class="ap-progress determinate" [style.width]="apStats.remainingPercent" [attr.data-tooltip]="apStats.string" materialize="tooltip" data-delay="30" data-position="top"></div>
-        <div class="user-progress determinate" [style.width]="apStats.percent"></div>
-        <div class="bareme-progress determinate" style="left: 50%" data-tooltip="Barème: 50%" materialize="tooltip" data-delay="30" data-position="top"></div>
+            <div class="progress">
+              <div class="ap-progress determinate" [style.width]="ap.stats.remainingPercent" [attr.data-tooltip]="ap.stats.string" materialize="tooltip"
+                data-delay="30" data-position="top"></div>
+              <div class="user-progress determinate" [style.width]="ap.stats.percent"></div>
+              <div class="bareme-progress determinate" [style.left]="ap.bareme+'%'" [attr.data-tooltip]="'Barème: '+ap.bareme+'%'" materialize="tooltip"
+                data-delay="30" data-position="top"></div>
+            </div>
+          </div>
+
+          <div class="collapsible-body active grey lighten-4">
+            <blockquote *ngIf="ap.description" class="caption">
+              {{ ap.description }}
+            </blockquote>
+
+            <app-ap-competences [ap]="ap" (onRequestNoteModal)="noteModal.show($event)"></app-ap-competences>
+          </div>
+        </li>
+      </ul>
+
+      <div *ngIf="apList.length == 0" class="container">
+        <br>
+        <p class="center-align">Aucune activité pédagogique notes ne correspond aux critères recherchés.</p>
       </div>
-    </div>
+    </ng-container>
+  </ng-container>
 
-    <div class="collapsible-body active grey lighten-4">
-      <blockquote *ngIf="ap.description" class="caption">
-        {{ ap.description }}
-      </blockquote>
+  <!--When loading notes-->
+  <loading *ngIf="global.apList == undefined"></loading>
 
-      <app-ap-competences [ap]="ap" (onRequestNoteModal)="noteModal.show($event)"></app-ap-competences>
-    </div>
-  </li>
-</ul>
-
-<loading *ngIf="global.apList == undefined || global.apList.length == 0"></loading>
+  <!--When api call failed-->
+  <div *ngIf="global.apList?.length == 0" class="container">
+    <br>
+    <h5>Un problème est survenu lors de la récupération de vos notes.</h5>
+    <p>Veuillez réessayer plus tard.</p>
+  </div>
+</div>
 
 <app-note-modal></app-note-modal>

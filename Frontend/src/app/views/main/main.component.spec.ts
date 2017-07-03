@@ -8,9 +8,11 @@ import { NoteModalComponent } from "app/components/note-modal/note-modal.compone
 import { MaterializeModule } from "angular2-materialize";
 import { KeysPipe } from "app/pipes/keys/keys.pipe";
 import { MainComponent } from './main.component';
-import { GetApStatsPipe } from "app/pipes/get-ap-stats/get-ap-stats.pipe";
 import { HasNewEvaluationPipe } from "app/pipes/has-new-evaluation/has-new-evaluation.pipe";
 import { LoadingComponent } from "app/components/loading/loading.component";
+import { WithApStatsPipe } from "app/pipes/with-ap-stats/with-ap-stats.pipe";
+import { FilterApsPipe } from "app/pipes/filter-aps/filter-aps.pipe";
+import { FormsModule } from '@angular/forms';
 
 describe('MainComponent', () => {
   let component: MainComponent;
@@ -18,9 +20,9 @@ describe('MainComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MainComponent, ApCompetencesComponent, HasNewEvaluationPipe, GetApStatsPipe, GetCompetenceTotalPipe, CompetenceTooltipInfoPipe, NoteModalComponent, KeysPipe, LoadingComponent],
+      declarations: [MainComponent, ApCompetencesComponent, HasNewEvaluationPipe, WithApStatsPipe, FilterApsPipe, GetCompetenceTotalPipe, CompetenceTooltipInfoPipe, NoteModalComponent, KeysPipe, LoadingComponent],
       providers: [GlobalVariablesService],
-      imports: [MaterializeModule]
+      imports: [MaterializeModule, FormsModule]
     })
       .compileComponents();
   }));

@@ -44,7 +44,10 @@ export class AppComponent {
           this.global.evaluations.push(new Evaluation(e.nom, associatedAps));
         }
       },
-      err => Materialize.toast('Impossible de télécharger les notes de l\'utilisateur', 4000));
+      err => {
+        this.global.apList = [];
+        Materialize.toast('Impossible de télécharger les notes de l\'utilisateur', 4000)
+      });
   }
 
   openWebsiteForLogin() {
