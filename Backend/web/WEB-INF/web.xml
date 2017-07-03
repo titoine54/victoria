@@ -17,6 +17,10 @@
         <servlet-name>Logout</servlet-name>
         <servlet-class>com.victoria.servlets.Logout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Default</servlet-name>
+        <servlet-class>com.victoria.servlets.AngularDefaultServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Victoria API</servlet-name>
         <url-pattern>/api/*</url-pattern>
@@ -24,6 +28,10 @@
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Default</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
     <filter>
@@ -101,9 +109,4 @@
         <filter-name>XsrfFilter</filter-name>
         <url-pattern>/api/*</url-pattern>
     </filter-mapping>
-
-    <error-page>
-        <error-code>404</error-code>
-        <location>/index.html</location>
-    </error-page>
 </web-app>
