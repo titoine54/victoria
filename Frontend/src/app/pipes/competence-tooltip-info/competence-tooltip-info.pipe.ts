@@ -13,14 +13,14 @@ export class CompetenceTooltipInfoPipe implements PipeTransform {
     * @return {string} The compiled value
     */
 
-  transform(competence: Competence, evaluations: Evaluation[]): string {
+  transform(competence: Competence, evaluations: Evaluation[], code: string): string {
     var total = 0;
     var moyenneTotal = 0;
     var leftPoints = 0;
     for (let evaluation of evaluations) {
       for (var apCode in evaluation.associatedAps) {
         for (let note of evaluation.associatedAps[apCode]) {
-          if (competence.competenceNumero == note.competenceNumero) {
+          if (competence.competenceNumero == note.competenceNumero && apCode == code) {
             if (note.note == null) {
               leftPoints += +note.ponderation;
             }
