@@ -25,4 +25,8 @@ export class GlobalVariablesService {
   
   apList: Ap[]; // = MockApList;
   evaluations: Evaluation[]; // = MockEvaluations;
+
+  // Search Bar
+  showSearchBar: boolean = false;
+  searchValue: string = '';
 }

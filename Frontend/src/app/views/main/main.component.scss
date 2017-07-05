@@ -1,3 +1,18 @@
+nav {
+    transition: height 0.35s ease-in-out;
+    input, i {
+        transition: opacity 0.25s ease-in-out;
+    }
+
+    &.hidden {
+        height: 0;
+        input, i {
+            opacity: 0;
+        }
+    }
+}
+
+
 .collapsible {
     margin: 15px;
 

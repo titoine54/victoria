@@ -29,4 +29,12 @@ export class NavbarComponent {
   selectTrimestre(trimestre: Dict<string>) {
     console.log(trimestre);
   }
+
+  /** Toggle search bar */
+  toggleSearchBar() {
+    this.global.showSearchBar = !this.global.showSearchBar;
+    if (!this.global.showSearchBar) {
+      this.global.searchValue = '';
+    }
+  }
 }

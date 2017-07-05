@@ -1,9 +1,9 @@
-<nav>
+<nav [class.hidden]="!global.showSearchBar">
   <div class="nav-wrapper green">
     <div class="input-field">
-      <input id="search" type="search" [(ngModel)]="searchValue" (ngModelChange)="updateCollapsible()" placeholder="Recherche (Code d'AP, compétence, évaluation, etc)">
+      <input id="search" type="search" [(ngModel)]="global.searchValue" (ngModelChange)="updateCollapsible()" placeholder="Recherche (Code d'AP, compétence, évaluation, etc)">
       <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-      <i (click)="searchValue = ''" class="material-icons">close</i>
+      <i (click)="global.searchValue = ''" class="material-icons">close</i>
     </div>
   </div>
 </nav>
@@ -12,7 +12,7 @@
   <!--Check if apList exists-->
   <ng-container *ngIf="global.apList?.length > 0">
     <!--Apply pipes of apList-->
-    <ng-container *ngIf="global.apList | filterAps:searchValue:global.evaluations | withApStats:global.evaluations; let apList">
+    <ng-container *ngIf="global.apList | filterAps:global.searchValue:global.evaluations | withApStats:global.evaluations; let apList">
       <!--Display filtered Aps-->
       <ul *ngIf="apList.length > 0" materialize="collapsible" class="collapsible" data-collapsible="expandable">
         <li *ngFor="let ap of apList">

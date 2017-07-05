@@ -75,6 +75,12 @@
         <i class="material-icons right">arrow_drop_down</i>
         </a>
       </li>
+      <!--Search-->
+      <li *ngIf="global.user">
+        <a (click)="toggleSearchBar()">
+        <i class="material-icons">search</i>
+        </a>
+      </li>
       <!--Notifications-->
       <li *ngIf="global.user" class="hide-on-med-and-down">
         <a materialize="dropdown" class="dropdown-button" data-activates="notifs" data-belowOrigin="true" data-alignment="right"

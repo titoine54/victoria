@@ -10,13 +10,12 @@ declare var $: any;
 })
 
 export class MainComponent {
-  searchValue: string = '';
   @ViewChild(NoteModalComponent) noteModal: NoteModalComponent
 
   constructor(public global: GlobalVariablesService) { }
 
   updateCollapsible() {
-    if (this.searchValue != '') {
+    if (this.global.searchValue != '') {
       setTimeout(function () {
         $(".collapsible-header").addClass("active");
         $(".collapsible").collapsible({ accordion: false });
