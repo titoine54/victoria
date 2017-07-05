@@ -6,8 +6,8 @@
       "credit": 2,
       "description": "Devenir un maître chasseur",
       "competences": [
-          {"competenceNumero": 1, "description": "Bien viser"},
-          {"competenceNumero": 2, "description": "Bien se cacher"}
+          {"competenceNumero": 1, "description": "Bien viser", "estEnEquipe": 1},
+          {"competenceNumero": 2, "description": "Bien se cacher", "estEnEquipe": 0}
       ]
     },
     {
@@ -16,8 +16,8 @@
       "credit": 3,
       "description": "Devenir un maître cuisinier",
       "competences": [
-          {"competenceNumero": 1, "description": "Bien préparer"},
-          {"competenceNumero": 2, "description": "Bien cuire"}
+          {"competenceNumero": 1, "description": "Bien préparer", "estEnEquipe": 0},
+          {"competenceNumero": 2, "description": "Bien cuire", "estEnEquipe": 0}
     ]
     }
   ],

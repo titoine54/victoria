@@ -56,8 +56,8 @@ public class Mock {
                 "      \"credit\": 2,\n" +
                 "      \"description\": \"Devenir un maître chasseur\",\n" +
                 "      \"competences\": [\n" +
-                "          {\"competenceNumero\": 1, \"description\": \"Bien viser\"},\n" +
-                "          {\"competenceNumero\": 2, \"description\": \"Bien se cacher\"}\n" +
+                "          {\"competenceNumero\": 1, \"description\": \"Bien viser\", \"estEnEquipe\": 1},\n" +
+                "          {\"competenceNumero\": 2, \"description\": \"Bien se cacher\", \"estEnEquipe\": 0}\n" +
                 "      ]\n" +
                 "    },\n" +
                 "    {\n" +
@@ -66,8 +66,8 @@ public class Mock {
                 "      \"credit\": 3,\n" +
                 "      \"description\": \"Devenir un maître cuisinier\",\n" +
                 "      \"competences\": [\n" +
-                "          {\"competenceNumero\": 1, \"description\": \"Bien préparer\"},\n" +
-                "          {\"competenceNumero\": 2, \"description\": \"Bien cuire\"}\n" +
+                "          {\"competenceNumero\": 1, \"description\": \"Bien préparer\", \"estEnEquipe\": 0},\n" +
+                "          {\"competenceNumero\": 2, \"description\": \"Bien cuire\", \"estEnEquipe\": 0}\n" +
                 "    ]\n" +
                 "    }\n" +
                 "  ],\n" +
