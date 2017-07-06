@@ -170,8 +170,23 @@ public class ApiRoute {
             if(statisticsResponse.size() == 0){
                 return "";
             }
+            /***** TO CONFIRM *****/
+            JSONObject returnedJSON = new JSONObject();
+            JSONArray stats = new JSONArray();
+            returnedJSON.put("statistiques", stats);
 
-            //PARSE AND RETURN
+            for(int i = 0; i < statisticsResponse.size(); i++){
+                JSONObject currentLine = (JSONObject)statisticsResponse.get(i);
+                JSONObject tmp = new JSONObject();
+                tmp.put("evaluation_id", currentLine.get("evalID"));
+                tmp.put("ap", "apCode");
+                tmp.put("competenceNumero", "competence");
+                tmp.put("moyenne", "moyenne");
+                tmp.put("ecartType", "ecartType");
+                stats.add(tmp);
+            }
+            /***** TO CONFIRM *****/
+            return returnedJSON.toJSONString();
         }
         catch(Exception e){
             e.printStackTrace();
@@ -196,15 +211,15 @@ public class ApiRoute {
                 return "";
             }
 
-            JSONObject result = (JSONObject)userResponse.get(0);
-            JSONObject response = new JSONObject();
-            response.put("cip", result.get("cip"));
-            response.put("firstName", result.get("prenom"));
-            response.put("lastName", result.get("nom"));
-            response.put("email", result.get("courriel"));
-            response.put("settings", new JSONObject());//TODO ITERATION 3 : fill json object with user settings
+            JSONObject userLine = (JSONObject)userResponse.get(0);
+            JSONObject returnedJSON = new JSONObject();
+            returnedJSON.put("cip", userLine.get("cip"));
+            returnedJSON.put("firstName", userLine.get("prenom"));
+            returnedJSON.put("lastName", userLine.get("nom"));
+            returnedJSON.put("email", userLine.get("courriel"));
+            returnedJSON.put("settings", new JSONObject());//TODO ITERATION 3 : fill json object with user settings
 
-            return response.toJSONString();
+            return returnedJSON.toJSONString();
         }
         catch (Exception e){
             e.printStackTrace();
