@@ -8,6 +8,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -24,14 +25,18 @@ public class ApiRoute {
     @GET
     @Path("notes")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getNotes(@Context HttpServletRequest req) {
+    public String getNotes(@Context HttpServletRequest req, @Context HttpServletResponse res) {
 
         try {
-            URL url = new URL("http://127.0.0.1:9090/v_notes_etudiants?cip=eq." + req.getRemoteUser() + "&trimestre=eq.H17");
+            URL url = new URL("http://10.43.158.107:9090/v_notes_etudiants?cip=eq." + req.getRemoteUser() + "&trimestre=eq.H17");
             InputStream is = url.openStream();
 
             JSONParser jsonParser = new JSONParser();
             JSONArray noteResponse = (JSONArray)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
+
+            if(noteResponse.size() == 0){
+                return "";
+            }
             /*
              * 1. Check Evaluation - If not existing : Add (Id, nom ,activité + Add note in Activité), else nothing
              * 2. Check specific activité - If not existing : Add activité, else nothing
@@ -74,7 +79,7 @@ public class ApiRoute {
         catch (Exception e) {
             e.printStackTrace();
         }
-        //Handle Catch + Error return (418)
+
         return "";
     }
 
@@ -151,6 +156,31 @@ public class ApiRoute {
     }
 
     @GET
+    @Path("statistics")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getStatistics(@Context HttpServletRequest req){
+
+        try{
+            URL url =  new URL("http://10.43.158.107:9090/membre?cip=eq." + req.getRemoteUser());
+            InputStream is = url.openStream();
+
+            JSONParser jsonParser = new JSONParser();
+            JSONArray statisticsResponse = (JSONArray)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
+
+            if(statisticsResponse.size() == 0){
+                return "";
+            }
+
+            //PARSE AND RETURN
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return "";
+    }
+
+    @GET
     @Path("user")
     @Produces(MediaType.APPLICATION_JSON)
     public String getUsers(@Context HttpServletRequest req) {
@@ -160,13 +190,13 @@ public class ApiRoute {
             InputStream is = url.openStream();
 
             JSONParser jsonParser = new JSONParser();
-            JSONArray resultArray = (JSONArray)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
+            JSONArray userResponse = (JSONArray)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
 
-            if(resultArray.size() != 1){
-                //HANDLE ERROR
+            if(userResponse.size() == 0){
+                return "";
             }
 
-            JSONObject result = (JSONObject)resultArray.get(0);
+            JSONObject result = (JSONObject)userResponse.get(0);
             JSONObject response = new JSONObject();
             response.put("cip", result.get("cip"));
             response.put("firstName", result.get("prenom"));
@@ -179,7 +209,7 @@ public class ApiRoute {
         catch (Exception e){
             e.printStackTrace();
         }
-        //Handle Catch + Error return (418)
+
         return "";
     }
 }
