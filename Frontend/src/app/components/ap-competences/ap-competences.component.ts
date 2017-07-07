@@ -1,4 +1,6 @@
+import { Router } from '@angular/router';
 import { GlobalVariablesService } from "app/services/global-variables.service";
+import { MobileService } from "app/services/mobile.service";
 import { NoteModalComponent } from "app/components/note-modal/note-modal.component";
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Evaluation } from "app/classes/evaluation";
@@ -32,6 +34,17 @@ export class ApCompetencesComponent {
     return layout;
   }
 
-  constructor(private global: GlobalVariablesService) { }
+  /** Show all the notes related to an evaluation
+   * @param evaluation The clicked evaluation 
+   */
+  showEvaluationNotes(evaluation: Evaluation) {
+    if (this.mobileService.mobileAndTabletcheck()) {
+      this.router.navigate(['/note', evaluation.titre]);
+    } else {
+      this.onRequestNoteModal.emit(evaluation);
+    }
+  }
+  
+  constructor(private global: GlobalVariablesService, private mobileService: MobileService, private router: Router) { }
 
 }

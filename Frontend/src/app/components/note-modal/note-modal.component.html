@@ -2,7 +2,8 @@
     <div *ngIf="evaluation" class="modal-content">
         <div class="modal-header">
             <h4>{{ evaluation.titre }}
-                <span *ngIf="getEvaluationStats(); let stats" materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: ' + stats.groupMean + ' Écart-type: ' + stats.standardDeviation"
+                <span *ngIf="notesService.getEvaluationStats(evaluation); let stats" materialize="tooltip" data-delay="50" class="badge"
+                    data-position="left" [attr.data-tooltip]="'Moyenne: ' + stats.groupMean + ' Écart-type: ' + stats.standardDeviation"
                     class="right">
                     {{ stats.accumulatedPoints }}/{{ stats.accumulatedTotals }} <b>({{ stats.note }}%)</b>
                 </span>
@@ -11,14 +12,15 @@
         <div>
             <ul *ngFor="let apCode of evaluation.associatedAps | keys" class="collection with-header">
                 <li class="collection-header">
-                    <b>{{ apCode }}</b> - {{ getSelectedAp(apCode).titre }}
-                    <span *ngIf="getApStats(apCode); let apStats" materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: ' + apStats.groupMean + ' Écart-type: ' + apStats.standardDeviation"
+                    <b>{{ apCode }}</b> - {{ notesService.getSelectedAp(apCode).titre }}
+                    <span *ngIf="notesService.getApStats(apCode, evaluation); let apStats" materialize="tooltip" data-delay="50" class="badge"
+                        data-position="left" [attr.data-tooltip]="'Moyenne: ' + apStats.groupMean + ' Écart-type: ' + apStats.standardDeviation"
                         class="right">
                     {{ apStats.accumulatedPoints }}/{{ apStats.accumulatedTotals }} <b>({{ apStats.note }}%)</b>
                 </span>
                 </li>
                 <li *ngFor="let note of evaluation.associatedAps[apCode]" class="collection-item">
-                    <b>Compétence {{ note.competenceNumero }}<i materialize="tooltip" data-delay="50" class="material-icons" data-position="bottom" [attr.data-tooltip]="getCompetenceDescription(apCode, note.competenceNumero)">info_outline</i></b>
+                    <b>Compétence {{ note.competenceNumero }}<i materialize="tooltip" data-delay="50" class="material-icons" data-position="bottom" [attr.data-tooltip]="notesService.getCompetenceDescription(apCode, note.competenceNumero)">info_outline</i></b>
                     <span materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: ' + note.moyenne + ' Écart-type: ' + note.ecartType">
                     {{ note.note }}/{{ note.ponderation }} <b>({{ (note.note/note.ponderation) * 100 | number : '1.0-0' }}%)</b>
                 </span>

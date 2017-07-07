@@ -7,6 +7,7 @@ import { MaterializeModule } from "angular2-materialize";
 import { AppComponent } from './app.component';
 import { GetCompetenceTotalPipe } from "app/pipes/get-competence-total/get-competence-total.pipe";
 import { MainComponent } from "app/views/main/main.component";
+import { NoteComponent } from "app/views/note/note.component";
 import { NoteModalComponent } from "app/components/note-modal/note-modal.component";
 import { SettingsModalComponent } from "app/components/settings-modal/settings-modal.component";
 import { PageNotFoundComponent } from "app/views/page-not-found/page-not-found.component";
@@ -16,14 +17,18 @@ import { GlobalVariablesService } from "app/services/global-variables.service";
 import { KeysPipe } from "app/pipes/keys/keys.pipe";
 import { CompetenceTooltipInfoPipe } from "app/pipes/competence-tooltip-info/competence-tooltip-info.pipe";
 import { ApiService } from "app/services/api.service";
+import { MobileService } from "app/services/mobile.service";
+import { EvaluationNotesService } from "app/services/evaluation-notes.service";
 import { HasNewEvaluationPipe } from "app/pipes/has-new-evaluation/has-new-evaluation.pipe";
 import { LoadingComponent } from "app/components/loading/loading.component";
 import { WithApStatsPipe } from "app/pipes/with-ap-stats/with-ap-stats.pipe";
 import { FilterApsPipe } from "app/pipes/filter-aps/filter-aps.pipe";
+import { MobileGuard } from './common/mobile.guard';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/notes', pathMatch: 'full' },
   { path: 'notes', component: MainComponent },
+  { path: 'note/:evaluation', component: NoteComponent, canActivate: [ MobileGuard ] },
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -31,6 +36,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     MainComponent,
+    NoteComponent,
     NoteModalComponent,
     SettingsModalComponent,
     NavbarComponent,
@@ -51,7 +57,16 @@ const appRoutes: Routes = [
     MaterializeModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [ApiService, GlobalVariablesService, NoteModalComponent, SettingsModalComponent],
+  providers: [
+    ApiService, 
+    GlobalVariablesService,
+    EvaluationNotesService, 
+    MobileService, 
+    MobileGuard,
+    NoteModalComponent, 
+    SettingsModalComponent,
+  ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
