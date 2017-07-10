@@ -172,7 +172,6 @@ public class ApiRoute {
             response.put("firstName", result.get("prenom"));
             response.put("lastName", result.get("nom"));
             response.put("email", result.get("courriel"));
-            response.put("settings", new JSONObject());//TODO ITERATION 3 : fill json object with user settings
 
             return response.toJSONString();
         }

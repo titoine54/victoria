@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { UserSettings } from "app/classes/user-settings";
 import { environment } from '../../environments/environment';
 
 @Injectable()
@@ -39,16 +38,6 @@ export class ApiService {
     if (trimestre) { url += `?trimestre=${trimestre}` }
 
     return this.http.get(url, this.getHeaders())
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error._body || 'Server error'));
-  }
-
-  /** Allow user to modify it's application settings
-   * @param {UserSettings} userSettings The settings of the user
-   * @return {Observable} The observable for the caller
-   */
-  public saveUserSettings(userSettings: UserSettings): Observable<any> {
-    return this.http.put(`${environment.apiUrl}/user`, JSON.stringify(userSettings), this.getHeaders())
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error._body || 'Server error'));
   }

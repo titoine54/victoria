@@ -20,7 +20,7 @@ export class AppComponent {
   constructor(private apiService: ApiService, public global: GlobalVariablesService) {
     apiService.getUserData().subscribe(
       (data: any) => {
-        global.user = new User(data.cip, data.firstName, data.lastName, data.email, data.settings);
+        global.user = new User(data.cip, data.firstName, data.lastName, data.email);
         this.loadUserNotes();
       },
       err => this.openWebsiteForLogin());
