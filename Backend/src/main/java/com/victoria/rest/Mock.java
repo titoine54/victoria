@@ -116,4 +116,90 @@ public class Mock {
     public String notify(@Context HttpServletRequest req) {
         return "{\"message\": \"ok\"}";
     }
+
+
+
+
+
+    @GET
+    @Path("/notes_v2")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getNotes_v2(@Context HttpServletRequest req) {
+        return "{\n" +
+                "  \"aps\": [\n" +
+                "    {\n" +
+                "      \"apCode\": \"GIF500\",\n" +
+                "      \"titre\": \"Chasser\",\n" +
+                "      \"credit\": 2,\n" +
+                "      \"description\": \"Devenir un maÃ®tre chasseur\",\n" +
+                "      \"competences\": [\n" +
+                "        {\n" +
+                "          \"competenceNumero\": 1,\n" +
+                "          \"description\": \"Bien viser\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "          \"competenceNumero\": 2,\n" +
+                "          \"description\": \"Bien se cacher\"\n" +
+                "        }\n" +
+                "      ]\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"apCode\": \"GIF510\",\n" +
+                "      \"titre\": \"Cuisiner\",\n" +
+                "      \"credit\": 3,\n" +
+                "      \"description\": \"Devenir un maÃ®tre cuisinier\",\n" +
+                "      \"competences\": [\n" +
+                "        {\n" +
+                "          \"competenceNumero\": 1,\n" +
+                "          \"description\": \"Bien prÃ©parer\"\n" +
+                "        },\n" +
+                "        {\n" +
+                "          \"competenceNumero\": 2,\n" +
+                "          \"description\": \"Bien cuire\"\n" +
+                "        }\n" +
+                "      ]\n" +
+                "    }\n" +
+                "  ],\n" +
+                "  \"evaluations\": [\n" +
+                "    {\n" +
+                "      \"evaluation_id\" : 123,\n" +
+                "      \"nom\": \"Rapport APP1\",\n" +
+                "      \"activites\": {\n" +
+                "        \"GIF500\": [\n" +
+                "          {\n" +
+                "            \"competenceNumero\": \"1\",\n" +
+                "            \"note\": \"35\",\n" +
+                "            \"ponderation\": \"40\"\n" +
+                "          }\n" +
+                "        ],\n" +
+                "        \"GIF510\": [\n" +
+                "          {\n" +
+                "            \"competenceNumero\": \"1\",\n" +
+                "            \"note\": \"64\",\n" +
+                "            \"ponderation\": \"100\"\n" +
+                "          },\n" +
+                "          {\n" +
+                "            \"competenceNumero\": \"2\",\n" +
+                "            \"note\": \"56\",\n" +
+                "            \"ponderation\": \"70\"\n" +
+                "          }\n" +
+                "        ]\n" +
+                "      }\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}";
+    }
+
+    @GET
+    @Path("/statistics_v2")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getStatistics_v2(@Context HttpServletRequest req) {
+        return "{\n" +
+                "  \"statistiques\": [\n" +
+                "    {\"evaluation_id\": 123, \"ap\": \"GIF500\", \"competenceNumero\": \"1\", \"moyenne\": \"30\", \"ecartType\": \"8\"},\n" +
+                "    {\"evaluation_id\": 123, \"ap\": \"GIF510\", \"competenceNumero\": \"1\", \"moyenne\": \"59\", \"ecartType\": \"9\"},\n" +
+                "    {\"evaluation_id\": 123, \"ap\": \"GIF510\", \"competenceNumero\": \"2\", \"moyenne\": \"47\", \"ecartType\": \"4\"}\n" +
+                "  ]\n" +
+                "}";
+    }
 }
