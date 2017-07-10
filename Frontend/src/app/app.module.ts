@@ -42,7 +42,7 @@ const appRoutes: Routes = [
     HasNewEvaluationPipe,
     LoadingComponent,
     WithApStatsPipe,
-    FilterApsPipe
+    FilterApsPipe,
   ],
   imports: [
     BrowserModule,

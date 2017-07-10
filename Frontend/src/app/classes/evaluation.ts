@@ -1,13 +1,16 @@
+import { Consultation } from "app/classes/consultation";
 import { Competence } from "app/classes/competence";
-import { Ap } from "app/classes/ap";
-import { Note } from "app/classes/note";
 import { Dict } from "app/classes/dict.interface";
+import { Note } from "app/classes/note";
+import { Ap } from "app/classes/ap";
 
 /** Represent an "Evaluation" */
 export class Evaluation {
     titre: string;
     associatedAps: Dict<Note[]>;
     estNouveau: boolean;
+    estEnEquipe: boolean;
+    consult: Consultation;
 
     /** Search for a note associated with a certain Ap and Compentence
      * @param {string} apCode The code of the "Activité Pédagogique"
@@ -25,9 +28,12 @@ export class Evaluation {
         return null;
     }
 
-    constructor(titre: string, associatedAps: Dict<Note[]>, estNouveau?:boolean) {
+
+    constructor(titre: string, associatedAps: Dict<Note[]>, estNouveau?: boolean, estEnEquipe?: boolean, consult?: Consultation) {
         this.titre = titre;
         this.associatedAps = associatedAps;
         this.estNouveau = (estNouveau ? estNouveau : false)
+        this.estEnEquipe = (estEnEquipe ? estEnEquipe : false)
+        this.consult = (consult ? consult: { aUneConsult: true, dateConsult: "8 juillet", heureConsult: "12:30", localConsult:"C1-3024" })
     }
 }
