@@ -1,16 +1,25 @@
-.modal-header {
-    overflow: hidden;
-}
+.modal-content {
 
-.collection-item {
-    font-size: 1rem !important;
+    padding: 24px 24px 0px 24px;
 
-    span.badge {
-        margin-top: 5px;
+    .modal-header {
+        overflow: hidden;
+
+        .note-global {
+            font-size: 1.55rem
+        }
     }
 
-    i {
-        font-size: 16px;
-        margin-left: 0.5rem;
+    .collection-item {
+        font-size: 1rem !important;
+
+        span.badge {
+            margin-top: 5px;
+        }
+
+        i {
+            font-size: 16px;
+            margin-left: 0.5rem;
+        }
     }
 }
