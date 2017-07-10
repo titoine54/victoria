@@ -155,7 +155,7 @@ public class ApiRoute {
     public String getUsers(@Context HttpServletRequest req) {
 
         try{
-            URL url =  new URL("http://127.0.0.1:9090/membre?cip=eq." + req.getRemoteUser());
+            URL url =  new URL("http://10.43.158.107:9090/membre?cip=eq." + req.getRemoteUser());
             InputStream is = url.openStream();
 
             JSONParser jsonParser = new JSONParser();
@@ -231,27 +231,10 @@ public class ApiRoute {
                 addAp(currentLine, aps);
             }
 
-            ///////////////////////////////////////////////////////
-            // TODO: to remove
-            JSONArray evals = object2array(evaluations);
-            for(int j = 0; j < evals.size(); j++){
-                JSONObject activities = (JSONObject) ((JSONObject) evals.get(j)).get("activites");
-                JSONArray output = new JSONArray();
-                for(Iterator iterator = activities.keySet().iterator(); iterator.hasNext();) {
-                    String key = (String) iterator.next();
-                    JSONObject a = new JSONObject();
-                    a.put(key, activities.get(key));
-                    output.add(a);
-                }
-                ((JSONObject) evals.get(j)).remove("activites");
-                ((JSONObject) evals.get(j)).put("activites", output);
-            }
-            ///////////////////////////////////////////////////////
-
             // Making the response
             JSONObject returnedJSON = new JSONObject();
             returnedJSON.put("aps", object2array(aps));
-            returnedJSON.put("evaluations", evals);
+            returnedJSON.put("evaluations", evaluations);
             return returnedJSON.toJSONString();
         }
         catch (Exception e) {
