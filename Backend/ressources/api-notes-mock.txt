@@ -24,6 +24,7 @@
   "evaluations": [
     {
       "nom": "Rapport APP1",
+      "individuel": true,
       "activites": [
         {
           "GIF500": [

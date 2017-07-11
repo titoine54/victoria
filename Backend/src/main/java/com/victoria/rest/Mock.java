@@ -74,6 +74,7 @@ public class Mock {
                 "  \"evaluations\": [\n" +
                 "    {\n" +
                 "      \"nom\": \"Rapport APP1\",\n" +
+                "      \"individuel\": true,\n" +
                 "      \"activites\": [\n" +
                 "        {\n" +
                 "          \"GIF500\": [\n" +
