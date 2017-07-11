@@ -34,6 +34,6 @@ export class Evaluation {
         this.associatedAps = associatedAps;
         this.estNouveau = (estNouveau ? estNouveau : false)
         this.estEnEquipe = (estEnEquipe ? estEnEquipe : false)
-        this.consult = (consult ? consult: { aUneConsult: true, dateConsult: "8 juillet", heureConsult: "12:30", localConsult:"C1-3024" })
+        this.consult = (consult ? consult: { aUneConsult: false, dateConsult: "", heureConsult: "", localConsult:"" })
     }
 }
