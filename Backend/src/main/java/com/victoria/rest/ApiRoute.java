@@ -28,14 +28,14 @@ public class ApiRoute {
     public String getNotes(@Context HttpServletRequest req, @Context HttpServletResponse res) {
 
         try {
-            URL url = new URL("http://10.43.158.107:9090/v_notes_etudiants?cip=eq." + req.getRemoteUser() + "&trimestre=eq.H17");
+            URL url = new URL("http://localhost:9090/v_notes_etudiants?cip=eq." + req.getRemoteUser() + "&trimestre=eq.H17");
             InputStream is = url.openStream();
 
             JSONParser jsonParser = new JSONParser();
             JSONArray noteResponse = (JSONArray)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
 
             if(noteResponse.size() == 0){
-                return "";
+                return "null";
             }
             /*
              * 1. Check Evaluation - If not existing : Add (Id, nom ,activité + Add note in Activité), else nothing
@@ -80,7 +80,7 @@ public class ApiRoute {
             e.printStackTrace();
         }
 
-        return "";
+        return "null";
     }
 
 
@@ -108,10 +108,10 @@ public class ApiRoute {
 
         // TODO : clean up rounding
         competenceNote.put("competenceNumero", currentLine.get("competence"));
-        competenceNote.put("note", roundToTwoDecimals((Double) currentLine.get("note")));
+        competenceNote.put("note", (Double)(Math.round((Double) currentLine.get("note")*100)/100.0));
         competenceNote.put("ponderation", currentLine.get("ponderation"));
-        competenceNote.put("moyenne", roundToTwoDecimals((Double) currentLine.get("moyenne")));
-        competenceNote.put("ecartType", roundToTwoDecimals((Double) currentLine.get("ecart_type")));
+        competenceNote.put("moyenne", (Double)(Math.round((Double) currentLine.get("moyenne")*100)/100.0));
+        competenceNote.put("ecartType", (Double)(Math.round((Double) currentLine.get("ecart_type")*100)/100.0));
         activity.add(competenceNote);
     }
 
@@ -123,9 +123,9 @@ public class ApiRoute {
         if (ap == null) {
             ap = new JSONObject();
             ap.put("apCode", apCode);
-            ap.put("titre", currentLine.get("ap_nom"));
-            ap.put("credit", currentLine.get("ap_credit"));
-            ap.put("description", currentLine.get("ap_description"));
+            ap.put("titre", currentLine.get("apNom"));
+            ap.put("credit", currentLine.get("apCredit"));
+            ap.put("description", currentLine.get("apDescription"));
             ap.put("competences", new JSONArray());
 
             aps.put(apCode, ap);
@@ -155,14 +155,14 @@ public class ApiRoute {
     public String getUsers(@Context HttpServletRequest req) {
 
         try{
-            URL url =  new URL("http://10.43.158.107:9090/membre?cip=eq." + req.getRemoteUser());
+            URL url =  new URL("http://localhost:9090/membre?cip=eq." + req.getRemoteUser());
             InputStream is = url.openStream();
 
             JSONParser jsonParser = new JSONParser();
             JSONArray userResponse = (JSONArray)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
 
             if(userResponse.size() == 0){
-                return "";
+                return "null";
             }
 
             JSONObject userLine = (JSONObject)userResponse.get(0);
@@ -179,7 +179,7 @@ public class ApiRoute {
             e.printStackTrace();
         }
 
-        return "";
+        return "null";
     }
 
 
@@ -206,14 +206,14 @@ public class ApiRoute {
     public String getNotes_v2(@Context HttpServletRequest req, @Context HttpServletResponse res) {
 
         try {
-            URL url = new URL("http://10.43.158.107:9090/v_notes_etudiants?cip=eq." + req.getRemoteUser() + "&trimestre=eq.H17");
+            URL url = new URL("http://localhost:9090/v2_notes_etudiants?cip=eq." + req.getRemoteUser() + "&trimestre=eq.H17");
             InputStream is = url.openStream();
 
             JSONParser jsonParser = new JSONParser();
             JSONArray noteResponse = (JSONArray)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
 
             if(noteResponse.size() == 0){
-                return "";
+                return "null";
             }
             /*
              * 1. Check Evaluation - If not existing : Add (Id, nom ,activité + Add note in Activité), else nothing
@@ -241,7 +241,7 @@ public class ApiRoute {
             e.printStackTrace();
         }
 
-        return "";
+        return "null";
     }
 
 
@@ -269,28 +269,28 @@ public class ApiRoute {
 
         // TODO : clean up rounding
         competenceNote.put("competenceNumero", currentLine.get("competence"));
-        competenceNote.put("note", roundToTwoDecimals((Double) currentLine.get("note")));
+        competenceNote.put("note", (Double)(Math.round((Double) currentLine.get("note")*100)/100.0));
         competenceNote.put("ponderation", currentLine.get("ponderation"));
         activity.add(competenceNote);
     }
 
 
     @GET
-    @Path("statistics_v2")
+    @Path("statistiques_v2")
     @Produces(MediaType.APPLICATION_JSON)
     public String getStatistics(@Context HttpServletRequest req){
 
         try{
-            URL url =  new URL("http://10.43.158.107:9090/membre?cip=eq." + req.getRemoteUser());
+            URL url =  new URL("http://localhost:9090/v_statistiques_etudiants?cip=eq." + req.getRemoteUser()+"&trimestre=eq.H17");
             InputStream is = url.openStream();
 
             JSONParser jsonParser = new JSONParser();
             JSONArray statisticsResponse = (JSONArray)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
 
             if(statisticsResponse.size() == 0){
-                return "";
+                return "null";
             }
-            /***** TO CONFIRM *****/
+
             JSONObject returnedJSON = new JSONObject();
             JSONArray stats = new JSONArray();
             returnedJSON.put("statistiques", stats);
@@ -298,20 +298,20 @@ public class ApiRoute {
             for(int i = 0; i < statisticsResponse.size(); i++){
                 JSONObject currentLine = (JSONObject)statisticsResponse.get(i);
                 JSONObject tmp = new JSONObject();
-                tmp.put("evaluation_id", currentLine.get("evalID"));
-                tmp.put("ap", "apCode");
-                tmp.put("competenceNumero", "competence");
-                tmp.put("moyenne", "moyenne");
-                tmp.put("ecartType", "ecartType");
+                tmp.put("evaluationId", currentLine.get("evaluationId"));
+                tmp.put("ap", currentLine.get("ap"));
+                tmp.put("competenceNumero", currentLine.get("competence"));
+                tmp.put("moyenne", (Double)(Math.round((Double) currentLine.get("moyenne")*100)/100.0));
+                tmp.put("ecartType", (Double)(Math.round((Double) currentLine.get("ecart_type")*100)/100.0));
                 stats.add(tmp);
             }
-            /***** TO CONFIRM *****/
+
             return returnedJSON.toJSONString();
         }
         catch(Exception e){
             e.printStackTrace();
         }
 
-        return "";
+        return "null";
     }
 }
