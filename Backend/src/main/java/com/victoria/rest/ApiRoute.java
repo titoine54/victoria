@@ -81,14 +81,14 @@ public class ApiRoute {
     private void addEvaluation(JSONObject currentLine, JSONObject evaluations) {
         //Evaluation check
         String evalID = currentLine.get("evaluation_id").toString();
-        boolean enEquipe = Integer.parseInt(currentLine.get("estEnEquipe").toString());
+        boolean individuel = Integer.parseInt(currentLine.get("individuel").toString());
         JSONObject evaluation = (JSONObject)evaluations.get(evalID);
         if (evaluation == null) {
             evaluation = new JSONObject();
             evaluation.put("id", evalID);
             evaluation.put("nom", currentLine.get("evaluation"));
             evaluation.put("activites", new JSONObject());
-            evaluation.put("estEnEquipe", enEquipe);
+            evaluation.put("individuel", individuel);
             evaluations.put(evalID, evaluation);
         }
         //Activities check
