@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Ap } from "app/classes/ap";
 import { Evaluation } from "app/classes/evaluation";
 import { GlobalVariablesService } from "app/services/global-variables.service";
@@ -6,9 +7,21 @@ import { GlobalVariablesService } from "app/services/global-variables.service";
 @Injectable()
 export class EvaluationNotesService {
 
-    /** This service checks if the user is on mobile or desktop */
-    constructor(private global: GlobalVariablesService) { }
+    /**  */
+    constructor(private global: GlobalVariablesService, private router: Router) { }
 
+    getSelectedEvaluation(evaluationTitle: string): Evaluation {
+        if (this.global.evaluations && evaluationTitle) {
+            var selectedEvaluation = this.global.evaluations.find(x => x.titre == evaluationTitle);
+
+            if (!selectedEvaluation) {
+                this.router.navigate(['/notes']);
+            }
+
+            return selectedEvaluation;
+        }
+        return null;
+    }
 
     /** TODO: Complete this header
      * @param {string} apCode ???
@@ -24,7 +37,7 @@ export class EvaluationNotesService {
      * @param {string} apCode The "Activité Pédagogique" to cumulate
      * @return {any} Return the evaluation AP statistics
      */
-    public getApStats(apCode: string, evaluation: Evaluation):any {
+    public getApStats(apCode: string, evaluation: Evaluation): any {
         var apStats = {
             accumulatedTotals: 0,
             accumulatedPoints: 0,
@@ -47,7 +60,7 @@ export class EvaluationNotesService {
     /** TODO: Complete this header
      * @return {any} Returns the evaluation overall statistics
      */
-    public getEvaluationStats(evaluation: Evaluation):any {
+    public getEvaluationStats(evaluation: Evaluation): any {
         var evaluationStats = {
             accumulatedTotals: 0,
             accumulatedPoints: 0,

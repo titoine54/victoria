@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { CompetenceTooltipInfoPipe } from "app/pipes/competence-tooltip-info/competence-tooltip-info.pipe";
 import { GetCompetenceTotalPipe } from "app/pipes/get-competence-total/get-competence-total.pipe";
@@ -23,7 +24,7 @@ describe('MainComponent', () => {
     TestBed.configureTestingModule({
       declarations: [MainComponent, ApCompetencesComponent, HasNewEvaluationPipe, WithApStatsPipe, FilterApsPipe, GetCompetenceTotalPipe, CompetenceTooltipInfoPipe, NoteModalComponent, KeysPipe, LoadingComponent],
       providers: [GlobalVariablesService, EvaluationNotesService],
-      imports: [MaterializeModule, FormsModule]
+      imports: [MaterializeModule, FormsModule, RouterTestingModule]
     })
       .compileComponents();
   }));

@@ -1,10 +1,11 @@
 import { Router } from '@angular/router';
-import { GlobalVariablesService } from "app/services/global-variables.service";
-import { MobileService } from "app/services/mobile.service";
-import { NoteModalComponent } from "app/components/note-modal/note-modal.component";
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Location } from '@angular/common';
+import { GlobalVariablesService } from "app/services/global-variables.service";
+import { NoteModalComponent } from "app/components/note-modal/note-modal.component";
 import { Evaluation } from "app/classes/evaluation";
 import { Ap } from "app/classes/ap";
+import { isNotMobile } from 'app/utility/utility'
 
 @Component({
   selector: 'app-ap-competences',
@@ -22,7 +23,7 @@ export class ApCompetencesComponent {
   }
   get ap(): Ap { return this._ap }
 
-  @Output() onRequestNoteModal = new EventEmitter<Evaluation>();
+  @Output() onRequestNoteModal = new EventEmitter<string>();
 
   /** Get the best grid layout from the number of elements to show
    * @param {number} length The number of elements
@@ -35,16 +36,17 @@ export class ApCompetencesComponent {
   }
 
   /** Show all the notes related to an evaluation
-   * @param evaluation The clicked evaluation 
+   * @param evaluation The selected evaluation 
    */
-  showEvaluationNotes(evaluation: Evaluation) {
-    if (this.mobileService.mobileAndTabletcheck()) {
-      this.router.navigate(['/note', evaluation.titre]);
+  showEvaluationNotes(evaluationTitle: string) {
+    if (!isNotMobile()) {
+      this.router.navigate(['/note', evaluationTitle]);
     } else {
-      this.onRequestNoteModal.emit(evaluation);
+      this.location.replaceState('/note/' + evaluationTitle);
+      this.onRequestNoteModal.emit(evaluationTitle);
     }
   }
-  
-  constructor(private global: GlobalVariablesService, private mobileService: MobileService, private router: Router) { }
+
+  constructor(private global: GlobalVariablesService, private location: Location, private router: Router) { }
 
 }
