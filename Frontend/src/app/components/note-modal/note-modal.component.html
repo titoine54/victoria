@@ -3,7 +3,7 @@
         <div class="modal-header">
             <h4>{{ evaluation.titre }}
                 <span *ngIf="getEvaluationStats(); let stats" materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: ' + stats.groupMean + ' Écart-type: ' + stats.standardDeviation"
-                    class="right">
+                    class="note-global right">
                     {{ stats.accumulatedPoints }}/{{ stats.accumulatedTotals }} <b>({{ stats.note }}%)</b>
                 </span>
             </h4>
