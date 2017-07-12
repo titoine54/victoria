@@ -151,7 +151,7 @@ public class Mock {
                 "        \"competences\": [\n" +
                 "            { \"competenceNumero\": 1, \"description\": \"Savoir si un matériel est mou\" },\n" +
                 "            { \"competenceNumero\": 2, \"description\": \"Appliquer la règle du pouce\" },\n" +
-                "            { \"competenceNumero\": 2, \"description\": \"Calculer des calculs de manière scientifique\" }\n" +
+                "            { \"competenceNumero\": 3, \"description\": \"Calculer des calculs de manière scientifique\" }\n" +
                 "        ]\n" +
                 "    },\n" +
                 "    {\n" +
