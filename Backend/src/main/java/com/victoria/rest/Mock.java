@@ -181,97 +181,33 @@ public class Mock {
                 "  ],\n" +
                 "  \"evaluations\": [\n" +
                 "    {\n" +
-                "      \"evaluationId\" : 123,\n" +
-                "      \"nom\": \"Rapport APP1\",\n" +
-                "      \"individuel\": true,\n" +
-                "      \"estNouveau\": false,\n" +
-                "      \"activites\": {\n" +
-                "        \"GIF500\": [\n" +
-                "          {\n" +
-                "            \"competenceNumero\": 1,\n" +
-                "            \"note\": 35,\n" +
-                "            \"ponderation\": 40\n" +
-                "          }\n" +
-                "        ],\n" +
-                "        \"GIF510\": [\n" +
-                "          {\n" +
-                "            \"competenceNumero\": 1,\n" +
-                "            \"note\": null,\n" +
-                "            \"ponderation\": 100\n" +
-                "          },\n" +
-                "          {\n" +
-                "            \"competenceNumero\": 2,\n" +
-                "            \"note\": 56,\n" +
-                "            \"ponderation\": 70\n" +
-                "          }\n" +
-                "        ]\n" +
-                "      }\n" +
+                "        \"evaluationId\": 123, \"nom\": \"Rapport APP1\", \"individuel\": true, \"estNouveau\": false,\n" +
+                "        \"activites\": {\n" +
+                "            \"GIF500\": [{ \"competenceNumero\": 1, \"note\": 35, \"ponderation\": 40 }],\n" +
+                "            \"GIF510\": [{ \"competenceNumero\": 1, \"note\": 80, \"ponderation\": 100 }, { \"competenceNumero\": 2, \"note\": 56, \"ponderation\": 70 }]\n" +
+                "        }\n" +
                 "    },\n" +
-                "    {\t\"evaluationId\" : 456,\n" +
-                "      \"nom\": \"Examen Sommatif APP1\",\n" +
-                "      \"individuel\": true,\n" +
-                "      \"estNouveau\": true,\n" +
-                "      \"activites\": {\n" +
-                "        \"GIF520\": [\n" +
-                "          {\n" +
-                "            \"competenceNumero\": 1,\n" +
-                "            \"note\": null,\n" +
-                "            \"ponderation\": 40\n" +
-                "          },\n" +
-                "          {\n" +
-                "            \"competenceNumero\": 2,\n" +
-                "            \"note\": null,\n" +
-                "            \"ponderation\": 50\n" +
-                "          }\n" +
-                "        ]\n" +
-                "      }\n" +
+                "    {\n" +
+                "        \"evaluationId\": 456, \"nom\": \"Examen Sommatif APP1\", \"individuel\": true, \"estNouveau\": false,\n" +
+                "        \"activites\": {\n" +
+                "            \"GIF500\": [{ \"competenceNumero\": 1, \"note\": null, \"ponderation\": 20 }],\n" +
+                "            \"GIF520\": [{ \"competenceNumero\": 1, \"note\": null, \"ponderation\": 40 }, { \"competenceNumero\": 2, \"note\": null, \"ponderation\": 50 }]\n" +
+                "        }\n" +
                 "    },\n" +
-                "    {\t\"evaluationId\" : 321,\n" +
-                "      \"nom\": \"Rapport APP2\",\n" +
-                "      \"individuel\": false,\n" +
-                "      \"estNouveau\": true,\n" +
-                "      \"activites\": {\n" +
-                "        \"GIF520\": [\n" +
-                "          {\n" +
-                "            \"competenceNumero\": 1,\n" +
-                "            \"note\": null,\n" +
-                "            \"ponderation\": 40\n" +
-                "          },\n" +
-                "          {\n" +
-                "            \"competenceNumero\": 2,\n" +
-                "            \"note\": null,\n" +
-                "            \"ponderation\": 50\n" +
-                "          }\n" +
-                "        ],\n" +
-                "        \"GIF540\": [\n" +
-                "          {\n" +
-                "            \"competenceNumero\": 1,\n" +
-                "            \"note\": 64,\n" +
-                "            \"ponderation\": 70\n" +
-                "          }\n" +
-                "        ]\n" +
-                "      }\n" +
+                "    {\n" +
+                "        \"evaluationId\": 321, \"nom\": \"Rapport APP2\", \"individuel\": true, \"estNouveau\": true,\n" +
+                "        \"activites\": {\n" +
+                "            \"GIF520\": [{ \"competenceNumero\": 1, \"note\": 34, \"ponderation\": 40 }, { \"competenceNumero\": 2, \"note\": 47, \"ponderation\": 50 }],\n" +
+                "            \"GIF540\": [{ \"competenceNumero\": 1, \"note\": 64, \"ponderation\": 70 }]\n" +
+                "        }\n" +
                 "    },\n" +
-                "    {\t\"evaluationId\" : 654,\n" +
-                "      \"nom\": \"Oral - Projet\",\n" +
-                "      \"individuel\": false,\n" +
-                "      \"estNouveau\": true,\n" +
-                "      \"activites\": {\n" +
-                "        \"GIF560\": [\n" +
-                "          {\n" +
-                "            \"competenceNumero\": 1,\n" +
-                "            \"note\": 22,\n" +
-                "            \"ponderation\": 40\n" +
-                "          },\n" +
-                "          {\n" +
-                "            \"competenceNumero\": 2,\n" +
-                "            \"note\": 63,\n" +
-                "            \"ponderation\": 70\n" +
-                "          }\n" +
-                "        ]\n" +
-                "      }\n" +
+                "    {\n" +
+                "        \"evaluationId\": 654, \"nom\": \"Oral - Projet\", \"individuel\": false, \"estNouveau\": true,\n" +
+                "        \"activites\": {\n" +
+                "            \"GIF560\": [{ \"competenceNumero\": 1, \"note\": 22, \"ponderation\": 40 }, { \"competenceNumero\": 2, \"note\": 63, \"ponderation\": 70 }]\n" +
+                "        }\n" +
                 "    }\n" +
-                "  ]\n" +
+                "]\n" +
                 "}";
     }
 
@@ -281,16 +217,16 @@ public class Mock {
     public String getStatistics_v2(@Context HttpServletRequest req) {
         return "{\n" +
                 "  \"statistiques\": [\n" +
-                "    {\"evaluationId\": 123, \"ap\": \"GIF500\", \"competenceNumero\": \"1\", \"moyenne\": \"30\", \"ecartType\": \"8\"},\n" +
-                "    {\"evaluationId\": 123, \"ap\": \"GIF510\", \"competenceNumero\": \"1\", \"moyenne\": \"59\", \"ecartType\": \"9\"},\n" +
-                "    {\"evaluationId\": 123, \"ap\": \"GIF510\", \"competenceNumero\": \"2\", \"moyenne\": \"47\", \"ecartType\": \"4\"},\n" +
-                "    {\"evaluationId\": 456, \"ap\": \"GIF520\", \"competenceNumero\": \"1\", \"moyenne\": \"27\", \"ecartType\": \"2\"},\n" +
-                "    {\"evaluationId\": 456, \"ap\": \"GIF520\", \"competenceNumero\": \"2\", \"moyenne\": \"36\", \"ecartType\": \"2\"},\n" +
-                "    {\"evaluationId\": 321, \"ap\": \"GIF530\", \"competenceNumero\": \"1\", \"moyenne\": \"30\", \"ecartType\": \"8\"},\n" +
-                "    {\"evaluationId\": 321, \"ap\": \"GIF530\", \"competenceNumero\": \"2\", \"moyenne\": \"29\", \"ecartType\": \"9\"},\n" +
-                "    {\"evaluationId\": 321, \"ap\": \"GIF540\", \"competenceNumero\": \"1\", \"moyenne\": \"47\", \"ecartType\": \"4\"},\n" +
-                "    {\"evaluationId\": 654, \"ap\": \"GIF560\", \"competenceNumero\": \"1\", \"moyenne\": \"37\", \"ecartType\": \"1\"},\n" +
-                "    {\"evaluationId\": 654, \"ap\": \"GIF560\", \"competenceNumero\": \"2\", \"moyenne\": \"63\", \"ecartType\": \"3\"}\n" +
+                "        { \"evaluationId\": 123, \"apCode\": \"GIF500\", \"competenceNumero\": 1, \"moyenne\": 30, \"ecartType\": 8 },\n" +
+                "        { \"evaluationId\": 123, \"apCode\": \"GIF510\", \"competenceNumero\": 1, \"moyenne\": 59, \"ecartType\": 9 },\n" +
+                "        { \"evaluationId\": 123, \"apCode\": \"GIF510\", \"competenceNumero\": 2, \"moyenne\": 47, \"ecartType\": 4 },\n" +
+                "        { \"evaluationId\": 456, \"apCode\": \"GIF520\", \"competenceNumero\": 1, \"moyenne\": 27, \"ecartType\": 2 },\n" +
+                "        { \"evaluationId\": 456, \"apCode\": \"GIF520\", \"competenceNumero\": 2, \"moyenne\": 36, \"ecartType\": 2 },\n" +
+                "        { \"evaluationId\": 321, \"apCode\": \"GIF530\", \"competenceNumero\": 1, \"moyenne\": 30, \"ecartType\": 8 },\n" +
+                "        { \"evaluationId\": 321, \"apCode\": \"GIF530\", \"competenceNumero\": 2, \"moyenne\": 29, \"ecartType\": 9 },\n" +
+                "        { \"evaluationId\": 321, \"apCode\": \"GIF540\", \"competenceNumero\": 1, \"moyenne\": 47, \"ecartType\": 4 },\n" +
+                "        { \"evaluationId\": 654, \"apCode\": \"GIF560\", \"competenceNumero\": 1, \"moyenne\": 37, \"ecartType\": 1 },\n" +
+                "        { \"evaluationId\": 654, \"apCode\": \"GIF560\", \"competenceNumero\": 2, \"moyenne\": 63, \"ecartType\": 3 }\n" +
                 "  ]\n" +
                 "}";
     }
