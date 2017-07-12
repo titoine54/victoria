@@ -1,5 +1,12 @@
-export const MockStats: statistiques[] = [
-        {evaluationId: 123, ap: "GIF500", competenceNumero: "1", moyenne: "30", ecartType: "8"},
-        {evaluationId: 123, ap: "GIF510", competenceNumero: "1", moyenne: "59", ecartType: "9"},
-        {evaluationId: 123, ap: "GIF510", competenceNumero: "2", moyenne: "47", ecartType: "4"}
+import { Statistique } from "app/classes/statistiques.interface";
+
+export const MockStats: Statistique = [
+        {evaluationId: 1, moyenne: 30, ecartType: 8},
+        {evaluationId: 2, moyenne: null, ecartType: null},
+        {evaluationId: 3, moyenne: 32, ecartType: 10},
+        {evaluationId: 4, moyenne: 30, ecartType: 8},
+        {evaluationId: 5, moyenne: 34, ecartType: 9},
+        {evaluationId: 6, moyenne: 29, ecartType: 7},
+        {evaluationId: 7, moyenne: 31, ecartType: 8},
+
 ];
