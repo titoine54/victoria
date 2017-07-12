@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  useOfflineMocks : true,
+  useOfflineMocks : false, // if true, will not call the backend API; Will only use frontend mockup instead.
   apiUrl: 'https://s6ie1704.gel.usherbrooke.ca/api/mock'
 };

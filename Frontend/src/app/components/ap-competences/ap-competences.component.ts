@@ -28,7 +28,7 @@ export class ApCompetencesComponent {
    */
   getBestGridLayout(length: number) {
     var layout = 's12 ';
-    layout += (length == 1 ? 'm12' : length == 2 ? 'm6' : length == 3 ? 'm4' : 'm6');
+    layout += (length == 1 ? 'l6' : length == 2 ? 'm6' : length == 3 ? 'm6 l4' : 'm6');
     return layout;
   }
 

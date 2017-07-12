@@ -46,7 +46,7 @@ export class ApiService {
       return Observable.of({ "aps": MockApList, "evaluations": MockEvaluations });
     }
 
-    var url = `${environment.apiUrl}/notes_v2`;
+    var url = `${environment.apiUrl}/v2/notes`;
     if (trimestre) { url += `?trimestre=${trimestre}` }
 
     return this.http.get(url, this.getHeaders())
@@ -63,7 +63,7 @@ export class ApiService {
       return Observable.of({ "statistiques": MockStats });
     }
 
-    var url = `${environment.apiUrl}/statistics_v2`;
+    var url = `${environment.apiUrl}/v2/statistics`;
     if (trimestre) { url += `?trimestre=${trimestre}` }
 
     return this.http.get(url, this.getHeaders())

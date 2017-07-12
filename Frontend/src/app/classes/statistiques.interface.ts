@@ -1,6 +1,6 @@
-export interface Statistique {
+export interface Statistiques {
     evaluationId: number,
-    ap: number,
+    apCode: string,
     competenceNumero: number,
     moyenne: number,
     ecartType: number
