@@ -39,7 +39,7 @@ export class ApCompetencesComponent {
    * @param evaluation The selected evaluation 
    */
   showEvaluationNotes(evaluationTitle: string) {
-    if (!isNotMobile()) {
+    if (!isNotMobile) {
       this.router.navigate(['/note', evaluationTitle]);
     } else {
       this.location.replaceState('/note/' + evaluationTitle);

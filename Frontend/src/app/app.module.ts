@@ -28,7 +28,7 @@ import { isNotMobile } from 'app/utility/utility'
 const appRoutes: Routes = [
     { path: '', redirectTo: '/notes', pathMatch: 'full' },
     { path: 'notes', component: MainComponent },
-    { path: 'note/:evaluation', component: isNotMobile() ? MainComponent : NoteComponent },
+    { path: 'note/:evaluation', component: isNotMobile ? MainComponent : NoteComponent },
     { path: '**', component: PageNotFoundComponent }
 ];
 
