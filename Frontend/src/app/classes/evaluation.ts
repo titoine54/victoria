@@ -8,6 +8,7 @@ export class Evaluation {
     titre: string;
     associatedAps: Dict<Note[]>;
     estNouveau: boolean;
+    individuel: boolean;
 
     /** Search for a note associated with a certain Ap and Compentence
      * @param {string} apCode The code of the "Activité Pédagogique"
@@ -25,9 +26,10 @@ export class Evaluation {
         return null;
     }
 
-    constructor(titre: string, associatedAps: Dict<Note[]>, estNouveau?:boolean) {
+    constructor(titre: string, associatedAps: Dict<Note[]>, estNouveau?:boolean, individuel?:boolean) {
         this.titre = titre;
         this.associatedAps = associatedAps;
         this.estNouveau = (estNouveau ? estNouveau : false)
+        this.individuel = (individuel ? individuel : false)
     }
 }

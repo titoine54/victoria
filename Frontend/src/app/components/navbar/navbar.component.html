@@ -76,7 +76,7 @@
         </a>
       </li>
       <!--Search-->
-      <li *ngIf="global.user">
+      <li *ngIf="global.user" [class.selected]="global.showSearchBar">
         <a (click)="toggleSearchBar()">
         <i class="material-icons">search</i>
         </a>

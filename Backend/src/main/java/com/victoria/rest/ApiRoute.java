@@ -87,7 +87,7 @@ public class ApiRoute {
             evaluation.put("id", evalID);
             evaluation.put("nom", currentLine.get("evaluation"));
             evaluation.put("activites", new JSONObject());
-
+            evaluation.put("individuel", Integer.parseInt(currentLine.get("individuel").toString()) == 1);
             evaluations.put(evalID, evaluation);
         }
         //Activities check
@@ -120,7 +120,6 @@ public class ApiRoute {
             ap.put("credit", currentLine.get("ap_credit"));
             ap.put("description", currentLine.get("ap_description"));
             ap.put("competences", new JSONArray());
-
             aps.put(apCode, ap);
         }
         //Activities check
