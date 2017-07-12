@@ -24,7 +24,7 @@ export const MockApList: any = [
         "competences": [
             { "competenceNumero": 1, "description": "Savoir si un matériel est mou" },
             { "competenceNumero": 2, "description": "Appliquer la règle du pouce" },
-            { "competenceNumero": 2, "description": "Calculer des calculs de manière scientifique" }
+            { "competenceNumero": 3, "description": "Calculer des calculs de manière scientifique" }
         ]
     },
     {

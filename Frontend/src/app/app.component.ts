@@ -36,6 +36,25 @@ export class AppComponent {
         }
 
         for (let e of data.evaluations) {
+          this.global.evaluations.push(new Evaluation(e.nom, e.activites));
+        }
+      },
+      err => {
+        this.global.apList = [];
+        Materialize.toast('Impossible de télécharger les notes de l\'utilisateur', 4000)
+      });
+  }
+
+  loadNotesStats() {
+    this.apiService.getStats().subscribe(
+      (data: any) => {
+        this.global.apList = [];
+        this.global.evaluations = [];
+        for (let ap of data.aps) {
+          this.global.apList.push(new Ap(ap.apCode, ap.titre, ap.competences, ap.description, ap.credit));
+        }
+
+        for (let e of data.evaluations) {
           var associatedAps: Dict<Note[]> = {};
           for (let a of e.activites) {
             var apCode = Object.keys(a)[0];
