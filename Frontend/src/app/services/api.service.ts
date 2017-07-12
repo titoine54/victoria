@@ -63,7 +63,7 @@ export class ApiService {
       return Observable.of({ "statistiques": MockStats });
     }
 
-    var url = `${environment.apiUrl}/v2/statistics`;
+    var url = `${environment.apiUrl}/v2/statistiques`;
     if (trimestre) { url += `?trimestre=${trimestre}` }
 
     return this.http.get(url, this.getHeaders())

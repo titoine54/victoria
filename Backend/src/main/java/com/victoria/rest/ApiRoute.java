@@ -148,9 +148,9 @@ public class ApiRoute {
 
 
     @GET
-    @Path("user")
+    @Path("/user")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getUsers(@Context HttpServletRequest req) {
+    public String getUsers(@Context HttpServletRequest req, @Context HttpServletResponse res) {
 
         try{
             URL url =  new URL("http://localhost:9090/membre?cip=eq." + req.getRemoteUser());
@@ -181,8 +181,9 @@ public class ApiRoute {
     }
 
 
-    private Double roundToTwoDecimals(Double value){
-        return Math.round(value*100)/100.0;
+    private Double toTwoDecimals(Double value){
+        if(value == null) return -1.00;
+        else return Math.round(value*100)/100.0;
     }
 
     private JSONArray object2array(JSONObject jsonObject) {
@@ -199,7 +200,7 @@ public class ApiRoute {
 
     
     @GET
-    @Path("notes_v2")
+    @Path("/v2/notes")
     @Produces(MediaType.APPLICATION_JSON)
     public String getNotes_v2(@Context HttpServletRequest req, @Context HttpServletResponse res) {
 
@@ -251,7 +252,7 @@ public class ApiRoute {
             evaluation = new JSONObject();
             evaluation.put("id", evalID);
             evaluation.put("nom", currentLine.get("evaluation"));
-            evaluation.put("individuel", Integer.parseInt(currentLine.get("individuel").toString() == "true"?"1":"0"));
+            evaluation.put("individuel", currentLine.get("individuel"));
             evaluation.put("activites", new JSONObject());
 
             evaluations.put(evalID, evaluation);
@@ -268,16 +269,16 @@ public class ApiRoute {
 
         // TODO : clean up rounding
         competenceNote.put("competenceNumero", currentLine.get("competence"));
-        competenceNote.put("note", (Double)(Math.round((Double) currentLine.get("note")*100)/100.0));
+        competenceNote.put("note", toTwoDecimals((Double) currentLine.get("note")));
         competenceNote.put("ponderation", currentLine.get("ponderation"));
         activity.add(competenceNote);
     }
 
 
     @GET
-    @Path("statistiques_v2")
+    @Path("/v2/statistiques")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getStatistics(@Context HttpServletRequest req){
+    public String getStatistics(@Context HttpServletRequest req, @Context HttpServletResponse res){
 
         try{
             URL url =  new URL("http://localhost:9090/v_statistiques_etudiants?cip=eq." + req.getRemoteUser()+"&trimestre=eq.H17");
@@ -300,8 +301,8 @@ public class ApiRoute {
                 tmp.put("evaluationId", currentLine.get("evaluationId"));
                 tmp.put("ap", currentLine.get("ap"));
                 tmp.put("competenceNumero", currentLine.get("competence"));
-                tmp.put("moyenne", (Double)(Math.round((Double) currentLine.get("moyenne")*100)/100.0));
-                tmp.put("ecartType", (Double)(Math.round((Double) currentLine.get("ecart_type")*100)/100.0));
+                tmp.put("moyenne", toTwoDecimals((Double) currentLine.get("moyenne")));
+                tmp.put("ecartType", toTwoDecimals((Double) currentLine.get("ecart_type")));
                 stats.add(tmp);
             }
 

@@ -12,7 +12,7 @@
           <li class="collection-item">
             <a href="javascript:void(0)" (click)="onRequestNoteModal.emit(evaluation)">{{evaluation.titre}}</a>
             <i class="material-icons">
-              {{ evaluation.individuel ? 'group' : 'person' }}
+              {{ evaluation.individuel ? 'person' : 'group' }}
             </i>
             <span class="new" *ngIf="evaluation.estNouveau">&bull;</span>
             <span *ngIf="note.note; else elseBlock" materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: ' + note.moyenne + ' Écart-type: ' + note.ecartType">{{note.note}}/{{note.ponderation}}

@@ -123,7 +123,7 @@ public class Mock {
 
 
     @GET
-    @Path("/notes_v2")
+    @Path("/v2/notes")
     @Produces(MediaType.APPLICATION_JSON)
     public String getNotes_v2(@Context HttpServletRequest req) {
         return "{\n" +
@@ -133,16 +133,16 @@ public class Mock {
                 "        \"competences\": []\n" +
                 "    },\n" +
                 "    {\n" +
-                "        \"apCode\": \"GIF500\", \"titre\": \"Conception d\\'un système embarqué et réseauté\", \"credit\": 3, \"description\": null,\n" +
+                "        \"apCode\": \"GIF500\", \"titre\": \"Conception d'un système embarqué et réseauté\", \"credit\": 3, \"description\": null,\n" +
                 "        \"competences\": [\n" +
                 "            { \"competenceNumero\": 1, \"description\": \"Faire un réseau\" },\n" +
                 "            { \"competenceNumero\": 2, \"description\": \"Embarquer sur un système\" }\n" +
                 "        ]\n" +
                 "    },\n" +
                 "    {\n" +
-                "        \"apCode\": \"GIF510\", \"titre\": \"Systèmes à microprocesseurs\", \"credit\": 2, \"description\": \"Exploiter une carte comportant un microcontrôleur et des circuits d\\'entrée/sortie en utilisant la documentation technique des composants et des logiciels qui la constituent; développer et mettre au point un logiciel sur un système embarqué en utilisant des outils de développement croisés.\",\n" +
+                "        \"apCode\": \"GIF510\", \"titre\": \"Systèmes à microprocesseurs\", \"credit\": 2, \"description\": \"Exploiter une carte comportant un microcontrôleur et des circuits d'entrée/sortie en utilisant la documentation technique des composants et des logiciels qui la constituent; développer et mettre au point un logiciel sur un système embarqué en utilisant des outils de développement croisés.\",\n" +
                 "        \"competences\": [\n" +
-                "            { \"competenceNumero\": 1, \"description\": \"Exploiter une carte comportant un microcontrôleur et des circuits d\\'entrée-sortie en utilisant la documentation technique des composants et des logiciels qui la constituent.\" },\n" +
+                "            { \"competenceNumero\": 1, \"description\": \"Exploiter une carte comportant un microcontrôleur et des circuits d'entrée-sortie en utilisant la documentation technique des composants et des logiciels qui la constituent.\" },\n" +
                 "            { \"competenceNumero\": 2, \"description\": \"Développer et mettre au point un logiciel sur un système embarqué en utilisant des outils de développement croisés.\" }\n" +
                 "        ]\n" +
                 "    },\n" +
@@ -158,13 +158,13 @@ public class Mock {
                 "        \"apCode\": \"GIF530\", \"titre\": \"Circuits d'entrées/sorties et d'interfaces\", \"credit\": 1, \"description\": null,\n" +
                 "        \"competences\": [\n" +
                 "            { \"competenceNumero\": 1, \"description\": \"Circuits d'entrées\" },\n" +
-                "            { \"competenceNumero\": 2, \"description\": \"Circuits de sorties\" },\n" +
+                "            { \"competenceNumero\": 2, \"description\": \"Circuits de sorties\" }\n" +
                 "        ]\n" +
                 "    },\n" +
                 "    {\n" +
                 "        \"apCode\": \"GIF540\", \"titre\": \"Noyaux temps réel et programmation concurrente\", \"credit\": 1, \"description\": null,\n" +
                 "        \"competences\": [\n" +
-                "            { \"competenceNumero\": 1, \"description\": \"Faire de la propagande en temps réel dans un système donné\" },\n" +
+                "            { \"competenceNumero\": 1, \"description\": \"Faire de la propagande en temps réel dans un système donné\" }\n" +
                 "        ]\n" +
                 "    },\n" +
                 "    {\n" +
@@ -212,7 +212,7 @@ public class Mock {
     }
 
     @GET
-    @Path("/statistics_v2")
+    @Path("/v2/statistiques")
     @Produces(MediaType.APPLICATION_JSON)
     public String getStatistics_v2(@Context HttpServletRequest req) {
         return "{\n" +
