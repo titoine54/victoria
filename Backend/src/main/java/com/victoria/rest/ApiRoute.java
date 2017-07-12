@@ -93,7 +93,6 @@ public class ApiRoute {
             evaluation.put("id", evalID);
             evaluation.put("nom", currentLine.get("evaluation"));
             evaluation.put("activites", new JSONObject());
-            evaluation.put("individuel", Integer.parseInt(currentLine.get("individuel").toString()) == 1);
             evaluations.put(evalID, evaluation);
         }
         //Activities check
@@ -252,6 +251,7 @@ public class ApiRoute {
             evaluation = new JSONObject();
             evaluation.put("id", evalID);
             evaluation.put("nom", currentLine.get("evaluation"));
+            evaluation.put("individuel", Integer.parseInt(currentLine.get("individuel").toString() == "true"?"1":"0"));
             evaluation.put("activites", new JSONObject());
 
             evaluations.put(evalID, evaluation);
