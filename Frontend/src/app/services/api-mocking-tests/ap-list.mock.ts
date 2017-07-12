@@ -1,7 +1,7 @@
 import { Ap } from "app/classes/ap";
 
 export const MockApList: Ap[] = [
-    { apCode: 'GEN 501', titre: 'Droit', description: null, credit: 2, competences: [], bareme: 50 },
+    { apCode: 'GEN 501', titre: 'Droit', credit: 2, description: null, competences: [], bareme: 50},
     { apCode: 'GEN 500', titre: 'Conception d\'un système embarqué et réseauté', description: null, credit: 3, competences: [], bareme: 50 },
     {
         apCode: 'GEN 510', titre: 'Systèmes à microprocesseurs', credit: 2, description: 'Exploiter une carte comportant un microcontrôleur et des circuits d\'entrée/sortie en utilisant la documentation technique des composants et des logiciels qui la constituent; développer et mettre au point un logiciel sur un système embarqué en utilisant des outils de développement croisés.',
