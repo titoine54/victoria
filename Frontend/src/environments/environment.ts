@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
+  useOfflineMocks : true,
   apiUrl: 'https://s6ie1704.gel.usherbrooke.ca/api/mock'
 };

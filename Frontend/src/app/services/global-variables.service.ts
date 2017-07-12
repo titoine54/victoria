@@ -6,12 +6,11 @@ import { MockUser } from "app/services/api-mocking-tests/user.mock";
 import { MockEvaluations } from "app/services/api-mocking-tests/evaluations.mock";
 import { MockApList } from "app/services/api-mocking-tests/ap-list.mock";
 import { Dict } from "app/classes/dict.interface";
+import { environment } from '../../environments/environment';
 
+/** This service contains all the global variables of the application */
 @Injectable()
 export class GlobalVariablesService {
-
-  /** This service contains all the global variables of the application */
-  constructor() { }
 
   // TODO: Fetch data from backend
   user: User; // = MockUser;
@@ -29,4 +28,12 @@ export class GlobalVariablesService {
   // Search Bar
   showSearchBar: boolean = false;
   searchValue: string = '';
+
+  constructor() {
+    if (environment.production == false && environment.useOfflineMocks) {
+      this.user = MockUser;
+      this.apList = MockApList;
+      this.evaluations = MockEvaluations;
+    }
+  }
 }
