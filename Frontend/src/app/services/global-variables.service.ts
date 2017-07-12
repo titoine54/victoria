@@ -8,32 +8,27 @@ import { MockApList } from "app/services/api-mocking-tests/ap-list.mock";
 import { Dict } from "app/classes/dict.interface";
 import { environment } from '../../environments/environment';
 
-/** This service contains all the global variables of the application */
 @Injectable()
 export class GlobalVariablesService {
 
+  /** This service contains all the global variables of the application */
+  constructor() { }
+
   // TODO: Fetch data from backend
-  user: User; // = MockUser;
-  
+  user: User;
+
   trimestres: Dict<string>[] = [
-    {title:'Trimestre hiver 2017', value:'h17'},
-    {title:'Trimestre automne 2016', value:'a16'},
-    {title:'Trimestre été 2016', value:'e16'}
+    { title: 'Trimestre hiver 2017', value: 'h17' },
+    { title: 'Trimestre automne 2016', value: 'a16' },
+    { title: 'Trimestre été 2016', value: 'e16' }
   ];
   selectedTrimestre = this.trimestres[0];
-  
-  apList: Ap[]; // = MockApList;
-  evaluations: Evaluation[]; // = MockEvaluations;
+
+  apList: Ap[];
+  evaluations: Evaluation[];
 
   // Search Bar
   showSearchBar: boolean = false;
   searchValue: string = '';
 
-  constructor() {
-    if (environment.production == false && environment.useOfflineMocks) {
-      this.user = MockUser;
-      this.apList = MockApList;
-      this.evaluations = MockEvaluations;
-    }
-  }
 }

@@ -3,6 +3,10 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { UserSettings } from "app/classes/user-settings";
 import { environment } from '../../environments/environment';
+import { MockUser } from "app/services/api-mocking-tests/user.mock";
+import { MockEvaluations } from "app/services/api-mocking-tests/evaluations.mock";
+import { MockApList } from "app/services/api-mocking-tests/ap-list.mock";
+import { MockStats } from "app/services/api-mocking-tests/stats.mock";
 
 @Injectable()
 export class ApiService {
@@ -24,6 +28,9 @@ export class ApiService {
    * @return {Observable} The observable for the caller
    */
   public getUserData(): Observable<any> {
+    if (environment.production == false && environment.useOfflineMocks) {
+      return Observable.of(MockUser);
+    }
     return this.http.get(`${environment.apiUrl}/user`, this.getHeaders())
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error || 'Server error'));
@@ -35,7 +42,28 @@ export class ApiService {
    * @return {Observable} The observable for the caller
    */
   public getNotes(trimestre?: string): Observable<any> {
-    var url = `${environment.apiUrl}/notes`;
+    if (environment.production == false && environment.useOfflineMocks) {
+      return Observable.of({ "aps": MockApList, "evaluations": MockEvaluations });
+    }
+
+    var url = `${environment.apiUrl}/notes_v2`;
+    if (trimestre) { url += `?trimestre=${trimestre}` }
+
+    return this.http.get(url, this.getHeaders())
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error._body || 'Server error'));
+  }
+
+  /** Collect stats for "moyenne" and "ecart-type" of each evaluations
+   * @param {string} trimestre The trimestre to fetch
+   * @return {Observable} The observable for the caller
+   */
+  public getStats(trimestre?: string): Observable<any> {
+    if (environment.production == false && environment.useOfflineMocks) {
+      return Observable.of({ "statistiques": MockStats });
+    }
+
+    var url = `${environment.apiUrl}/statistics_v2`;
     if (trimestre) { url += `?trimestre=${trimestre}` }
 
     return this.http.get(url, this.getHeaders())
