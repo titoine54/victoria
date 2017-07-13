@@ -122,9 +122,9 @@ public class ApiRoute {
         if (ap == null) {
             ap = new JSONObject();
             ap.put("apCode", apCode);
-            ap.put("titre", currentLine.get("apNom"));
-            ap.put("credit", currentLine.get("apCredit"));
-            ap.put("description", currentLine.get("apDescription"));
+            ap.put("titre", currentLine.get("ap_nom"));
+            ap.put("credit", currentLine.get("ap_credit"));
+            ap.put("description", currentLine.get("ap_description"));
             ap.put("competences", new JSONArray());
             aps.put(apCode, ap);
         }
