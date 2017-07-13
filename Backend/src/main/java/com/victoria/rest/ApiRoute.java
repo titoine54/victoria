@@ -230,10 +230,13 @@ public class ApiRoute {
                 addAp(currentLine, aps);
             }
 
+            //evaluation : JSONObject -> JSONArray
+            JSONArray evalArray = object2array(evaluations);
+
             // Making the response
             JSONObject returnedJSON = new JSONObject();
             returnedJSON.put("aps", object2array(aps));
-            returnedJSON.put("evaluations", evaluations);
+            returnedJSON.put("evaluations", evalArray);
             return returnedJSON.toJSONString();
         }
         catch (Exception e) {
@@ -250,9 +253,10 @@ public class ApiRoute {
         JSONObject evaluation = (JSONObject)evaluations.get(evalID);
         if (evaluation == null) {
             evaluation = new JSONObject();
-            evaluation.put("id", evalID);
+            evaluation.put("evaluationId", evalID);
             evaluation.put("nom", currentLine.get("evaluation"));
             evaluation.put("individuel", currentLine.get("individuel"));
+            evaluation.put("estNouveau", false); //TODO change for value of DB
             evaluation.put("activites", new JSONObject());
 
             evaluations.put(evalID, evaluation);
@@ -267,7 +271,6 @@ public class ApiRoute {
         }
         JSONObject competenceNote = new JSONObject();
 
-        // TODO : clean up rounding
         competenceNote.put("competenceNumero", currentLine.get("competence"));
         competenceNote.put("note", toTwoDecimals((Double) currentLine.get("note")));
         competenceNote.put("ponderation", currentLine.get("ponderation"));
