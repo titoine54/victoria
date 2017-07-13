@@ -65,6 +65,10 @@ public class ApiRoute {
             }
             ///////////////////////////////////////////////////////
 
+            String user_test = req.getRemoteUser();
+            String test = getNotifications(user_test);
+            System.out.println(test.toString());
+
             // Making the response
             JSONObject returnedJSON = new JSONObject();
             returnedJSON.put("aps", object2array(aps));
@@ -149,18 +153,25 @@ public class ApiRoute {
         return output;
     }
 
-    private JSONObject getNotifications () {
-        URL url = new URL("http://127.0.0.1:9090/notification?cip=eq." + req.getRemoteUser());
+    private String getNotifications (String user_test) {
+        try {
+            URL url = new URL("http://127.0.0.1:9090/notification?cip=eq." + user_test);
+            InputStream is = url.openStream();
 
+            JSONParser jsonParser = new JSONParser();
+            JSONArray notificationResponse = (JSONArray)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
 
-
+            return notificationResponse.toJSONString();
+        }
+            catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
-    private void sendNotifications (JSONObject jsonObject) {
-        URL url = new URL("http://127.0.0.1:9090/v_notes_etudiants?cip=eq." + req.getRemoteUser() + "&trimestre=eq.H17");
-
-
-    }
+//    private void sendNotifications (JSONObject jsonObject) {
+//        URL url = new URL("http://127.0.0.1:9090/v_notes_etudiants"); //TODO: get real address from notification team
+//    }
 
     @GET
     @Path("user")
