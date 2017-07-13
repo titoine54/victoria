@@ -301,8 +301,8 @@ public class ApiRoute {
             for(int i = 0; i < statisticsResponse.size(); i++){
                 JSONObject currentLine = (JSONObject)statisticsResponse.get(i);
                 JSONObject tmp = new JSONObject();
-                tmp.put("evaluationId", currentLine.get("evaluationId"));
-                tmp.put("ap", currentLine.get("ap"));
+                tmp.put("evaluationId", currentLine.get("evaluation_id"));
+                tmp.put("apCode", currentLine.get("ap"));
                 tmp.put("competenceNumero", currentLine.get("competence"));
                 tmp.put("moyenne", toTwoDecimals((Double) currentLine.get("moyenne")));
                 tmp.put("ecartType", toTwoDecimals((Double) currentLine.get("ecart_type")));
