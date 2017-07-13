@@ -149,6 +149,19 @@ public class ApiRoute {
         return output;
     }
 
+    private JSONObject getNotifications () {
+        URL url = new URL("http://127.0.0.1:9090/notification?cip=eq." + req.getRemoteUser());
+
+
+
+    }
+
+    private void sendNotifications (JSONObject jsonObject) {
+        URL url = new URL("http://127.0.0.1:9090/v_notes_etudiants?cip=eq." + req.getRemoteUser() + "&trimestre=eq.H17");
+
+
+    }
+
     @GET
     @Path("user")
     @Produces(MediaType.APPLICATION_JSON)
