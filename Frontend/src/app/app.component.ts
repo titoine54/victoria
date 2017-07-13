@@ -71,6 +71,7 @@ export class AppComponent {
             }
           }
         }
+        this.global.evaluations = [...this.global.evaluations];
       },
       err => {
         this.global.apList = [];
