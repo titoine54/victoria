@@ -6,6 +6,7 @@ import { MockUser } from "app/services/api-mocking-tests/user.mock";
 import { MockEvaluations } from "app/services/api-mocking-tests/evaluations.mock";
 import { MockApList } from "app/services/api-mocking-tests/ap-list.mock";
 import { Dict } from "app/classes/dict.interface";
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class GlobalVariablesService {
@@ -14,19 +15,20 @@ export class GlobalVariablesService {
   constructor() { }
 
   // TODO: Fetch data from backend
-  user: User; // = MockUser;
-  
+  user: User;
+
   trimestres: Dict<string>[] = [
-    {title:'Trimestre hiver 2017', value:'h17'},
-    {title:'Trimestre automne 2016', value:'a16'},
-    {title:'Trimestre été 2016', value:'e16'}
+    { title: 'Trimestre hiver 2017', value: 'h17' },
+    { title: 'Trimestre automne 2016', value: 'a16' },
+    { title: 'Trimestre été 2016', value: 'e16' }
   ];
   selectedTrimestre = this.trimestres[0];
-  
-  apList: Ap[]; // = MockApList;
-  evaluations: Evaluation[]; // = MockEvaluations;
+
+  apList: Ap[];
+  evaluations: Evaluation[];
 
   // Search Bar
   showSearchBar: boolean = false;
   searchValue: string = '';
+
 }

@@ -5,6 +5,7 @@ import { Dict } from "app/classes/dict.interface";
 
 /** Represent an "Evaluation" */
 export class Evaluation {
+    evaluationId : number;
     titre: string;
     associatedAps: Dict<Note[]>;
     estNouveau: boolean;
@@ -26,7 +27,8 @@ export class Evaluation {
         return null;
     }
 
-    constructor(titre: string, associatedAps: Dict<Note[]>, estNouveau?:boolean, individuel?:boolean) {
+    constructor(titre: string, associatedAps: Dict<Note[]>, evaluationId?: number, estNouveau?:boolean, individuel?:boolean) {
+        this.evaluationId = evaluationId;
         this.titre = titre;
         this.associatedAps = associatedAps;
         this.estNouveau = (estNouveau ? estNouveau : false)

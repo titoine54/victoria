@@ -8,6 +8,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -24,14 +25,18 @@ public class ApiRoute {
     @GET
     @Path("notes")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getNotes(@Context HttpServletRequest req) {
+    public String getNotes(@Context HttpServletRequest req, @Context HttpServletResponse res) {
 
         try {
-            URL url = new URL("http://127.0.0.1:9090/v_notes_etudiants?cip=eq." + req.getRemoteUser() + "&trimestre=eq.H17");
+            URL url = new URL("http://localhost:9090/v_notes_etudiants?cip=eq." + req.getRemoteUser() + "&trimestre=eq.H17");
             InputStream is = url.openStream();
 
             JSONParser jsonParser = new JSONParser();
             JSONArray noteResponse = (JSONArray)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
+
+            if(noteResponse.size() == 0){
+                return "null";
+            }
             /*
              * 1. Check Evaluation - If not existing : Add (Id, nom ,activité + Add note in Activité), else nothing
              * 2. Check specific activité - If not existing : Add activité, else nothing
@@ -74,9 +79,10 @@ public class ApiRoute {
         catch (Exception e) {
             e.printStackTrace();
         }
-        //Handle Catch + Error return (418)
-        return "";
+
+        return "null";
     }
+
 
     private void addEvaluation(JSONObject currentLine, JSONObject evaluations) {
         //Evaluation check
@@ -87,7 +93,6 @@ public class ApiRoute {
             evaluation.put("id", evalID);
             evaluation.put("nom", currentLine.get("evaluation"));
             evaluation.put("activites", new JSONObject());
-            evaluation.put("individuel", Integer.parseInt(currentLine.get("individuel").toString()) == 1);
             evaluations.put(evalID, evaluation);
         }
         //Activities check
@@ -102,12 +107,13 @@ public class ApiRoute {
 
         // TODO : clean up rounding
         competenceNote.put("competenceNumero", currentLine.get("competence"));
-        competenceNote.put("note", (Double) (Math.floor((Double) currentLine.get("note")*100)/100.0));
+        competenceNote.put("note", (Double)(Math.round((Double) currentLine.get("note")*100)/100.0));
         competenceNote.put("ponderation", currentLine.get("ponderation"));
-        competenceNote.put("moyenne", (Double) (Math.floor((Double) currentLine.get("moyenne")*100)/100.0));
-        competenceNote.put("ecartType", (Double) (Math.floor((Double) currentLine.get("ecart_type")*100)/100.0));
+        competenceNote.put("moyenne", (Double)(Math.round((Double) currentLine.get("moyenne")*100)/100.0));
+        competenceNote.put("ecartType", (Double)(Math.round((Double) currentLine.get("ecart_type")*100)/100.0));
         activity.add(competenceNote);
     }
+
 
     private void addAp(JSONObject currentLine, JSONObject aps) {
         //Evaluation check
@@ -140,6 +146,46 @@ public class ApiRoute {
         }
     }
 
+
+    @GET
+    @Path("/user")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getUsers(@Context HttpServletRequest req, @Context HttpServletResponse res) {
+
+        try{
+            URL url =  new URL("http://localhost:9090/membre?cip=eq." + req.getRemoteUser());
+            InputStream is = url.openStream();
+
+            JSONParser jsonParser = new JSONParser();
+            JSONArray userResponse = (JSONArray)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
+
+            if(userResponse.size() == 0){
+                return "null";
+            }
+
+            JSONObject userLine = (JSONObject)userResponse.get(0);
+            JSONObject returnedJSON = new JSONObject();
+            returnedJSON.put("cip", userLine.get("cip"));
+            returnedJSON.put("firstName", userLine.get("prenom"));
+            returnedJSON.put("lastName", userLine.get("nom"));
+            returnedJSON.put("email", userLine.get("courriel"));
+            returnedJSON.put("settings", new JSONObject());//TODO ITERATION 3 : fill json object with user settings
+
+            return returnedJSON.toJSONString();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return "null";
+    }
+
+
+    private Double toTwoDecimals(Double value){
+        if(value == null) return -1.00;
+        else return Math.round(value*100)/100.0;
+    }
+
     private JSONArray object2array(JSONObject jsonObject) {
         JSONArray output = new JSONArray();
         for(Iterator iterator = jsonObject.keySet().iterator(); iterator.hasNext();) {
@@ -149,36 +195,126 @@ public class ApiRoute {
         return output;
     }
 
-    @GET
-    @Path("user")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getUsers(@Context HttpServletRequest req) {
 
-        try{
-            URL url =  new URL("http://127.0.0.1:9090/membre?cip=eq." + req.getRemoteUser());
+
+
+    
+    @GET
+    @Path("/v2/notes")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getNotes_v2(@Context HttpServletRequest req, @Context HttpServletResponse res) {
+
+        try {
+            URL url = new URL("http://localhost:9090/v2_notes_etudiants?cip=eq." + req.getRemoteUser() + "&trimestre=eq.H17");
             InputStream is = url.openStream();
 
             JSONParser jsonParser = new JSONParser();
-            JSONArray resultArray = (JSONArray)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
+            JSONArray noteResponse = (JSONArray)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
 
-            if(resultArray.size() != 1){
-                //HANDLE ERROR
+            if(noteResponse.size() == 0){
+                return "null";
+            }
+            /*
+             * 1. Check Evaluation - If not existing : Add (Id, nom ,activité + Add note in Activité), else nothing
+             * 2. Check specific activité - If not existing : Add activité, else nothing
+             * 3. Check Put note
+             */
+
+            JSONObject evaluations = new JSONObject();
+            JSONObject aps = new JSONObject();
+
+            for (int i = 0; i < noteResponse.size(); i++) {
+                JSONObject currentLine = (JSONObject)noteResponse.get(i);
+
+                addEvaluation_v2(currentLine, evaluations);
+                addAp(currentLine, aps);
             }
 
-            JSONObject result = (JSONObject)resultArray.get(0);
-            JSONObject response = new JSONObject();
-            response.put("cip", result.get("cip"));
-            response.put("firstName", result.get("prenom"));
-            response.put("lastName", result.get("nom"));
-            response.put("email", result.get("courriel"));
-            response.put("settings", new JSONObject());//TODO ITERATION 3 : fill json object with user settings
+            //evaluation : JSONObject -> JSONArray
+            JSONArray evalArray = object2array(evaluations);
 
-            return response.toJSONString();
+            // Making the response
+            JSONObject returnedJSON = new JSONObject();
+            returnedJSON.put("aps", object2array(aps));
+            returnedJSON.put("evaluations", evalArray);
+            return returnedJSON.toJSONString();
         }
-        catch (Exception e){
+        catch (Exception e) {
             e.printStackTrace();
         }
-        //Handle Catch + Error return (418)
-        return "";
+
+        return "null";
+    }
+
+
+    private void addEvaluation_v2(JSONObject currentLine, JSONObject evaluations) {
+        //Evaluation check
+        String evalID = currentLine.get("evaluation_id").toString();
+        JSONObject evaluation = (JSONObject)evaluations.get(evalID);
+        if (evaluation == null) {
+            evaluation = new JSONObject();
+            evaluation.put("evaluationId", evalID);
+            evaluation.put("nom", currentLine.get("evaluation"));
+            evaluation.put("individuel", currentLine.get("individuel"));
+            evaluation.put("estNouveau", false); //TODO change for value of DB
+            evaluation.put("activites", new JSONObject());
+
+            evaluations.put(evalID, evaluation);
+        }
+        //Activities check
+        JSONObject activities = (JSONObject)evaluation.get("activites");
+        String apCode = currentLine.get("ap").toString();
+        JSONArray activity = (JSONArray)activities.get(apCode);
+        if (activity == null) {
+            activity = new JSONArray();
+            activities.put(apCode, activity);
+        }
+        JSONObject competenceNote = new JSONObject();
+
+        competenceNote.put("competenceNumero", currentLine.get("competence"));
+        competenceNote.put("note", toTwoDecimals((Double) currentLine.get("note")));
+        competenceNote.put("ponderation", currentLine.get("ponderation"));
+        activity.add(competenceNote);
+    }
+
+
+    @GET
+    @Path("/v2/statistiques")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getStatistics(@Context HttpServletRequest req, @Context HttpServletResponse res){
+
+        try{
+            URL url =  new URL("http://localhost:9090/v_statistiques_etudiants?cip=eq." + req.getRemoteUser()+"&trimestre=eq.H17");
+            InputStream is = url.openStream();
+
+            JSONParser jsonParser = new JSONParser();
+            JSONArray statisticsResponse = (JSONArray)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
+
+            if(statisticsResponse.size() == 0){
+                return "null";
+            }
+
+            JSONObject returnedJSON = new JSONObject();
+            JSONArray stats = new JSONArray();
+            returnedJSON.put("statistiques", stats);
+
+            for(int i = 0; i < statisticsResponse.size(); i++){
+                JSONObject currentLine = (JSONObject)statisticsResponse.get(i);
+                JSONObject tmp = new JSONObject();
+                tmp.put("evaluationId", currentLine.get("evaluation_id"));
+                tmp.put("apCode", currentLine.get("ap"));
+                tmp.put("competenceNumero", currentLine.get("competence"));
+                tmp.put("moyenne", toTwoDecimals((Double) currentLine.get("moyenne")));
+                tmp.put("ecartType", toTwoDecimals((Double) currentLine.get("ecart_type")));
+                stats.add(tmp);
+            }
+
+            return returnedJSON.toJSONString();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return "null";
     }
 }

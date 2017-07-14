@@ -10,7 +10,7 @@ export class Note {
         this.competenceNumero = competenceNumero;
         this.note = note;
         this.ponderation = ponderation;
-        this.moyenne = moyenne;
-        this.ecartType = ecartType;
+        this.moyenne = moyenne || null;
+        this.ecartType = ecartType || null;
     }
 }
