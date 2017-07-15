@@ -20,22 +20,37 @@ export class NoteModalComponent {
 
     constructor(private global: GlobalVariablesService, private location: Location, private notesService: EvaluationNotesService, private router: Router) { }
 
-    /** TODO: Complete this header
-     * @param {Evaluation} evaluation ???
+    /**  Get the evaluation details 
+    * @return {Evaluation} The selected evaluation
+    */
+    getEvaluation() {
+        return this.notesService.getSelectedEvaluation(this.evaluationTitle);
+    }
+    
+    /** Detect clicks outside the modal
+     * @param {Event} e the clicked event
      */
-    show(evaluationTitle: string) {
-        this.evaluationTitle = evaluationTitle;
-        this.modalActions.emit({ action: "modal", params: ['open'] });
+    onClickedOutside(e: Event) {
+        if (e.srcElement.tagName.toLowerCase() !== 'a') { // Check if event target is hyperlink
+            this.hide();
+        }
     }
 
-    /** TODO: Complete this header */
+    /** Hide the modal */
     hide() {
         this.modalActions.emit({ action: "modal", params: ['close'] });
         this.location.go('/notes');
     }
 
-    getEvaluation() {
-        return this.notesService.getSelectedEvaluation(this.evaluationTitle);
+    /** Show the modal
+     * @param {string} evaluationTitle The title of the selected evaluation
+     */
+    show(evaluationTitle: string) {
+        this.evaluationTitle = evaluationTitle;
+        
+        if (this.notesService.getSelectedEvaluation(this.evaluationTitle)) {
+            this.modalActions.emit({ action: "modal", params: ['open'] });
+        }
     }
 
 }

@@ -5,7 +5,7 @@ import { GlobalVariablesService } from "app/services/global-variables.service";
 import { NoteModalComponent } from "app/components/note-modal/note-modal.component";
 import { Evaluation } from "app/classes/evaluation";
 import { Ap } from "app/classes/ap";
-import { isNotMobile } from 'app/utility/utility'
+import { isDesktopScreen } from 'app/utility/utility'
 
 @Component({
   selector: 'app-ap-competences',
@@ -39,8 +39,8 @@ export class ApCompetencesComponent {
    * @param evaluation The selected evaluation 
    */
   showEvaluationNotes(evaluationTitle: string) {
-    if (!isNotMobile) {
-      this.router.navigate(['/note', evaluationTitle]);
+    if (!isDesktopScreen) {
+      this.router.navigate(['/m/note', evaluationTitle]);
     } else {
       this.location.replaceState('/note/' + evaluationTitle);
       this.onRequestNoteModal.emit(evaluationTitle);

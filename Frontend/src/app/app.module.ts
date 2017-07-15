@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterializeModule } from "angular2-materialize";
+import { ClickOutsideModule } from 'ng-click-outside';
 import { AppComponent } from './app.component';
 import { GetCompetenceTotalPipe } from "app/pipes/get-competence-total/get-competence-total.pipe";
 import { MainComponent } from "app/views/main/main.component";
@@ -23,12 +24,14 @@ import { HasNewEvaluationPipe } from "app/pipes/has-new-evaluation/has-new-evalu
 import { LoadingComponent } from "app/components/loading/loading.component";
 import { WithApStatsPipe } from "app/pipes/with-ap-stats/with-ap-stats.pipe";
 import { FilterApsPipe } from "app/pipes/filter-aps/filter-aps.pipe";
-import { isNotMobile } from 'app/utility/utility'
+import { MobileGuard } from 'app/common/mobile.guard'
+import { DesktopGuard } from 'app/common/desktop.guard'
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/notes', pathMatch: 'full' },
     { path: 'notes', component: MainComponent },
-    { path: 'note/:evaluation', component: isNotMobile ? MainComponent : NoteComponent },
+    { path: 'note/:evaluation', component: MainComponent, canActivate: [ DesktopGuard ] },
+    { path: 'm/note/:evaluation', component: NoteComponent, canActivate: [ MobileGuard ] },
     { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -53,6 +56,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    ClickOutsideModule,
     FormsModule,
     HttpModule,
     MaterializeModule,
@@ -64,6 +68,8 @@ const appRoutes: Routes = [
     EvaluationNotesService, 
     NoteModalComponent, 
     SettingsModalComponent,
+    MobileGuard,
+    DesktopGuard,
   ],
   bootstrap: [AppComponent]
 })

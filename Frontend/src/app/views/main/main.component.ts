@@ -26,9 +26,6 @@ export class MainComponent implements AfterViewChecked {
 
     if (url.indexOf('note/') != -1) {
       this.evaluationTitle = (url.split('note/').pop().trim().replace(/%20/g, " "));
-    }
-
-    if (this.evaluationTitle) {
       this.noteModal.show(this.evaluationTitle);
     }
   }

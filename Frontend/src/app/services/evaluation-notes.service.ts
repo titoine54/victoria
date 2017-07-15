@@ -10,6 +10,10 @@ export class EvaluationNotesService {
     /**  */
     constructor(private global: GlobalVariablesService, private router: Router) { }
 
+    /** Get an Evaluation object
+     * @param {string} evaluationTitle The title of the selected evaluation
+     * @return {Evaluation} The Evaluation object corresponding to the evaluation title
+     */
     getSelectedEvaluation(evaluationTitle: string): Evaluation {
         if (this.global.evaluations && evaluationTitle) {
             var selectedEvaluation = this.global.evaluations.find(x => x.titre == evaluationTitle);
@@ -23,9 +27,9 @@ export class EvaluationNotesService {
         return null;
     }
 
-    /** TODO: Complete this header
-     * @param {string} apCode ???
-     * @return {unknown} ???
+    /** Get an "Activité Pédagogique" object
+     * @param {string} apCode The selected "Activité Pédagogique" code
+     * @return {Ap} The AP object corresponding to the "Activité Pédagogique" code
      */
     public getSelectedAp(apCode: string): Ap {
         return this.global.apList.filter(function (obj) {
@@ -33,9 +37,9 @@ export class EvaluationNotesService {
         })[0];
     }
 
-    /** TODO: Complete this header
-     * @param {string} apCode The "Activité Pédagogique" to cumulate
-     * @return {any} Return the evaluation AP statistics
+    /** Get the stats of an "Activité Pédagogique"
+     * @param {string} apCode The code of the "Activité Pédagogique" to cumulate
+     * @return {any} Return the AP statistics
      */
     public getApStats(apCode: string, evaluation: Evaluation): any {
         var apStats = {
@@ -57,8 +61,9 @@ export class EvaluationNotesService {
         return apStats;
     }
 
-    /** TODO: Complete this header
-     * @return {any} Returns the evaluation overall statistics
+    /** Get the overall stats of an evaluation
+     * @param {Evaluation} Evaluation The evaluation to cumulate
+     * @return {any} Return the evaluation overall statistics
      */
     public getEvaluationStats(evaluation: Evaluation): any {
         var evaluationStats = {
@@ -81,10 +86,10 @@ export class EvaluationNotesService {
         return evaluationStats;
     }
 
-    /** TODO: Complete this header
-     * @param {string} apCode ???
-     * @param {number} competenceNumber ???
-     * @return {unknown} ???
+    /** Get a competence description
+     * @param {string} apCode The AP code to get a competence description
+     * @param {number} competenceNumber The competence number to get a description
+     * @return {string} The competence description
      */
     public getCompetenceDescription(apCode: string, competenceNumber: number): string {
         var selectedAp = this.getSelectedAp(apCode);

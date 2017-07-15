@@ -6,6 +6,7 @@ import { GetCompetenceTotalPipe } from "app/pipes/get-competence-total/get-compe
 import { GlobalVariablesService } from "app/services/global-variables.service";
 import { EvaluationNotesService } from "app/services/evaluation-notes.service";
 import { ApCompetencesComponent } from "app/components/ap-competences/ap-competences.component";
+import { EvaluationComponent } from "app/components/evaluation/evaluation.component";
 import { NoteModalComponent } from "app/components/note-modal/note-modal.component";
 import { MaterializeModule } from "angular2-materialize";
 import { KeysPipe } from "app/pipes/keys/keys.pipe";
@@ -22,7 +23,7 @@ describe('MainComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MainComponent, ApCompetencesComponent, HasNewEvaluationPipe, WithApStatsPipe, FilterApsPipe, GetCompetenceTotalPipe, CompetenceTooltipInfoPipe, NoteModalComponent, KeysPipe, LoadingComponent],
+      declarations: [MainComponent, EvaluationComponent, ApCompetencesComponent, HasNewEvaluationPipe, WithApStatsPipe, FilterApsPipe, GetCompetenceTotalPipe, CompetenceTooltipInfoPipe, NoteModalComponent, KeysPipe, LoadingComponent],
       providers: [GlobalVariablesService, EvaluationNotesService],
       imports: [MaterializeModule, FormsModule, RouterTestingModule]
     })
