@@ -19,7 +19,7 @@ export class EvaluationNotesService {
             var selectedEvaluation = this.global.evaluations.find(x => x.titre == evaluationTitle);
 
             if (!selectedEvaluation) {
-                this.router.navigate(['/notes']);
+                this.router.navigate(['/404']);
             }
 
             return selectedEvaluation;

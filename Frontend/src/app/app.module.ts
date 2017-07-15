@@ -32,7 +32,8 @@ const appRoutes: Routes = [
     { path: 'notes', component: MainComponent },
     { path: 'note/:evaluation', component: MainComponent, canActivate: [ DesktopGuard ] },
     { path: 'm/note/:evaluation', component: NoteComponent, canActivate: [ MobileGuard ] },
-    { path: '**', component: PageNotFoundComponent }
+    { path: '404', component: PageNotFoundComponent },
+    { path: '**', redirectTo: '/404'}
 ];
 
 @NgModule({
