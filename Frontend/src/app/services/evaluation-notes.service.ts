@@ -44,19 +44,20 @@ export class EvaluationNotesService {
     public getApStats(apCode: string, evaluation: Evaluation): any {
         var apStats = {
             accumulatedTotals: 0,
-            accumulatedPoints: 0,
+            accumulatedPoints: null,
             groupMean: 0,
-            note: 0,
             standardDeviation: 0,
         }
         for (let e of evaluation.associatedAps[apCode]) {
             apStats.groupMean += +e.moyenne;
-            apStats.accumulatedTotals += +e.ponderation;
-            apStats.accumulatedPoints += +e.note;
+            apStats.accumulatedTotals += +e.ponderation;            
             apStats.standardDeviation = Math.sqrt(Math.pow(apStats.standardDeviation, 2) + Math.pow(+e.ecartType, 2));
+
+            if (e.note) {
+                apStats.accumulatedPoints += +e.note;
+            }
         }
-        apStats.accumulatedPoints = +apStats.accumulatedPoints.toFixed(2);
-        apStats.note = +((apStats.accumulatedPoints / apStats.accumulatedTotals) * 100).toFixed(2);
+        apStats.groupMean = +(apStats.groupMean.toFixed(2));
         apStats.standardDeviation = +(apStats.standardDeviation.toFixed(2));
         return apStats;
     }
@@ -68,20 +69,22 @@ export class EvaluationNotesService {
     public getEvaluationStats(evaluation: Evaluation): any {
         var evaluationStats = {
             accumulatedTotals: 0,
-            accumulatedPoints: 0,
+            accumulatedPoints: null,
             groupMean: 0,
-            note: 0,
             standardDeviation: 0,
         }
         for (var apCode in evaluation.associatedAps) {
             var apStats = this.getApStats(apCode, evaluation);
+
+            if (apStats.accumulatedPoints) {
+                evaluationStats.accumulatedPoints += +apStats.accumulatedPoints;
+            }
+            
             evaluationStats.groupMean += +apStats.groupMean;
-            evaluationStats.accumulatedPoints += +apStats.accumulatedPoints;
             evaluationStats.accumulatedTotals += +apStats.accumulatedTotals;
             evaluationStats.standardDeviation = Math.sqrt(Math.pow(evaluationStats.standardDeviation, 2) + Math.pow(+apStats.standardDeviation, 2));
         }
-        evaluationStats.accumulatedPoints = +evaluationStats.accumulatedPoints.toFixed(2);
-        evaluationStats.note = +((evaluationStats.accumulatedPoints / evaluationStats.accumulatedTotals) * 100).toFixed(2);
+        evaluationStats.groupMean = +(evaluationStats.groupMean.toFixed(2));
         evaluationStats.standardDeviation = +(evaluationStats.standardDeviation.toFixed(2));
         return evaluationStats;
     }

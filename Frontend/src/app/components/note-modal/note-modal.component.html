@@ -1,12 +1,15 @@
-<div id="modal1" class="modal" materialize="modal" [materializeActions]="modalActions">
+<div id="modal1" class="modal" materialize="modal" [materializeActions]="modalActions" (clickOutside)="onClickedOutside($event)">
     <div *ngIf="getEvaluation(); let evaluation">
         <div class="modal-content">
             <div class="modal-header">
                 <h4>{{ evaluation.titre }}
-                    <span *ngIf="notesService.getEvaluationStats(evaluation); let stats" materialize="tooltip" data-delay="50" class="badge"
+                    <span *ngIf="notesService.getEvaluationStats(evaluation); let stats">
+                        <span *ngIf="stats.accumulatedPoints; else elseBlock" materialize="tooltip" data-delay="50" class="badge"
                         data-position="left" [attr.data-tooltip]="'Moyenne: ' + stats.groupMean + ' Écart-type: ' + stats.standardDeviation"
                         class="note-global right">
-                       {{ stats.accumulatedPoints }}/{{ stats.accumulatedTotals }} <b>({{ stats.note }}%)</b>
+                            {{ stats.accumulatedPoints | number : '1.0-2' }}/{{ stats.accumulatedTotals | number : '1.0-2' }} <b>({{ (stats.accumulatedPoints/stats.accumulatedTotals) | number : '1.0-2' }}%)</b>
+                        </span>
+                        <ng-template #elseBlock><span class="tooltipped note-global right" data-position="left">--/{{ stats.accumulatedTotals | number : '1.0-2' }}</span></ng-template>
                   </span>
                 </h4>
             </div>
@@ -17,7 +20,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <a class="waves-effect waves-green btn-flat" (click)="hide()" (clickOutside)="onClickedOutside($event)">OK</a>
+            <a class="waves-effect waves-green btn-flat" (click)="hide()">OK</a>
         </div>
     </div>
 </div>
