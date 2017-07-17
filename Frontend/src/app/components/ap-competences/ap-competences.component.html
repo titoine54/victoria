@@ -10,7 +10,7 @@
       <ng-container *ngFor="let evaluation of global.evaluations"> 
         <ng-container *ngIf="evaluation.getNote(ap.apCode, competence.competenceNumero); let note">
           <li class="collection-item">
-            <a href="javascript:void(0)" (click)="onRequestNoteModal.emit(evaluation)">{{evaluation.titre}}</a>
+            <a href="javascript:void(0)" (click)="showEvaluationNotes(evaluation.titre)">{{evaluation.titre}}</a>
             <i class="material-icons">
               {{ evaluation.individuel ? 'person' : 'group' }}
             </i>

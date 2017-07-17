@@ -1,0 +1,25 @@
+<div *ngIf="notesService.getSelectedEvaluation(evaluationTitle); let evaluation" class='container'>
+    <div class="page-header">
+        <h5>{{ evaluation.titre }}
+            <span *ngIf="notesService.getEvaluationStats(evaluation); let stats" materialize="tooltip" data-delay="50" class="badge"
+                data-position="left" [attr.data-tooltip]="'Moyenne: ' + stats.groupMean + ' Écart-type: ' + stats.standardDeviation"
+                class="note-global right">
+                    {{ stats.accumulatedPoints }}/{{ stats.accumulatedTotals }} <b>({{ stats.note }}%)</b>
+                </span>
+        </h5> 
+    </div>
+    <div>
+        <ul *ngFor="let apCode of evaluation.associatedAps | keys" class="collection with-header">
+            <app-evaluation [apCode]="apCode" [evaluation]="evaluation"></app-evaluation>
+        </ul>
+    </div>
+</div>
+
+<loading *ngIf="global.evaluations == undefined"></loading>
+
+<!--When api call failed-->
+<div *ngIf="global.evaluations?.length == 0" class="container">
+    <br>
+    <h5>Un problème est survenu lors de la récupération de vos notes d'évaluation.</h5>
+    <p>Veuillez réessayer plus tard.</p>
+</div>
