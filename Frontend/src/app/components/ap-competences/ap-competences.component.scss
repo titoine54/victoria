@@ -11,6 +11,10 @@ i {
 }
 
 .collection-item {
+    &.new {
+        background-color: #f1f1f1 !important;
+    }
+
     span.new {
         color: red;
         font-size: 2rem;
