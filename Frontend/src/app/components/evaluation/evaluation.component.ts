@@ -12,6 +12,6 @@ export class EvaluationComponent {
     @Input() apCode: string;
     @Input() evaluation: Evaluation;
 
-    constructor(private notesService: EvaluationNotesService) {}
+    constructor(public notesService: EvaluationNotesService) {}
 
 }
