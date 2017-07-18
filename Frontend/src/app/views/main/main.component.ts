@@ -18,7 +18,7 @@ export class MainComponent implements AfterViewChecked {
   noteModal: NoteModalComponent
   evaluationTitle: string;
 
-  constructor(private global: GlobalVariablesService, private notesService: EvaluationNotesService, private route: ActivatedRoute, private router: Router) {}
+  constructor(public global: GlobalVariablesService, private notesService: EvaluationNotesService, private route: ActivatedRoute, private router: Router) {}
 
   ngAfterViewChecked() {
     this.evaluationTitle = undefined;
