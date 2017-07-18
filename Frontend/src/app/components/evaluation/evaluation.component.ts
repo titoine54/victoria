@@ -5,7 +5,8 @@ import { EvaluationNotesService } from "app/services/evaluation-notes.service";
 
 @Component({
     selector: 'app-evaluation',
-    templateUrl: './evaluation.component.html'
+    templateUrl: './evaluation.component.html',
+    styleUrls: ['./evaluation.component.scss']
 })
 export class EvaluationComponent {
 

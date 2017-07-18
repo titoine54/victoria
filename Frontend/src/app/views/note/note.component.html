@@ -1,12 +1,15 @@
 <div *ngIf="notesService.getSelectedEvaluation(evaluationTitle); let evaluation" class='container'>
     <div class="page-header">
         <h5>{{ evaluation.titre }}
-            <span *ngIf="notesService.getEvaluationStats(evaluation); let stats" materialize="tooltip" data-delay="50" class="badge"
-                data-position="left" [attr.data-tooltip]="'Moyenne: ' + stats.groupMean + ' Écart-type: ' + stats.standardDeviation"
-                class="note-global right">
-                    {{ stats.accumulatedPoints }}/{{ stats.accumulatedTotals }} <b>({{ stats.note }}%)</b>
+            <span *ngIf="notesService.getEvaluationStats(evaluation); let stats">
+                <span *ngIf="stats.accumulatedPoints; else elseBlock" materialize="tooltip" data-delay="50" class="badge"
+                        data-position="left" [attr.data-tooltip]="'Moyenne: ' + stats.groupMean + ' Écart-type: ' + stats.standardDeviation"
+                        class="note-global right">
+                    {{ stats.accumulatedPoints | number : '1.0-2' }}/{{ stats.accumulatedTotals | number : '1.0-2' }} <b>({{ (stats.accumulatedPoints/stats.accumulatedTotals) | number : '1.0-2' }}%)</b>
                 </span>
-        </h5> 
+                <ng-template #elseBlock><span class="tooltipped note-global right" data-position="left">--/{{ stats.accumulatedTotals | number : '1.0-2' }}</span></ng-template>
+            </span>
+        </h5>
     </div>
     <div>
         <ul *ngFor="let apCode of evaluation.associatedAps | keys" class="collection with-header">
