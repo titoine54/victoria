@@ -6,7 +6,6 @@
 
 <!--Parameters dropdown-->
 <ul id="params" class="dropdown-content">
-  <li><a href="javascript:void(0)" (click)="settingsModal.show()"><i class="material-icons">settings</i>Paramètres</a></li>
   <li><a href="/logout"><i class="material-icons">exit_to_app</i>Déconnexion</a></li>
   <li *ngIf="isDevEnv" class="divider"></li>
   <li *ngIf="isDevEnv">
@@ -38,9 +37,6 @@
   <li><a class="waves-effect notification" href="javascript:void(0)">Nouvelle note disponible pour <b>GEN521</b></a></li>
 
   <li class="divider"></li>
-  <li><a href="javascript:void(0)" (click)="settingsModal.show()">
-    <i class="material-icons">settings</i>Paramètres</a>
-  </li>
   <li><a href="/logout">
     <i class="material-icons">exit_to_app</i>Déconnexion</a>
   </li>
@@ -81,7 +77,7 @@
         <i class="material-icons">search</i>
         </a>
       </li>
-      <!--Notifications-->
+      <!--Notifications Dropdown-->
       <li *ngIf="global.user" class="hide-on-med-and-down">
         <a materialize="dropdown" class="dropdown-button" data-activates="notifs" data-belowOrigin="true" data-alignment="right"
           data-constrainWidth="false">
@@ -98,5 +94,3 @@
     </ul>
   </div>
 </nav>
-
-<app-settings-modal></app-settings-modal>

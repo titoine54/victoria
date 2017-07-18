@@ -27,13 +27,7 @@ public class Mock {
                 "  \"cip\": \"grab1337\",\n" +
                 "  \"firstName\": \"Bob\",\n" +
                 "  \"lastName\": \"Gratton\",\n" +
-                "  \"email\": \"bob.gratton@usherbrooke.ca\",\n" +
-                "  \"settings\": {\n" +
-                "    \"enableEmailNotif\": true,\n" +
-                "    \"enableSmsNotif\": false,\n" +
-                "    \"smsNumber\": \"999 999-9999\",\n" +
-                "    \"notifEmail\": \"bob.gratton@usherbrooke.ca\"\n" +
-                "  }\n" +
+                "  \"email\": \"bob.gratton@usherbrooke.ca\"\n" +
                 "}";
     }
 
