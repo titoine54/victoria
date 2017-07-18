@@ -35,7 +35,7 @@ describe('GetCompetenceTotalPipe', () => {
 
   it('get should display "{note}/{total} {percentage}%" for all notes in competence 1 of GEN 500', () => {
     var output = pipe.transform(competence[0], 'GEN 510', evaluations);
-    expect(output).toEqual('78/88 (89%)')
+    expect(output).toEqual('78/88 (88,64%)')
   });
 
 });

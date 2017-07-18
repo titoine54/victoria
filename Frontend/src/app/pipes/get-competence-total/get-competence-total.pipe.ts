@@ -33,7 +33,10 @@ export class GetCompetenceTotalPipe implements PipeTransform {
     }
     else {
       noteTotal = Math.round(noteTotal * 100) / 100;
-      return noteTotal + "/" + total + " (" + Math.round((noteTotal / total) * 100) + "%)";
+      if(((noteTotal / total) * 100)%1 == 0)
+        return (noteTotal + "/" + total + " (" + ((noteTotal / total) * 100).toString().replace(".", ",") + "%)");
+      else
+        return (noteTotal + "/" + total + " (" + ((noteTotal / total) * 100).toFixed(2).replace(".", ",") + "%)");
     }
   }
 }
