@@ -24,6 +24,7 @@ import { HasNewEvaluationPipe } from "app/pipes/has-new-evaluation/has-new-evalu
 import { LoadingComponent } from "app/components/loading/loading.component";
 import { WithApStatsPipe } from "app/pipes/with-ap-stats/with-ap-stats.pipe";
 import { FilterApsPipe } from "app/pipes/filter-aps/filter-aps.pipe";
+import { ReplaceDotByComma } from "app/pipes/replaceDotByComma/replaceDotByComma.pipe"
 import { MobileGuard } from 'app/common/mobile.guard'
 import { DesktopGuard } from 'app/common/desktop.guard'
 
@@ -53,7 +54,8 @@ const appRoutes: Routes = [
     HasNewEvaluationPipe,
     LoadingComponent,
     WithApStatsPipe,
-    FilterApsPipe
+    FilterApsPipe,
+    ReplaceDotByComma
   ],
   imports: [
     BrowserModule,
