@@ -179,6 +179,14 @@ public class ApiRoute {
         }
         System.out.println(notifications.toString());
     }
+    /*
+    id_notification
+        nom_notification (a determiner)
+        description_notification ("Nouvelle note pour " + nom evaluation)
+        id_evaluation
+        nom_evaluation
+    */
+
 
 //    private void sendNotifications (JSONObject jsonObject) {
 //        URL url = new URL("http://127.0.0.1:9090/v_notes_etudiants"); //TODO: get real address from notification team
