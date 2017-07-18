@@ -36,11 +36,13 @@ export class CompetenceTooltipInfoPipe implements PipeTransform {
     if (moyenneTotal <= 0) {
       return "Points restants: " + leftPoints;
     }
+    
+    moyenneTotal = +moyenneTotal.toFixed(2);
     if (leftPoints > 0) {
       return "Moyenne: " + moyenneTotal + "/" + total + ", Points à combler: " + leftPoints;
     }
     else {
-      return "Moyenne: " + moyenneTotal + "/" + total + ", Note finale";
+      return "Moyenne: " + moyenneTotal + "/" + total + ", Note complète.";
     }
   }
 }

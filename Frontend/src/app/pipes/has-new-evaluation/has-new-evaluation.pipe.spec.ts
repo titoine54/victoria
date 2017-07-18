@@ -14,11 +14,11 @@ let evaluations: Evaluation[] = [
   new Evaluation('Rapport de l\'APP 1', {
     'GEN 500': [new Note(1, null, 40), new Note(2, 35, 40)],
     'GEN 510': [new Note(1, 85, 100)]
-  }, true),
+  }, 1, true),
   new Evaluation('Examen Sommatif de l\'APP 1', {
     'GEN 501': [new Note(1, 35, 40)],
     'GEN 510': [new Note(1, 35, 40)]
-  }, false)
+  }, 2, false)
 ];
 
 let pipe: HasNewEvaluationPipe;

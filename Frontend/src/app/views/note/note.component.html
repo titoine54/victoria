@@ -1,0 +1,28 @@
+<div *ngIf="notesService.getSelectedEvaluation(evaluationTitle); let evaluation" class='container'>
+    <div class="page-header">
+        <h5>{{ evaluation.titre }}
+            <span *ngIf="notesService.getEvaluationStats(evaluation); let stats">
+                <span *ngIf="stats.accumulatedPoints; else elseBlock" materialize="tooltip" data-delay="50" class="badge"
+                        data-position="left" [attr.data-tooltip]="'Moyenne: ' + stats.groupMean + ' Écart-type: ' + stats.standardDeviation"
+                        class="note-global right">
+                    {{ stats.accumulatedPoints | number : '1.0-2' }}/{{ stats.accumulatedTotals | number : '1.0-2' }} <b>({{ (stats.accumulatedPoints/stats.accumulatedTotals) | number : '1.0-2' }}%)</b>
+                </span>
+                <ng-template #elseBlock><span class="tooltipped note-global right" data-position="left">--/{{ stats.accumulatedTotals | number : '1.0-2' }}</span></ng-template>
+            </span>
+        </h5>
+    </div>
+    <div>
+        <ul *ngFor="let apCode of evaluation.associatedAps | keys" class="collection with-header">
+            <app-evaluation [apCode]="apCode" [evaluation]="evaluation"></app-evaluation>
+        </ul>
+    </div>
+</div>
+
+<loading *ngIf="global.evaluations == undefined"></loading>
+
+<!--When api call failed-->
+<div *ngIf="global.evaluations?.length == 0" class="container">
+    <br>
+    <h5>Un problème est survenu lors de la récupération de vos notes d'évaluation.</h5>
+    <p>Veuillez réessayer plus tard.</p>
+</div>

@@ -1,15 +1,20 @@
+i {
+    font-size: 1.3rem !important;
+}
+
 .collection-header {
     font-size: 1.3rem !important;
 
     .badge {
         margin-top: 5px;
     }
-    i {
-        font-size: 1.3rem !important;
-    }
 }
 
 .collection-item {
+    &.new {
+        background-color: #f1f1f1 !important;
+    }
+
     span.new {
         color: red;
         font-size: 2rem;

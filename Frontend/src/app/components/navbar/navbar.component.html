@@ -72,12 +72,12 @@
         </a>
       </li>
       <!--Search-->
-      <li *ngIf="global.user">
+      <li *ngIf="global.user" [class.selected]="global.showSearchBar">
         <a (click)="toggleSearchBar()">
         <i class="material-icons">search</i>
         </a>
       </li>
-      <!--Notifications-->
+      <!--Notifications Dropdown-->
       <li *ngIf="global.user" class="hide-on-med-and-down">
         <a materialize="dropdown" class="dropdown-button" data-activates="notifs" data-belowOrigin="true" data-alignment="right"
           data-constrainWidth="false">

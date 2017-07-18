@@ -3,7 +3,7 @@
     <div class="input-field">
       <input id="search" type="search" [(ngModel)]="global.searchValue" (ngModelChange)="updateCollapsible()" placeholder="Recherche (Code d'AP, compétence, évaluation, etc)">
       <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-      <i (click)="global.searchValue = ''" class="material-icons">close</i>
+      <i (click)="global.searchValue = '';global.showSearchBar = false;" class="material-icons">close</i>
     </div>
   </div>
 </nav>
@@ -32,7 +32,7 @@
           </div>
 
           <div class="collapsible-body active grey lighten-4">
-            <blockquote *ngIf="ap.description" class="caption">
+            <blockquote class="caption">
               {{ ap.description }}
             </blockquote>
 
