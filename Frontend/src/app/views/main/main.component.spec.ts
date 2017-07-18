@@ -13,6 +13,7 @@ import { LoadingComponent } from "app/components/loading/loading.component";
 import { WithApStatsPipe } from "app/pipes/with-ap-stats/with-ap-stats.pipe";
 import { FilterApsPipe } from "app/pipes/filter-aps/filter-aps.pipe";
 import { FormsModule } from '@angular/forms';
+import { ReplaceDotByComma } from "app/pipes/replaceDotByComma/replaceDotByComma.pipe";
 
 describe('MainComponent', () => {
   let component: MainComponent;
@@ -20,7 +21,7 @@ describe('MainComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MainComponent, ApCompetencesComponent, HasNewEvaluationPipe, WithApStatsPipe, FilterApsPipe, GetCompetenceTotalPipe, CompetenceTooltipInfoPipe, NoteModalComponent, KeysPipe, LoadingComponent],
+      declarations: [MainComponent, ReplaceDotByComma, ApCompetencesComponent, HasNewEvaluationPipe, WithApStatsPipe, FilterApsPipe, GetCompetenceTotalPipe, CompetenceTooltipInfoPipe, NoteModalComponent, KeysPipe, LoadingComponent],
       providers: [GlobalVariablesService],
       imports: [MaterializeModule, FormsModule]
     })
