@@ -49,9 +49,14 @@ export class WithApStatsPipe implements PipeTransform {
     for (let ap of apsWithStats) {
       if (ap.stats.total > 0) {
         ap.stats.points = +ap.stats.points.toFixed(2);
-        ap.stats.percent = Math.round((ap.stats.points / ap.stats.total) * 100) + '%';
+         if(((ap.stats.points / ap.stats.total) * 100)%1 == 0) {
+          ap.stats.percent = ((ap.stats.points / ap.stats.total) * 100).toString().replace(".", ",") + '%';
+           ap.stats.remainingPercent = ((ap.stats.total / (ap.stats.total + ap.stats.remaining)) * 100).toString().replace(".", ",") + '%';
+         } else {
+          ap.stats.percent = ((ap.stats.points / ap.stats.total) * 100).toFixed(2).replace(".", ",") + '%'
+           ap.stats.remainingPercent = ((ap.stats.total / (ap.stats.total + ap.stats.remaining)) * 100).toFixed(2).replace(".", ",") + '%';
+         }
         ap.stats.string = `${ap.stats.points}/${ap.stats.total} (${ap.stats.percent})`;
-        ap.stats.remainingPercent = Math.round((ap.stats.total / (ap.stats.total + ap.stats.remaining)) * 100) + '%';
       } else {
         ap.stats.percent = '0%';
         ap.stats.string = '--/0'

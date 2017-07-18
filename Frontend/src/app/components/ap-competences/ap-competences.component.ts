@@ -1,5 +1,6 @@
-import { GlobalVariablesService } from "app/services/global-variables.service";
+import { ReplaceDotByComma } from "app/pipes/replaceDotByComma/replaceDotByComma.pipe";
 import { NoteModalComponent } from "app/components/note-modal/note-modal.component";
+import { GlobalVariablesService } from "app/services/global-variables.service";
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Evaluation } from "app/classes/evaluation";
 import { Ap } from "app/classes/ap";
