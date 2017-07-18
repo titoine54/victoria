@@ -40,13 +40,22 @@ public class ApiRoute {
 
             JSONObject evaluations = new JSONObject();
             JSONObject aps = new JSONObject();
+            JSONObject notifications = new JSONObject();
 
-            for (int i = 0; i < noteResponse.size(); i++) {
-                JSONObject currentLine = (JSONObject)noteResponse.get(i);
+            URL urlNotif = new URL("http://127.0.0.1:9090/notification?cip=eq." + req.getRemoteUser());
+            InputStream isNotif = urlNotif.openStream();
 
-                addEvaluation(currentLine, evaluations);
-                addAp(currentLine, aps);
-            }
+            JSONParser jsonParserNotif = new JSONParser();
+            JSONArray notificationResponse = (JSONArray)jsonParserNotif.parse(new InputStreamReader(isNotif, "UTF-8"));
+
+            getNotifications(notificationResponse, notifications);
+
+//            for (int i = 0; i < noteResponse.size(); i++) {
+//                JSONObject currentLine = (JSONObject)noteResponse.get(i);
+//
+//                addEvaluation(currentLine, evaluations);
+//                addAp(currentLine, aps);
+//            }
 
             ///////////////////////////////////////////////////////
             // TODO: to remove
@@ -65,14 +74,11 @@ public class ApiRoute {
             }
             ///////////////////////////////////////////////////////
 
-            String user_test = req.getRemoteUser();
-            String test = getNotifications(user_test);
-            System.out.println(test.toString());
-
             // Making the response
             JSONObject returnedJSON = new JSONObject();
             returnedJSON.put("aps", object2array(aps));
             returnedJSON.put("evaluations", evals);
+            returnedJSON.put("notifications", notifications);
             return returnedJSON.toJSONString();
         }
         catch (Exception e) {
@@ -153,20 +159,25 @@ public class ApiRoute {
         return output;
     }
 
-    private String getNotifications (String user_test) {
-        try {
-            URL url = new URL("http://127.0.0.1:9090/notification?cip=eq." + user_test);
-            InputStream is = url.openStream();
+    private void getNotifications (JSONArray notificationResponse, JSONObject notifications) {
 
-            JSONParser jsonParser = new JSONParser();
-            JSONArray notificationResponse = (JSONArray)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
+        for (int i = 0; i < notificationResponse.size(); i++) {
+            JSONObject currentLine = (JSONObject) notificationResponse.get(i);
 
-            return notificationResponse.toJSONString();
+            String notifID = currentLine.get("notification_id").toString();
+            JSONObject notification = (JSONObject)notifications.get(notifID);
+            if (notification == null) {
+                notification = new JSONObject();
+                notification.put("id", notifID);
+                notification.put("description", currentLine.get("description"));
+                notification.put("est_envoye", currentLine.get("est_envoye"));
+                notification.put("cip", currentLine.get("cip"));
+                //notification.put("nom", currentLine.get("nom"));
+                notification.put("url", currentLine.get("url"));
+                notifications.put(currentLine.get("nom"),notification);
+            }
         }
-            catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "";
+        System.out.println(notifications.toString());
     }
 
 //    private void sendNotifications (JSONObject jsonObject) {
