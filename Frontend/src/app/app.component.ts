@@ -24,7 +24,7 @@ export class AppComponent {
         global.user = new User(data.cip, data.firstName, data.lastName, data.email, data.settings);
         this.loadUserNotes();
       },
-      err => this.openWebsiteForLogin());
+      err => Materialize.toast('Impossible de télécharger les données de l\'utilisateur', 4000));
   }
 
   loadUserNotes() {
@@ -77,9 +77,5 @@ export class AppComponent {
         this.global.apList = [];
         Materialize.toast('Impossible de télécharger les notes de l\'utilisateur', 4000)
       });
-  }
-
-  openWebsiteForLogin() {
-    window.location.replace("https://cas.usherbrooke.ca/login?service=" + window.location.protocol + "//" + window.location.host);
   }
 }
