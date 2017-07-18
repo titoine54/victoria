@@ -1,9 +1,12 @@
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { ReplaceDotByComma } from "app/pipes/replaceDotByComma/replaceDotByComma.pipe";
 import { NoteModalComponent } from "app/components/note-modal/note-modal.component";
 import { GlobalVariablesService } from "app/services/global-variables.service";
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Evaluation } from "app/classes/evaluation";
 import { Ap } from "app/classes/ap";
+import { isDesktopScreen } from 'app/utility/utility'
 
 @Component({
   selector: 'app-ap-competences',
@@ -21,7 +24,7 @@ export class ApCompetencesComponent {
   }
   get ap(): Ap { return this._ap }
 
-  @Output() onRequestNoteModal = new EventEmitter<Evaluation>();
+  @Output() onRequestNoteModal = new EventEmitter<string>();
 
   /** Get the best grid layout from the number of elements to show
    * @param {number} length The number of elements
@@ -33,6 +36,18 @@ export class ApCompetencesComponent {
     return layout;
   }
 
-  constructor(private global: GlobalVariablesService) { }
+  /** Show all the notes related to an evaluation
+   * @param evaluation The selected evaluation 
+   */
+  showEvaluationNotes(evaluationTitle: string) {
+    if (!isDesktopScreen) {
+      this.router.navigate(['/m/note', evaluationTitle]);
+    } else {
+      this.location.replaceState('/note/' + evaluationTitle);
+      this.onRequestNoteModal.emit(evaluationTitle);
+    }
+  }
+
+  constructor(private global: GlobalVariablesService, private location: Location, private router: Router) { }
 
 }
