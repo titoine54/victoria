@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 @Path("/")
@@ -43,7 +44,7 @@ public class ApiRoute {
 
             JSONObject evaluations = new JSONObject();
             JSONObject aps = new JSONObject();
-            JSONObject notifications = new JSONObject();
+            ArrayList notifications = new ArrayList();
 
             URL urlNotif = new URL("http://127.0.0.1:9090/v_notifications?cip=eq." + req.getRemoteUser());
             InputStream isNotif = urlNotif.openStream();
@@ -155,22 +156,21 @@ public class ApiRoute {
     }
 
 
-    private void getNotifications (JSONArray notificationResponse, JSONObject notifications) {
+    private void getNotifications (JSONArray notificationResponse, ArrayList notifications) {
 
         for (int i = 0; i < notificationResponse.size(); i++) {
             JSONObject currentLine = (JSONObject) notificationResponse.get(i);
 
             String notifID = currentLine.get("notification_id").toString();
-            JSONObject notification = (JSONObject) notifications.get(notifID);
+            //JSONObject notification = (ArrayList) notifications.get(notifID);
 
-            if (notification == null) {
-                notification = new JSONObject();
-                notification.put("evaluationID", currentLine.get("evaluation_id"));
-                notification.put("evaluationNom", currentLine.get("titre"));
-                notification.put("descriptionNotification", "Nouvelle note : " + currentLine.get("titre"));
-                notification.put("cip", currentLine.get("cip"));
-                notifications.put(notifID, notification);
-            }
+            JSONObject notification = new JSONObject();
+            notification.put("notificationID", currentLine.get("notification_id"));
+            notification.put("evaluationID", currentLine.get("evaluation_id"));
+            notification.put("evaluationNom", currentLine.get("titre"));
+            notification.put("descriptionNotification", "Nouvelle note : " + currentLine.get("titre"));
+            notification.put("cip", currentLine.get("cip"));
+            notifications.add(notification);
         }
     }
 
@@ -349,8 +349,18 @@ public class ApiRoute {
     @Path("/notification/{notification_id}")
     @Produces(MediaType.APPLICATION_JSON)
     public void markNotificationAsRed(@PathParam("notification_id") Integer notification_id){
+        try{
+            URL url = new URL("http://localhost:9090/v_notes_etudiants?cip=eq." + notification_id);
+            InputStream is = url.openStream();
 
-        System.out.println(notification_id);
+            JSONParser jsonParser = new JSONParser();
+            JSONArray noteResponse = (JSONArray)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
+
+            System.out.println(notification_id);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
 
     }
 }
