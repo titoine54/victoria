@@ -55,12 +55,12 @@ public class ApiRoute {
 
             getNotifications(notificationResponse, notifications);
 
-//            for (int i = 0; i < noteResponse.size(); i++) {
-//                JSONObject currentLine = (JSONObject)noteResponse.get(i);
-//
-//                addEvaluation(currentLine, evaluations);
-//                addAp(currentLine, aps);
-//            }
+            for (int i = 0; i < noteResponse.size(); i++) {
+                JSONObject currentLine = (JSONObject)noteResponse.get(i);
+
+                addEvaluation(currentLine, evaluations);
+                addAp(currentLine, aps);
+            }
 
             ///////////////////////////////////////////////////////
             // TODO: to remove
@@ -157,6 +157,26 @@ public class ApiRoute {
     }
 
 
+    private void getNotifications (JSONArray notificationResponse, JSONObject notifications) {
+
+        for (int i = 0; i < notificationResponse.size(); i++) {
+            JSONObject currentLine = (JSONObject) notificationResponse.get(i);
+
+            String notifID = currentLine.get("notification_id").toString();
+            JSONObject notification = (JSONObject) notifications.get(notifID);
+
+            if (notification == null) {
+                notification = new JSONObject();
+                notification.put("evaluationID", currentLine.get("evaluation_id"));
+                notification.put("evaluationNom", currentLine.get("titre"));
+                notification.put("descriptionNotification", "Nouvelle note : " + currentLine.get("titre"));
+                notification.put("cip", currentLine.get("cip"));
+                notifications.put(notifID, notification);
+            }
+        }
+    }
+
+
     @GET
     @Path("/user")
     @Produces(MediaType.APPLICATION_JSON)
@@ -204,27 +224,6 @@ public class ApiRoute {
         }
         return output;
     }
-
-    private void getNotifications (JSONArray notificationResponse, JSONObject notifications) {
-
-        for (int i = 0; i < notificationResponse.size(); i++) {
-            JSONObject currentLine = (JSONObject) notificationResponse.get(i);
-
-            String notifID = currentLine.get("notification_id").toString();
-            JSONObject notification = (JSONObject) notifications.get(notifID);
-
-            if (notification == null) {
-                notification = new JSONObject();
-                notification.put("evaluationID", currentLine.get("evaluation_id"));
-                notification.put("evaluationNom", currentLine.get("titre"));
-                notification.put("descriptionNotification", "Nouvelle note : " + currentLine.get("titre"));
-                notification.put("cip", currentLine.get("cip"));
-                notifications.put(notifID, notification);
-            }
-        }
-        System.out.println(notifications.toString());
-    }
-
 
 //    private void sendNotifications (JSONObject jsonObject) {
 //         //TODO: get real address from notification team
@@ -340,6 +339,23 @@ public class ApiRoute {
             }
 
             return returnedJSON.toJSONString();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return "null";
+    }
+
+    @GET
+    @Path("/notification")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String markNotificationAsRed(@Context HttpServletRequest req, @Context HttpServletResponse res){
+
+        try{
+
+
+
         }
         catch(Exception e){
             e.printStackTrace();
