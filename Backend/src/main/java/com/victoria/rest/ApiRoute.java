@@ -47,7 +47,7 @@ public class ApiRoute {
             JSONObject aps = new JSONObject();
             JSONObject notifications = new JSONObject();
 
-            URL urlNotif = new URL("http://127.0.0.1:9090/notification?cip=eq." + req.getRemoteUser());
+            URL urlNotif = new URL("http://127.0.0.1:9090/v_notifications?cip=eq." + req.getRemoteUser());
             InputStream isNotif = urlNotif.openStream();
 
             JSONParser jsonParserNotif = new JSONParser();
@@ -204,38 +204,30 @@ public class ApiRoute {
         }
         return output;
     }
-    
+
     private void getNotifications (JSONArray notificationResponse, JSONObject notifications) {
 
         for (int i = 0; i < notificationResponse.size(); i++) {
             JSONObject currentLine = (JSONObject) notificationResponse.get(i);
 
             String notifID = currentLine.get("notification_id").toString();
-            JSONObject notification = (JSONObject)notifications.get(notifID);
+            JSONObject notification = (JSONObject) notifications.get(notifID);
+
             if (notification == null) {
                 notification = new JSONObject();
-                notification.put("id", notifID);
-                notification.put("description", currentLine.get("description"));
-                notification.put("est_envoye", currentLine.get("est_envoye"));
+                notification.put("evaluationID", currentLine.get("evaluation_id"));
+                notification.put("evaluationNom", currentLine.get("titre"));
+                notification.put("descriptionNotification", "Nouvelle note : " + currentLine.get("titre"));
                 notification.put("cip", currentLine.get("cip"));
-                //notification.put("nom", currentLine.get("nom"));
-                notification.put("url", currentLine.get("url"));
-                notifications.put(currentLine.get("nom"),notification);
+                notifications.put(notifID, notification);
             }
         }
         System.out.println(notifications.toString());
     }
-    /*
-    id_notification
-        nom_notification (a determiner)
-        description_notification ("Nouvelle note pour " + nom evaluation)
-        id_evaluation
-        nom_evaluation
-    */
 
 
 //    private void sendNotifications (JSONObject jsonObject) {
-//        URL url = new URL("http://127.0.0.1:9090/v_notes_etudiants"); //TODO: get real address from notification team
+//         //TODO: get real address from notification team
 //    }
 
     @GET
