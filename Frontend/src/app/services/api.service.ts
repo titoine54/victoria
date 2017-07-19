@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, URLSearchParams, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { UserSettings } from "app/classes/user-settings";
 import { environment } from '../../environments/environment';
 import { MockUser } from "app/services/api-mocking-tests/user.mock";
 import { MockEvaluations } from "app/services/api-mocking-tests/evaluations.mock";
@@ -77,16 +76,6 @@ export class ApiService {
     var url = `${environment.apiUrl}/v2/statistiques`;
 
     return this.http.get(url, this.getRequestOptions(trimestre? new URLSearchParams(`trimestre=${trimestre}`) : null))
-      .map((res: Response) => res.json())
-      .catch(this.handleError);
-  }
-
-  /** Allow user to modify it's application settings
-   * @param {UserSettings} userSettings The settings of the user
-   * @return {Observable} The observable for the caller
-   */
-  public saveUserSettings(userSettings: UserSettings): Observable<any> {
-    return this.http.put(`${environment.apiUrl}/user`, JSON.stringify(userSettings), this.getRequestOptions())
       .map((res: Response) => res.json())
       .catch(this.handleError);
   }

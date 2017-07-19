@@ -3,12 +3,6 @@
   "nom": "grab1337",
   "firstName": "Bob",
   "lastName": "Gratton",
-  "email": "bob.gratton@usherbrooke.ca",
-  "settings": {
-    "enableEmailNotif": true,
-    "enableSmsNotif": false,
-    "smsNumber": "999 999-9999",
-    "notifEmail": "bob.gratton@usherbrooke.ca"
-  }
+  "email": "bob.gratton@usherbrooke.ca"
 }
 ]
