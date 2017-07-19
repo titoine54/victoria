@@ -85,7 +85,7 @@ export class ApiService {
    * @param {number} notificationId The id of the notification to mark as read
    * @return {Observable} The observable for the caller
    */
-  public markEvaluationAsRead(notificationId: number): Observable<any> {
+  public markNotificationAsRead(notificationId: number): Observable<any> {
     return this.http.get(`${environment.apiUrl}/notify/${notificationId}`, this.getHeaders())
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error._body || 'Server error'));
