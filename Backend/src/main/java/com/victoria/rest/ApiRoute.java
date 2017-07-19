@@ -9,15 +9,13 @@ import org.json.simple.parser.JSONParser;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Iterator;
 
 @Path("/")
@@ -313,11 +311,11 @@ public class ApiRoute {
     public String getStatistics(@Context HttpServletRequest req, @Context HttpServletResponse res){
 
         try{
-            URL url =  new URL("http://localhost:9090/v_statistiques_etudiants?cip=eq." + req.getRemoteUser()+"&trimestre=eq.H17");
-            InputStream is = url.openStream();
+                URL url =  new URL("http://localhost:9090/v_statistiques_etudiants?cip=eq." + req.getRemoteUser()+"&trimestre=eq.H17");
+                InputStream is = url.openStream();
 
-            JSONParser jsonParser = new JSONParser();
-            JSONArray statisticsResponse = (JSONArray)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
+                JSONParser jsonParser = new JSONParser();
+                JSONArray statisticsResponse = (JSONArray)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
 
             if(statisticsResponse.size() == 0){
                 return "null";
@@ -348,19 +346,11 @@ public class ApiRoute {
     }
 
     @GET
-    @Path("/notification")
+    @Path("/notification/{notification_id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String markNotificationAsRed(@Context HttpServletRequest req, @Context HttpServletResponse res){
+    public void markNotificationAsRed(@PathParam("notification_id") Integer notification_id){
 
-        try{
+        System.out.println(notification_id);
 
-
-
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-
-        return "null";
     }
 }
