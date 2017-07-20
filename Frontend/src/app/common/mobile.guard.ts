@@ -11,7 +11,7 @@ export class MobileGuard implements CanActivate {
             return true;
         }
 
-        this.router.navigate([state.url.slice(2).replace(/%20/g, " ")]);
+        this.router.navigate([decodeURIComponent(state.url.slice(2))]);
         return false;
     }
 }

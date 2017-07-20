@@ -11,7 +11,7 @@ export class DesktopGuard implements CanActivate {
             return true;
         }
 
-        this.router.navigate(['/m' + state.url.replace(/%20/g, " ")]);
+        this.router.navigate(['/m' + decodeURIComponent(state.url)]);
         return false;
     }
 }
