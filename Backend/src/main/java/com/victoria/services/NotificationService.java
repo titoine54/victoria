@@ -15,7 +15,7 @@ public class NotificationService implements ServletContextListener {
     NotificationForwarder nf = new NotificationForwarder();
 
     public void contextInitialized(ServletContextEvent e){
-        ses.scheduleAtFixedRate(nf, 0, 30, TimeUnit.SECONDS);
+        ses.scheduleAtFixedRate(nf, 0, 60, TimeUnit.SECONDS);
     }
 
 
