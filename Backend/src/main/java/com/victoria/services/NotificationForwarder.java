@@ -43,8 +43,8 @@ public class NotificationForwarder implements Runnable{
         datePlusOneDay.setTime(date.getTime() + (1 * 24 * 60 * 60 * 1000));
 
         JSONObject o = new JSONObject();
-        o.put("cip", "bolb2201");//currentLine.get("cip")); ////////////////////////
-        o.put("title", "No. " + currentLine.get("notification_id") + " " + Double.toString(Math.random()));/////////////////////////////////
+        o.put("cip", currentLine.get("cip"));
+        o.put("title", "No. " + currentLine.get("notification_id"));
         o.put("description", "Nouvelle note pour : " + currentLine.get("titre"));
         o.put("url", "https://s6ie1704.gel.usherbrooke.ca/");
         o.put("idChannel", "1");
@@ -58,7 +58,7 @@ public class NotificationForwarder implements Runnable{
     private JSONArray getNotificationsFromDB(){
 
         try {
-            URL url = new URL("http://localhost:9090/v_notifications?cip=eq.laci2103&est_envoye=eq.f");////////////////////
+            URL url = new URL("http://localhost:9090/v_notifications?est_envoye=eq.f");
             InputStream is = url.openStream();
 
             JSONParser jsonParser = new JSONParser();
