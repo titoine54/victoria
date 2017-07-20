@@ -6,6 +6,7 @@ import { MockUser } from "app/services/api-mocking-tests/user.mock";
 import { MockEvaluations } from "app/services/api-mocking-tests/evaluations.mock";
 import { MockApList } from "app/services/api-mocking-tests/ap-list.mock";
 import { MockStats } from "app/services/api-mocking-tests/stats.mock";
+import { MockNouvelles } from "app/services/api-mocking-tests/nouvelles.mock";
 
 @Injectable()
 export class ApiService {
@@ -54,7 +55,7 @@ export class ApiService {
    */
   public getNotes(trimestre?: string): Observable<any> {
     if (environment.production == false && environment.useOfflineMocks) {
-      return Observable.of({ "aps": MockApList, "evaluations": MockEvaluations });
+      return Observable.of({ "aps": MockApList, "evaluations": MockEvaluations, "notifications": MockNouvelles });
     }
 
     var url = `${environment.apiUrl}/v2/notes`;

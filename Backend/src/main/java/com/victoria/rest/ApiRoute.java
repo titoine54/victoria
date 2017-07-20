@@ -284,7 +284,6 @@ public class ApiRoute {
             evaluation.put("evaluationId", evalID);
             evaluation.put("nom", currentLine.get("evaluation"));
             evaluation.put("individuel", currentLine.get("individuel"));
-            evaluation.put("estNouveau", false); //TODO change for value of DB
             evaluation.put("activites", new JSONObject());
 
             evaluations.put(evalID, evaluation);

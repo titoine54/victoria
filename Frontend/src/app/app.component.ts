@@ -8,6 +8,7 @@ import { Evaluation } from "app/classes/evaluation";
 import { Note } from "app/classes/note";
 import { Dict } from "app/classes/dict.interface";
 import { Statistiques } from "app/classes/statistiques.interface";
+import { Nouvelle } from "app/classes/nouvelle";
 declare var Materialize: any;
 
 @Component({
@@ -32,12 +33,23 @@ export class AppComponent {
       (data: any) => {
         this.global.apList = [];
         this.global.evaluations = [];
+
         for (let ap of data.aps) {
           this.global.apList.push(new Ap(ap.apCode, ap.titre, ap.competences, ap.description, ap.credit));
         }
 
         for (let e of data.evaluations) {
           this.global.evaluations.push(new Evaluation(e.nom, e.activites, e.evaluationId, e.estNouveau, e.individuel));
+        }
+
+        if (data.notifications) {
+          for (let n of data.notifications) {
+            this.global.nouvelles.push(new Nouvelle(n.notificationID, n.evaluationID, n.evaluationNom, n.descriptionNotification));
+            var associatedEvaluation = this.global.evaluations.find(e => e.evaluationId == n.evaluationID);
+            if (associatedEvaluation) {
+              associatedEvaluation.estNouveau = true;
+            }
+          }
         }
 
         this.loadNotesStats();
@@ -56,14 +68,15 @@ export class AppComponent {
           for (let stat of stats) {
             loop:
             for (let evaluation of this.global.evaluations) {
-              if (evaluation.evaluationId == stat.evaluationId)
-              for (var apCode in evaluation.associatedAps) {
-                if (apCode == stat.apCode) {
-                  for (let note of evaluation.associatedAps[apCode]) {
-                    if (note.competenceNumero == stat.competenceNumero) {
-                      note.moyenne = stat.moyenne;
-                      note.ecartType = stat.ecartType;
-                      break loop;
+              if (evaluation.evaluationId == stat.evaluationId) {
+                for (var apCode in evaluation.associatedAps) {
+                  if (apCode == stat.apCode) {
+                    for (let note of evaluation.associatedAps[apCode]) {
+                      if (note.competenceNumero == stat.competenceNumero) {
+                        note.moyenne = stat.moyenne;
+                        note.ecartType = stat.ecartType;
+                        break loop;
+                      }
                     }
                   }
                 }
