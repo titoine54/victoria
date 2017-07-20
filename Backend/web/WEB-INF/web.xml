@@ -122,4 +122,9 @@
         <filter-name>XsrfFilter</filter-name>
         <url-pattern>/api/*</url-pattern>
     </filter-mapping>
+    <listener>
+        <listener-class>
+            com.victoria.services.NotificationService
+        </listener-class>
+    </listener>
 </web-app>
