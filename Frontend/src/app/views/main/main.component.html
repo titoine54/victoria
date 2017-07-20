@@ -1,7 +1,7 @@
 <nav [class.hidden]="!global.showSearchBar">
   <div class="nav-wrapper green">
     <div class="input-field">
-      <input id="search" type="search" [(ngModel)]="searchText" (ngModelChange)="updateCollapsible($event)" placeholder="Recherche (Code d'AP, compétence, évaluation, etc)">
+      <input id="search" type="search" [(ngModel)]="searchText" (ngModelChange)="searchTextChanged($event)" placeholder="Recherche (Code d'AP, compétence, évaluation, etc)">
       <label class="label-icon" for="search"><i class="material-icons">search</i></label>
       <i (click)="global.searchValue = '';global.showSearchBar = false;" class="material-icons">close</i>
     </div>

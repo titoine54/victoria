@@ -28,6 +28,11 @@ export class MainComponent implements AfterViewChecked {
       .distinctUntilChanged()
       .subscribe(searchValue => {
         this.global.searchValue = searchValue;
+
+        if (searchValue != "") {
+          this.updateCollapsible();
+        }
+
       });
   }
 
@@ -41,13 +46,15 @@ export class MainComponent implements AfterViewChecked {
     }
   }
 
-  updateCollapsible(text: string) {
-    if (text != '') {
-      setTimeout(function () {
-        $(".collapsible-header").addClass("active");
-        $(".collapsible").collapsible({ accordion: false });
-      }, 1500);
-    }
+  searchTextChanged(text: string) {
     this.searchChanged.next(text);
   }
+  
+  updateCollapsible() {
+    setTimeout(function () {
+      $(".collapsible-header").addClass("active");
+      $(".collapsible").collapsible({ accordion: false });
+    }, 0);
+  }
+
 }
