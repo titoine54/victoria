@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Ap } from "app/classes/ap";
 import { Evaluation } from "app/classes/evaluation";
 import { User } from "app/classes/user";
-import { MockNouvelles } from "app/services/api-mocking-tests/nouvelles.mock";
 import { Dict } from "app/classes/dict.interface";
 import { environment } from '../../environments/environment';
 import { Nouvelle } from "app/classes/nouvelle";
@@ -25,7 +24,7 @@ export class GlobalVariablesService {
 
   apList: Ap[];
   evaluations: Evaluation[];
-  nouvelles: Nouvelle[] = MockNouvelles;
+  nouvelles: Nouvelle[];
 
   // Search Bar
   showSearchBar: boolean = false;

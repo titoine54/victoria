@@ -3,6 +3,11 @@ package com.victoria.rest;
 /**
  * Created by BenjaminB.-M and Ric Matte on 2017-06-27.
  */
+
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPatch;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -12,8 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -284,7 +290,6 @@ public class ApiRoute {
             evaluation.put("evaluationId", evalID);
             evaluation.put("nom", currentLine.get("evaluation"));
             evaluation.put("individuel", currentLine.get("individuel"));
-            evaluation.put("estNouveau", false); //TODO change for value of DB
             evaluation.put("activites", new JSONObject());
 
             evaluations.put(evalID, evaluation);
@@ -348,14 +353,35 @@ public class ApiRoute {
     @GET
     @Path("/notification/{notification_id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void markNotificationAsRed(@PathParam("notification_id") Integer notification_id){
+    public void markNotificationAsRead(@PathParam("notification_id") Integer notification_id){
         try{
-            URL url = new URL("http://localhost:9090/v_notes_etudiants?cip=eq." + notification_id);
-            InputStream is = url.openStream();
+            URL url = new URL("http://localhost:9090/notification?notification_id=eq." + notification_id);
 
-            JSONParser jsonParser = new JSONParser();
-            JSONArray noteResponse = (JSONArray)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
+//            JSONObject json_data = new JSONObject();
+//            json_data.put("est_lu", true);
+//
+//            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//            conn.setDoOutput(true);
+//            conn.setDoInput(true);
+//            conn.setRequestMethod("POST");
+//            conn.setRequestProperty("X-HTTP-Method-Override", "PATCH");
+//            conn.setRequestProperty("Content-Type", "application/json");
+//            conn.setRequestProperty("charset", "utf-8");
+//
+//            String input = json_data.toJSONString();
+//            OutputStream os = conn.getOutputStream();
+//            os.write(input.getBytes());
+//            os.flush();
+//
+//            String response = conn.getResponseMessage();
+//            System.out.println(response);
+//
+//            conn.disconnect();
 
+            CloseableHttpClient httpClient = HttpClients.createDefault();
+            HttpPatch httpPatch = new HttpPatch(new URI("http://localhost:9090/notification?notification_id=eq." + notification_id));
+            CloseableHttpResponse response = httpClient.execute(httpPatch);
+            System.out.println(response);
             System.out.println(notification_id);
         }
         catch(Exception e){
