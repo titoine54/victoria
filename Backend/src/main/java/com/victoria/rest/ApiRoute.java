@@ -6,6 +6,7 @@ package com.victoria.rest;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPatch;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.json.simple.JSONArray;
@@ -355,31 +356,15 @@ public class ApiRoute {
     @Produces(MediaType.APPLICATION_JSON)
     public void markNotificationAsRead(@PathParam("notification_id") Integer notification_id){
         try{
-            URL url = new URL("http://localhost:9090/notification?notification_id=eq." + notification_id);
-
-//            JSONObject json_data = new JSONObject();
-//            json_data.put("est_lu", true);
-//
-//            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//            conn.setDoOutput(true);
-//            conn.setDoInput(true);
-//            conn.setRequestMethod("POST");
-//            conn.setRequestProperty("X-HTTP-Method-Override", "PATCH");
-//            conn.setRequestProperty("Content-Type", "application/json");
-//            conn.setRequestProperty("charset", "utf-8");
-//
-//            String input = json_data.toJSONString();
-//            OutputStream os = conn.getOutputStream();
-//            os.write(input.getBytes());
-//            os.flush();
-//
-//            String response = conn.getResponseMessage();
-//            System.out.println(response);
-//
-//            conn.disconnect();
-
             CloseableHttpClient httpClient = HttpClients.createDefault();
             HttpPatch httpPatch = new HttpPatch(new URI("http://localhost:9090/notification?notification_id=eq." + notification_id));
+
+            String json = "{ \"est_vu\" : true }";
+            StringEntity entity = new StringEntity(json);
+            httpPatch.setEntity(entity);
+            httpPatch.setHeader("Accept", "application/json");
+            httpPatch.setHeader("Content-type", "application/json");
+
             CloseableHttpResponse response = httpClient.execute(httpPatch);
             System.out.println(response);
             System.out.println(notification_id);
