@@ -21,10 +21,10 @@ export class AppComponent {
   constructor(private apiService: ApiService, public global: GlobalVariablesService) {
     apiService.getUserData().subscribe(
       (data: any) => {
-        global.user = new User(data.cip, data.firstName, data.lastName, data.email, data.settings);
+        global.user = new User(data.cip, data.firstName, data.lastName, data.email);
         this.loadUserNotes();
       },
-      err => this.openWebsiteForLogin());
+      err => console.log('Utilisateur non connecté'));
   }
 
   loadUserNotes() {
@@ -44,7 +44,7 @@ export class AppComponent {
       },
       err => {
         this.global.apList = [];
-        Materialize.toast('Impossible de télécharger les notes de l\'utilisateur', 4000)
+        Materialize.toast('Une erreur s\'est produite lors du téléchargement des notes.', 4000)
       });
   }
 
@@ -75,11 +75,7 @@ export class AppComponent {
       },
       err => {
         this.global.apList = [];
-        Materialize.toast('Impossible de télécharger les notes de l\'utilisateur', 4000)
+        Materialize.toast('Une erreur s\'est produite lors du téléchargement des notes.', 4000)
       });
-  }
-
-  openWebsiteForLogin() {
-    window.location.replace("https://cas.usherbrooke.ca/login?service=" + window.location.protocol + "//" + window.location.host);
   }
 }

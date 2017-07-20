@@ -1,6 +1,5 @@
 import { Component, OnInit, HostListener, ViewChild, AfterViewInit } from '@angular/core';
 import { GlobalVariablesService } from "app/services/global-variables.service";
-import { SettingsModalComponent } from "app/components/settings-modal/settings-modal.component";
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
 import { Dict } from "app/classes/dict.interface";
@@ -17,8 +16,6 @@ export class NavbarComponent implements AfterViewInit {
   selectOptions: string[] = ['Trimestre e17', 'Trimestre a16', 'Trimestre h17'];
 
   constructor(public global: GlobalVariablesService, private router: Router) { }
-
-  @ViewChild(SettingsModalComponent) settingsModal: SettingsModalComponent
 
   @HostListener('window:resize') onResize() {
     var header = document.getElementById('navBar').parentElement.parentElement;
