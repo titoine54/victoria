@@ -1,5 +1,10 @@
 package com.victoria.services;
 
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPatch;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -8,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -18,19 +24,13 @@ import java.util.Date;
  */
 public class NotificationForwarder implements Runnable{
     public void run(){
-        //1 - PosRest request to DB, get lines from Notification table with est_envoye à FALSE
-        //2 - Pour chaque ligne, envoye forme un objet json et l'envoye a : https://s6ie1718.gel.usherbrooke.ca/api/developpeur/post_notification
-
-        //{ "cip": "gosa3202", "title": "Titre test", "description": "Desc Test", "url": "", "idChannel": 1, "idCategory": 8, "dateEmitted": "2017-07-18", "dateExpired": "2017-07-19" }
-
         JSONArray notifications = getNotificationsFromDB();
 
         for(int i = 0; i < notifications.size(); i++){
             JSONObject currentLine = (JSONObject)notifications.get(i);
             JSONObject o = getJSONObjectToSend(currentLine);
-            if(true){//sendNotification(o)){
-                //POST TO POSTRESTS;
-                System.out.println("SENTT");
+
+            if(sendNotification(o)){
                 updateNotificationDB(currentLine);
             }
         }
@@ -49,7 +49,7 @@ public class NotificationForwarder implements Runnable{
         o.put("url", "https://s6ie1704.gel.usherbrooke.ca/");
         o.put("idChannel", "1");
         o.put("idCategory", "8");
-        o.put("dateEmitted", dateFormat.format(date));//"2017-07-19"
+        o.put("dateEmitted", dateFormat.format(date));
         o.put("dateExpired", dateFormat.format(datePlusOneDay));
 
         return o;
@@ -105,35 +105,22 @@ public class NotificationForwarder implements Runnable{
     }
 
     private void updateNotificationDB(JSONObject o){
-        try {
-            URL url = new URL("http://localhost:9090/notification?notification_id=eq." + o.get("notification_id"));
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setDoOutput(true);
-            conn.setDoInput(true);
-            conn.setRequestProperty("X-HTTP-Method-Override", "PATCH");
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json");
+        try{
+            CloseableHttpClient httpClient = HttpClients.createDefault();
+            HttpPatch httpPatch = new HttpPatch(new URI("http://localhost:9090/notification?notification_id=eq." + o.get("notification_id")));
 
-            JSONObject jso = new JSONObject();
-            jso.put("est_envoye", true);
-            String input = jso.toJSONString();
+            JSONObject json = new JSONObject();
+            json.put("est_envoye", "true");
+            StringEntity entity = new StringEntity(json.toJSONString());
+            httpPatch.setEntity(entity);
+            httpPatch.setHeader("Accept", "application/json");
+            httpPatch.setHeader("Content-type", "application/json");
 
-            OutputStream os = conn.getOutputStream();
-            os.write(input.getBytes());
-            os.flush();
-
-            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                System.out.println("Failed : HTTP error code : " + conn.getResponseCode());
-                conn.disconnect();
-                //return false;
-            }
-
-            conn.disconnect();
-            //return true;
+            CloseableHttpResponse response = httpClient.execute(httpPatch);
+            //TODO todo something with the response
         }
-        catch (Exception e) {
+        catch(Exception e){
             e.printStackTrace();
-            //return false;
         }
 
     }
