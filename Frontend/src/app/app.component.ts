@@ -24,7 +24,7 @@ export class AppComponent {
         global.user = new User(data.cip, data.firstName, data.lastName, data.email);
         this.loadUserNotes();
       },
-      err => console.log('Utilisateur non connecté'));
+      err => Materialize.toast('Une erreur s\'est produite lors du téléchargement des donnees de l\'utilisateur.', 4000));
   }
 
   loadUserNotes() {
@@ -44,7 +44,7 @@ export class AppComponent {
       },
       err => {
         this.global.apList = [];
-        Materialize.toast('Une erreur s\'est produite lors du téléchargement des notes.', 4000)
+        Materialize.toast('Une erreur s\'est produite lors du téléchargement des notes.', 4000);
       });
   }
 
@@ -75,7 +75,7 @@ export class AppComponent {
       },
       err => {
         this.global.apList = [];
-        Materialize.toast('Une erreur s\'est produite lors du téléchargement des notes.', 4000)
+        Materialize.toast('Une erreur s\'est produite lors du téléchargement des notes.', 4000);
       });
   }
 }
