@@ -257,6 +257,15 @@ public class ApiRoute {
 
             JSONObject evaluations = new JSONObject();
             JSONObject aps = new JSONObject();
+            ArrayList notifications = new ArrayList();
+
+            URL urlNotif = new URL("http://127.0.0.1:9090/v_notifications?cip=eq." + req.getRemoteUser());
+            InputStream isNotif = urlNotif.openStream();
+
+            JSONParser jsonParserNotif = new JSONParser();
+            JSONArray notificationResponse = (JSONArray)jsonParserNotif.parse(new InputStreamReader(isNotif, "UTF-8"));
+
+            getNotifications(notificationResponse, notifications);
 
             for (int i = 0; i < noteResponse.size(); i++) {
                 JSONObject currentLine = (JSONObject)noteResponse.get(i);
@@ -272,6 +281,7 @@ public class ApiRoute {
             JSONObject returnedJSON = new JSONObject();
             returnedJSON.put("aps", object2array(aps));
             returnedJSON.put("evaluations", evalArray);
+            returnedJSON.put("notifications", notifications);
             return returnedJSON.toJSONString();
         }
         catch (Exception e) {
