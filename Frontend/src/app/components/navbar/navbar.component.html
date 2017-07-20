@@ -32,7 +32,7 @@
 
   <!--Notifications-->
   <li><a class="subheader">
-    <i class="material-icons">notifications</i>Nouvelles</a>
+    <i class="material-icons">{{ global.nouvelles?.length > 0 ? 'notifications' : 'notifications_none' }}</i>Nouvelles</a>
   </li>
   <li *ngFor="let nouvelle of global.nouvelles">
     <a [routerLink]="'/note/'+nouvelle.nomEvaluation" class="waves-effect notification">{{nouvelle.description}}</a>
@@ -83,7 +83,7 @@
       <li *ngIf="global.user" class="hide-on-med-and-down">
         <a materialize="dropdown" class="dropdown-button" data-activates="notifs" data-belowOrigin="true" data-alignment="right"
           data-constrainWidth="false">
-        <i class="material-icons">notifications</i>
+        <i class="material-icons">{{ global.nouvelles?.length > 0 ? 'notifications' : 'notifications_none' }}</i>
         </a>
       </li>
       <!--Options-->
