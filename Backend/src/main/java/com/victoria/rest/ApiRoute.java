@@ -359,15 +359,14 @@ public class ApiRoute {
             CloseableHttpClient httpClient = HttpClients.createDefault();
             HttpPatch httpPatch = new HttpPatch(new URI("http://localhost:9090/notification?notification_id=eq." + notification_id));
 
-            String json = "{ \"est_vu\" : true }";
-            StringEntity entity = new StringEntity(json);
+            JSONObject json = new JSONObject();
+            json.put("est_lu", true);
+            StringEntity entity = new StringEntity(json.toJSONString());
             httpPatch.setEntity(entity);
-            httpPatch.setHeader("Accept", "application/json");
             httpPatch.setHeader("Content-type", "application/json");
 
             CloseableHttpResponse response = httpClient.execute(httpPatch);
             System.out.println(response);
-            System.out.println(notification_id);
         }
         catch(Exception e){
             e.printStackTrace();
