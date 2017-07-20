@@ -86,7 +86,7 @@ public class NotificationForwarder implements Runnable{
             String input = jso.toJSONString();
 
             OutputStream os = conn.getOutputStream();
-            os.write(input.getBytes());
+            os.write(input.getBytes("UTF-8"));
             os.flush();
 
             if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
