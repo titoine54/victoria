@@ -86,7 +86,7 @@ export class ApiService {
    * @return {Observable} The observable for the caller
    */
   public markNotificationAsRead(notificationId: number): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/notify/${notificationId}`, this.getRequestOptions())
+    return this.http.get(`${environment.apiUrl}/notification/${notificationId}`, this.getRequestOptions())
       .map((res: Response) => res.json())
       .catch(this.handleError);
   }
