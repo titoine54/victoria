@@ -15,7 +15,7 @@ export class NavbarComponent implements AfterViewInit {
   useBlackIcon: boolean = false;
   selectOptions: string[] = ['Trimestre e17', 'Trimestre a16', 'Trimestre h17'];
 
-  constructor(public global: GlobalVariablesService, private router: Router) { }
+  constructor(public global: GlobalVariablesService, public router: Router) { }
 
   @HostListener('window:resize') onResize() {
     var header = document.getElementById('navBar').parentElement.parentElement;
