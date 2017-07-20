@@ -26,7 +26,7 @@ export class NoteModalComponent {
     getEvaluation() {
         return this.notesService.getSelectedEvaluation(this.evaluationTitle);
     }
-    
+
     /** Detect clicks outside the modal
      * @param {Event} e the clicked event
      */
@@ -50,7 +50,10 @@ export class NoteModalComponent {
         var evaluation = this.notesService.getSelectedEvaluation(evaluationTitle);
 
         if (evaluation) {
-            this.notesService.dismissAssociatedNotification(evaluation);
+            if (evaluation.estNouveau) {
+                this.notesService.dismissAssociatedNotification(evaluation);
+                evaluation.estNouveau = false; // TODO: Should only be false after confirmation from server
+            }
             this.modalActions.emit({ action: "modal", params: ['open'] });
         }
     }

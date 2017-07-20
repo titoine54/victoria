@@ -28,10 +28,12 @@ export class ApiService {
   }
 
   private handleError(error: any) {
-    if (error.status == 401)
+    if (error.status == 401) {
       window.location.replace("https://cas.usherbrooke.ca/login?service=" + window.location.protocol + "//" + window.location.host);
-    else
+      return Observable.empty();
+    } else {
       return Observable.throw(error || 'Server error');
+    }
   }
 
   /** Fetch all the user data from the server

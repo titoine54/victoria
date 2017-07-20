@@ -123,10 +123,10 @@ public class ApiRoute {
 
         // TODO : clean up rounding
         competenceNote.put("competenceNumero", currentLine.get("competence"));
-        competenceNote.put("note", (Double)(Math.round((Double) currentLine.get("note")*100)/100.0));
+        competenceNote.put("note", toTwoDecimals((Number) currentLine.get("note")));
         competenceNote.put("ponderation", currentLine.get("ponderation"));
-        competenceNote.put("moyenne", (Double)(Math.round((Double) currentLine.get("moyenne")*100)/100.0));
-        competenceNote.put("ecartType", (Double)(Math.round((Double) currentLine.get("ecart_type")*100)/100.0));
+        competenceNote.put("moyenne", toTwoDecimals((Number) currentLine.get("moyenne")));
+        competenceNote.put("ecartType", toTwoDecimals((Number) currentLine.get("ecart_type")));
         activity.add(competenceNote);
     }
 
@@ -216,9 +216,9 @@ public class ApiRoute {
     }
 
 
-    private Double toTwoDecimals(Double value){
-        if(value == null) return -1.00;
-        else return Math.round(value*100)/100.0;
+    private Double toTwoDecimals(Number value){
+        Double v = value.doubleValue();
+        return Math.round(v*100)/100.0;
     }
 
     private JSONArray object2array(JSONObject jsonObject) {
@@ -257,6 +257,15 @@ public class ApiRoute {
 
             JSONObject evaluations = new JSONObject();
             JSONObject aps = new JSONObject();
+            ArrayList notifications = new ArrayList();
+
+            URL urlNotif = new URL("http://127.0.0.1:9090/v_notifications?cip=eq." + req.getRemoteUser());
+            InputStream isNotif = urlNotif.openStream();
+
+            JSONParser jsonParserNotif = new JSONParser();
+            JSONArray notificationResponse = (JSONArray)jsonParserNotif.parse(new InputStreamReader(isNotif, "UTF-8"));
+
+            getNotifications(notificationResponse, notifications);
 
             for (int i = 0; i < noteResponse.size(); i++) {
                 JSONObject currentLine = (JSONObject)noteResponse.get(i);
@@ -272,6 +281,7 @@ public class ApiRoute {
             JSONObject returnedJSON = new JSONObject();
             returnedJSON.put("aps", object2array(aps));
             returnedJSON.put("evaluations", evalArray);
+            returnedJSON.put("notifications", notifications);
             return returnedJSON.toJSONString();
         }
         catch (Exception e) {
@@ -306,7 +316,7 @@ public class ApiRoute {
         JSONObject competenceNote = new JSONObject();
 
         competenceNote.put("competenceNumero", currentLine.get("competence"));
-        competenceNote.put("note", toTwoDecimals((Double) currentLine.get("note")));
+        competenceNote.put("note", toTwoDecimals((Number) currentLine.get("note")));
         competenceNote.put("ponderation", currentLine.get("ponderation"));
         activity.add(competenceNote);
     }
@@ -337,8 +347,8 @@ public class ApiRoute {
                 tmp.put("evaluationId", currentLine.get("evaluation_id"));
                 tmp.put("apCode", currentLine.get("ap"));
                 tmp.put("competenceNumero", currentLine.get("competence"));
-                tmp.put("moyenne", toTwoDecimals((Double) currentLine.get("moyenne")));
-                tmp.put("ecartType", toTwoDecimals((Double) currentLine.get("ecart_type")));
+                tmp.put("moyenne", toTwoDecimals((Number) currentLine.get("moyenne")));
+                tmp.put("ecartType", toTwoDecimals((Number) currentLine.get("ecart_type")));
                 stats.add(tmp);
             }
 
@@ -359,15 +369,14 @@ public class ApiRoute {
             CloseableHttpClient httpClient = HttpClients.createDefault();
             HttpPatch httpPatch = new HttpPatch(new URI("http://localhost:9090/notification?notification_id=eq." + notification_id));
 
-            String json = "{ \"est_vu\" : true }";
-            StringEntity entity = new StringEntity(json);
+            JSONObject json = new JSONObject();
+            json.put("est_lu", true);
+            StringEntity entity = new StringEntity(json.toJSONString());
             httpPatch.setEntity(entity);
-            httpPatch.setHeader("Accept", "application/json");
             httpPatch.setHeader("Content-type", "application/json");
 
             CloseableHttpResponse response = httpClient.execute(httpPatch);
             System.out.println(response);
-            System.out.println(notification_id);
         }
         catch(Exception e){
             e.printStackTrace();

@@ -17,7 +17,7 @@ export class EvaluationNotesService {
      */
     getSelectedEvaluation(evaluationTitle: string): Evaluation {
         if (this.global.evaluations && evaluationTitle) {
-            var selectedEvaluation = this.global.evaluations.find(x => x.titre == evaluationTitle);
+            var selectedEvaluation = this.global.evaluations.find(x => x.titre == decodeURIComponent(evaluationTitle));
 
             if (!selectedEvaluation) {
                 this.router.navigate(['/404']);
@@ -37,7 +37,7 @@ export class EvaluationNotesService {
                 if (nouvelle.evaluationId == evaluation.evaluationId) {
                     console.log(`Dismissing evaluation "${evaluation.titre}"...`);
                     this.api.markNotificationAsRead(nouvelle.notificationId).subscribe(
-                        (data: any) => {}
+                        (data: any) => evaluation.estNouveau = false
                     );
                 }
             }

@@ -14,14 +14,15 @@ export class NoteComponent implements AfterViewChecked {
     evaluationTitle: string;
 
     constructor(private global: GlobalVariablesService, private notesService: EvaluationNotesService, private route: ActivatedRoute)
-    {}
+    { }
 
     ngAfterViewChecked() {
         this.route.params.subscribe(params => this.evaluationTitle = params['evaluation']);
         var evaluation = this.notesService.getSelectedEvaluation(this.evaluationTitle);
 
-        if (evaluation) {
+        if (evaluation && evaluation.estNouveau) {
             this.notesService.dismissAssociatedNotification(evaluation);
+            evaluation.estNouveau = false; // TODO: Should only be false after confirmation from server
         }
     }
 
