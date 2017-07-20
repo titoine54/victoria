@@ -175,28 +175,28 @@ public class Mock {
                 "  ],\n" +
                 "  \"evaluations\": [\n" +
                 "    {\n" +
-                "        \"evaluationId\": 123, \"nom\": \"Rapport APP1\", \"individuel\": true, \"estNouveau\": false,\n" +
+                "        \"evaluationId\": 123, \"nom\": \"Rapport APP1\", \"individuel\": true,\n" +
                 "        \"activites\": {\n" +
                 "            \"GIF500\": [{ \"competenceNumero\": 1, \"note\": 35, \"ponderation\": 40 }],\n" +
                 "            \"GIF510\": [{ \"competenceNumero\": 1, \"note\": 80, \"ponderation\": 100 }, { \"competenceNumero\": 2, \"note\": 56, \"ponderation\": 70 }]\n" +
                 "        }\n" +
                 "    },\n" +
                 "    {\n" +
-                "        \"evaluationId\": 456, \"nom\": \"Examen Sommatif APP1\", \"individuel\": true, \"estNouveau\": false,\n" +
+                "        \"evaluationId\": 456, \"nom\": \"Examen Sommatif APP1\", \"individuel\": true,\n" +
                 "        \"activites\": {\n" +
                 "            \"GIF500\": [{ \"competenceNumero\": 1, \"note\": null, \"ponderation\": 20 }],\n" +
                 "            \"GIF520\": [{ \"competenceNumero\": 1, \"note\": null, \"ponderation\": 40 }, { \"competenceNumero\": 2, \"note\": null, \"ponderation\": 50 }]\n" +
                 "        }\n" +
                 "    },\n" +
                 "    {\n" +
-                "        \"evaluationId\": 321, \"nom\": \"Rapport APP2\", \"individuel\": true, \"estNouveau\": true,\n" +
+                "        \"evaluationId\": 321, \"nom\": \"Rapport APP2\", \"individuel\": true,\n" +
                 "        \"activites\": {\n" +
                 "            \"GIF520\": [{ \"competenceNumero\": 1, \"note\": 34, \"ponderation\": 40 }, { \"competenceNumero\": 2, \"note\": 47, \"ponderation\": 50 }],\n" +
                 "            \"GIF540\": [{ \"competenceNumero\": 1, \"note\": 64, \"ponderation\": 70 }]\n" +
                 "        }\n" +
                 "    },\n" +
                 "    {\n" +
-                "        \"evaluationId\": 654, \"nom\": \"Oral - Projet\", \"individuel\": false, \"estNouveau\": true,\n" +
+                "        \"evaluationId\": 654, \"nom\": \"Oral - Projet\", \"individuel\": false,\n" +
                 "        \"activites\": {\n" +
                 "            \"GIF560\": [{ \"competenceNumero\": 1, \"note\": 22, \"ponderation\": 40 }, { \"competenceNumero\": 2, \"note\": 63, \"ponderation\": 70 }]\n" +
                 "        }\n" +

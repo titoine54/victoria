@@ -2,3 +2,5 @@
 out/*
 target/*
 Victoria.iml
+lib/
+../.idea/*

@@ -3,12 +3,13 @@ import { Router } from '@angular/router';
 import { Ap } from "app/classes/ap";
 import { Evaluation } from "app/classes/evaluation";
 import { GlobalVariablesService } from "app/services/global-variables.service";
+import { ApiService } from "app/services/api.service";
 
 @Injectable()
 export class EvaluationNotesService {
 
     /**  */
-    constructor(private global: GlobalVariablesService, private router: Router) { }
+    constructor(private global: GlobalVariablesService, private router: Router, private api: ApiService) { }
 
     /** Get an Evaluation object
      * @param {string} evaluationTitle The title of the selected evaluation
@@ -25,6 +26,22 @@ export class EvaluationNotesService {
             return selectedEvaluation;
         }
         return null;
+    }
+
+    /** Tell the server that an notification has been viewed
+     * @param {Evaluation} evaluation The selected "Evaluation"
+     */
+    dismissAssociatedNotification(evaluation: Evaluation) {
+        if (evaluation) {
+            for (let nouvelle of this.global.nouvelles) {
+                if (nouvelle.evaluationId == evaluation.evaluationId) {
+                    console.log(`Dismissing evaluation "${evaluation.titre}"...`);
+                    this.api.markNotificationAsRead(nouvelle.notificationId).subscribe(
+                        (data: any) => evaluation.estNouveau = false
+                    );
+                }
+            }
+        }
     }
 
     /** Get an "Activité Pédagogique" object
