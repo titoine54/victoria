@@ -123,10 +123,10 @@ public class ApiRoute {
 
         // TODO : clean up rounding
         competenceNote.put("competenceNumero", currentLine.get("competence"));
-        competenceNote.put("note", (Double)(Math.round((Double) currentLine.get("note")*100)/100.0));
+        competenceNote.put("note", toTwoDecimals((Number) currentLine.get("note")));
         competenceNote.put("ponderation", currentLine.get("ponderation"));
-        competenceNote.put("moyenne", (Double)(Math.round((Double) currentLine.get("moyenne")*100)/100.0));
-        competenceNote.put("ecartType", (Double)(Math.round((Double) currentLine.get("ecart_type")*100)/100.0));
+        competenceNote.put("moyenne", toTwoDecimals((Number) currentLine.get("moyenne")));
+        competenceNote.put("ecartType", toTwoDecimals((Number) currentLine.get("ecart_type")));
         activity.add(competenceNote);
     }
 
@@ -216,9 +216,9 @@ public class ApiRoute {
     }
 
 
-    private Double toTwoDecimals(Double value){
-        if(value == null) return -1.00;
-        else return Math.round(value*100)/100.0;
+    private Double toTwoDecimals(Number value){
+        Double v = value.doubleValue();
+        return Math.round(v*100)/100.0;
     }
 
     private JSONArray object2array(JSONObject jsonObject) {
@@ -306,7 +306,7 @@ public class ApiRoute {
         JSONObject competenceNote = new JSONObject();
 
         competenceNote.put("competenceNumero", currentLine.get("competence"));
-        competenceNote.put("note", toTwoDecimals((Double) currentLine.get("note")));
+        competenceNote.put("note", toTwoDecimals((Number) currentLine.get("note")));
         competenceNote.put("ponderation", currentLine.get("ponderation"));
         activity.add(competenceNote);
     }
@@ -337,8 +337,8 @@ public class ApiRoute {
                 tmp.put("evaluationId", currentLine.get("evaluation_id"));
                 tmp.put("apCode", currentLine.get("ap"));
                 tmp.put("competenceNumero", currentLine.get("competence"));
-                tmp.put("moyenne", toTwoDecimals((Double) currentLine.get("moyenne")));
-                tmp.put("ecartType", toTwoDecimals((Double) currentLine.get("ecart_type")));
+                tmp.put("moyenne", toTwoDecimals((Number) currentLine.get("moyenne")));
+                tmp.put("ecartType", toTwoDecimals((Number) currentLine.get("ecart_type")));
                 stats.add(tmp);
             }
 

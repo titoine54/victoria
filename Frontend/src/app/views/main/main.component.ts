@@ -4,6 +4,8 @@ import { Evaluation } from "app/classes/evaluation";
 import { NoteModalComponent } from "app/components/note-modal/note-modal.component";
 import { GlobalVariablesService } from "app/services/global-variables.service";
 import { EvaluationNotesService } from "app/services/evaluation-notes.service";
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/debounceTime';
 declare var $: any;
 
 @Component({
@@ -15,10 +17,24 @@ declare var $: any;
 export class MainComponent implements AfterViewChecked {
   @ViewChild(NoteModalComponent)
 
-  noteModal: NoteModalComponent
+  noteModal: NoteModalComponent;
   evaluationTitle: string;
+  searchChanged: Subject<string> = new Subject<string>();
+  searchText: string;
 
-  constructor(public global: GlobalVariablesService, private notesService: EvaluationNotesService, private route: ActivatedRoute, private router: Router) {}
+  constructor(public global: GlobalVariablesService, private notesService: EvaluationNotesService, private route: ActivatedRoute, private router: Router) {
+    this.searchChanged
+      .debounceTime(300)
+      .distinctUntilChanged()
+      .subscribe(searchValue => {
+        this.global.searchValue = searchValue;
+
+        if (searchValue != "") {
+          this.updateCollapsible();
+        }
+
+      });
+  }
 
   ngAfterViewChecked() {
     this.evaluationTitle = undefined;
@@ -30,12 +46,15 @@ export class MainComponent implements AfterViewChecked {
     }
   }
 
-  updateCollapsible() {
-    if (this.global.searchValue != '') {
-      setTimeout(function () {
-        $(".collapsible-header").addClass("active");
-        $(".collapsible").collapsible({ accordion: false });
-      }, 1500);
-    }
+  searchTextChanged(text: string) {
+    this.searchChanged.next(text);
   }
+  
+  updateCollapsible() {
+    setTimeout(function () {
+      $(".collapsible-header").addClass("active");
+      $(".collapsible").collapsible({ accordion: false });
+    }, 0);
+  }
+
 }
