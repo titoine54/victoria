@@ -16,7 +16,7 @@ export class EvaluationNotesService {
      */
     getSelectedEvaluation(evaluationTitle: string): Evaluation {
         if (this.global.evaluations && evaluationTitle) {
-            var selectedEvaluation = this.global.evaluations.find(x => x.titre == evaluationTitle);
+            var selectedEvaluation = this.global.evaluations.find(x => x.titre == decodeURIComponent(evaluationTitle));
 
             if (!selectedEvaluation) {
                 this.router.navigate(['/404']);
