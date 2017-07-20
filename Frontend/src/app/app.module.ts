@@ -10,7 +10,6 @@ import { GetCompetenceTotalPipe } from "app/pipes/get-competence-total/get-compe
 import { MainComponent } from "app/views/main/main.component";
 import { NoteComponent } from "app/views/note/note.component";
 import { NoteModalComponent } from "app/components/note-modal/note-modal.component";
-import { SettingsModalComponent } from "app/components/settings-modal/settings-modal.component";
 import { EvaluationComponent } from "app/components/evaluation/evaluation.component";
 import { PageNotFoundComponent } from "app/views/page-not-found/page-not-found.component";
 import { NavbarComponent } from "app/components/navbar/navbar.component";
@@ -24,7 +23,6 @@ import { HasNewEvaluationPipe } from "app/pipes/has-new-evaluation/has-new-evalu
 import { LoadingComponent } from "app/components/loading/loading.component";
 import { WithApStatsPipe } from "app/pipes/with-ap-stats/with-ap-stats.pipe";
 import { FilterApsPipe } from "app/pipes/filter-aps/filter-aps.pipe";
-import { ReplaceDotByComma } from "app/pipes/replaceDotByComma/replaceDotByComma.pipe"
 import { MobileGuard } from 'app/common/mobile.guard'
 import { DesktopGuard } from 'app/common/desktop.guard'
 
@@ -44,7 +42,6 @@ const appRoutes: Routes = [
     MainComponent,
     NoteComponent,
     NoteModalComponent,
-    SettingsModalComponent,
     NavbarComponent,
     PageNotFoundComponent,
     GetCompetenceTotalPipe,
@@ -54,8 +51,7 @@ const appRoutes: Routes = [
     HasNewEvaluationPipe,
     LoadingComponent,
     WithApStatsPipe,
-    FilterApsPipe,
-    ReplaceDotByComma
+    FilterApsPipe
   ],
   imports: [
     BrowserModule,
@@ -69,8 +65,7 @@ const appRoutes: Routes = [
     ApiService, 
     GlobalVariablesService,
     EvaluationNotesService, 
-    NoteModalComponent, 
-    SettingsModalComponent,
+    NoteModalComponent,
     MobileGuard,
     DesktopGuard,
   ],

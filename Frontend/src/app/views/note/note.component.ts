@@ -13,7 +13,7 @@ export class NoteComponent {
 
     evaluationTitle: string;
 
-    constructor(private global: GlobalVariablesService, private notesService: EvaluationNotesService, private route: ActivatedRoute) {
+    constructor(public global: GlobalVariablesService, public notesService: EvaluationNotesService, private route: ActivatedRoute) {
         this.route.params.subscribe(params => this.evaluationTitle = params['evaluation']);
     }
 
