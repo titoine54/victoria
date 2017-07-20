@@ -1,12 +1,12 @@
 <!--Notifications-->
 <ul id="notifs" class="dropdown-content">
-  <li><a href="javascript:void(0)">Nouvelle note disponible pour <b>GEN502</b></a></li>
-  <li><a href="javascript:void(0)">Nouvelle note disponible pour <b>GEN521</b></a></li>
+  <li *ngFor="let nouvelle of global.nouvelles">
+    <a [routerLink]="'/note/'+nouvelle.nomEvaluation">{{nouvelle.description}}</a>
+  </li>
 </ul>
 
 <!--Parameters dropdown-->
 <ul id="params" class="dropdown-content">
-  <li><a href="javascript:void(0)" (click)="settingsModal.show()"><i class="material-icons">settings</i>Paramètres</a></li>
   <li><a href="/logout"><i class="material-icons">exit_to_app</i>Déconnexion</a></li>
   <li *ngIf="isDevEnv" class="divider"></li>
   <li *ngIf="isDevEnv">
@@ -29,18 +29,16 @@
     <a href="http://materializecss.com/" target="_blank"><i class="material-icons">dashboard</i>Materialize CSS</a>
   </li>
   <li *ngIf="isDevEnv" class="divider"></li>
-  <li><a class="subheader">
-    <i class="material-icons">notifications</i>Notifications</a>
-  </li>
 
   <!--Notifications-->
-  <li><a class="waves-effect notification" href="javascript:void(0)">Nouvelle note disponible pour <b>GEN502</b></a></li>
-  <li><a class="waves-effect notification" href="javascript:void(0)">Nouvelle note disponible pour <b>GEN521</b></a></li>
-
-  <li class="divider"></li>
-  <li><a href="javascript:void(0)" (click)="settingsModal.show()">
-    <i class="material-icons">settings</i>Paramètres</a>
+  <li><a class="subheader">
+    <i class="material-icons">notifications</i>Nouvelles</a>
   </li>
+  <li *ngFor="let nouvelle of global.nouvelles">
+    <a [routerLink]="'/note/'+nouvelle.nomEvaluation" class="waves-effect notification">{{nouvelle.description}}</a>
+  </li>
+  
+  <li class="divider"></li>
   <li><a href="/logout">
     <i class="material-icons">exit_to_app</i>Déconnexion</a>
   </li>
@@ -56,7 +54,7 @@
 <nav id="navBar">
   <div class="nav-wrapper green">
     <!--Hamburger menu-->
-    <a href="javascript:void(0)" materialize="sideNav" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+    <a href="javascript:void(0)" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
     <!--UdeS logo-->
     <a [routerLink]="['/notes']" class="brand-logo">
       <img class="logo material-icons" src="/assets/img/logo-udes.png">
@@ -76,12 +74,12 @@
         </a>
       </li>
       <!--Search-->
-      <li *ngIf="global.user" [class.selected]="global.showSearchBar">
+      <li *ngIf="global.user && router.url === '/notes'" [class.selected]="global.showSearchBar">
         <a (click)="toggleSearchBar()">
         <i class="material-icons">search</i>
         </a>
       </li>
-      <!--Notifications-->
+      <!--Notifications Dropdown-->
       <li *ngIf="global.user" class="hide-on-med-and-down">
         <a materialize="dropdown" class="dropdown-button" data-activates="notifs" data-belowOrigin="true" data-alignment="right"
           data-constrainWidth="false">
@@ -98,5 +96,3 @@
     </ul>
   </div>
 </nav>
-
-<app-settings-modal></app-settings-modal>

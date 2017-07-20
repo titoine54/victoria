@@ -3,21 +3,27 @@ package com.victoria.rest;
 /**
  * Created by BenjaminB.-M and Ric Matte on 2017-06-27.
  */
+
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPatch;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 @Path("/")
@@ -45,9 +51,9 @@ public class ApiRoute {
 
             JSONObject evaluations = new JSONObject();
             JSONObject aps = new JSONObject();
-            JSONObject notifications = new JSONObject();
+            ArrayList notifications = new ArrayList();
 
-            URL urlNotif = new URL("http://127.0.0.1:9090/notification?cip=eq." + req.getRemoteUser());
+            URL urlNotif = new URL("http://127.0.0.1:9090/v_notifications?cip=eq." + req.getRemoteUser());
             InputStream isNotif = urlNotif.openStream();
 
             JSONParser jsonParserNotif = new JSONParser();
@@ -55,12 +61,12 @@ public class ApiRoute {
 
             getNotifications(notificationResponse, notifications);
 
-//            for (int i = 0; i < noteResponse.size(); i++) {
-//                JSONObject currentLine = (JSONObject)noteResponse.get(i);
-//
-//                addEvaluation(currentLine, evaluations);
-//                addAp(currentLine, aps);
-//            }
+            for (int i = 0; i < noteResponse.size(); i++) {
+                JSONObject currentLine = (JSONObject)noteResponse.get(i);
+
+                addEvaluation(currentLine, evaluations);
+                addAp(currentLine, aps);
+            }
 
             ///////////////////////////////////////////////////////
             // TODO: to remove
@@ -157,6 +163,25 @@ public class ApiRoute {
     }
 
 
+    private void getNotifications (JSONArray notificationResponse, ArrayList notifications) {
+
+        for (int i = 0; i < notificationResponse.size(); i++) {
+            JSONObject currentLine = (JSONObject) notificationResponse.get(i);
+
+            String notifID = currentLine.get("notification_id").toString();
+            //JSONObject notification = (ArrayList) notifications.get(notifID);
+
+            JSONObject notification = new JSONObject();
+            notification.put("notificationID", currentLine.get("notification_id"));
+            notification.put("evaluationID", currentLine.get("evaluation_id"));
+            notification.put("evaluationNom", currentLine.get("titre"));
+            notification.put("descriptionNotification", "Nouvelle note : " + currentLine.get("titre"));
+            notification.put("cip", currentLine.get("cip"));
+            notifications.add(notification);
+        }
+    }
+
+
     @GET
     @Path("/user")
     @Produces(MediaType.APPLICATION_JSON)
@@ -204,38 +229,9 @@ public class ApiRoute {
         }
         return output;
     }
-    
-    private void getNotifications (JSONArray notificationResponse, JSONObject notifications) {
-
-        for (int i = 0; i < notificationResponse.size(); i++) {
-            JSONObject currentLine = (JSONObject) notificationResponse.get(i);
-
-            String notifID = currentLine.get("notification_id").toString();
-            JSONObject notification = (JSONObject)notifications.get(notifID);
-            if (notification == null) {
-                notification = new JSONObject();
-                notification.put("id", notifID);
-                notification.put("description", currentLine.get("description"));
-                notification.put("est_envoye", currentLine.get("est_envoye"));
-                notification.put("cip", currentLine.get("cip"));
-                //notification.put("nom", currentLine.get("nom"));
-                notification.put("url", currentLine.get("url"));
-                notifications.put(currentLine.get("nom"),notification);
-            }
-        }
-        System.out.println(notifications.toString());
-    }
-    /*
-    id_notification
-        nom_notification (a determiner)
-        description_notification ("Nouvelle note pour " + nom evaluation)
-        id_evaluation
-        nom_evaluation
-    */
-
 
 //    private void sendNotifications (JSONObject jsonObject) {
-//        URL url = new URL("http://127.0.0.1:9090/v_notes_etudiants"); //TODO: get real address from notification team
+//         //TODO: get real address from notification team
 //    }
 
     @GET
@@ -295,7 +291,6 @@ public class ApiRoute {
             evaluation.put("evaluationId", evalID);
             evaluation.put("nom", currentLine.get("evaluation"));
             evaluation.put("individuel", currentLine.get("individuel"));
-            evaluation.put("estNouveau", false); //TODO change for value of DB
             evaluation.put("activites", new JSONObject());
 
             evaluations.put(evalID, evaluation);
@@ -322,11 +317,11 @@ public class ApiRoute {
     public String getStatistics(@Context HttpServletRequest req, @Context HttpServletResponse res){
 
         try{
-            URL url =  new URL("http://localhost:9090/v_statistiques_etudiants?cip=eq." + req.getRemoteUser()+"&trimestre=eq.H17");
-            InputStream is = url.openStream();
+                URL url =  new URL("http://localhost:9090/v_statistiques_etudiants?cip=eq." + req.getRemoteUser()+"&trimestre=eq.H17");
+                InputStream is = url.openStream();
 
-            JSONParser jsonParser = new JSONParser();
-            JSONArray statisticsResponse = (JSONArray)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
+                JSONParser jsonParser = new JSONParser();
+                JSONArray statisticsResponse = (JSONArray)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
 
             if(statisticsResponse.size() == 0){
                 return "null";
@@ -354,5 +349,29 @@ public class ApiRoute {
         }
 
         return "null";
+    }
+
+    @GET
+    @Path("/notification/{notification_id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public void markNotificationAsRead(@PathParam("notification_id") Integer notification_id){
+        try{
+            CloseableHttpClient httpClient = HttpClients.createDefault();
+            HttpPatch httpPatch = new HttpPatch(new URI("http://localhost:9090/notification?notification_id=eq." + notification_id));
+
+            String json = "{ \"est_vu\" : true }";
+            StringEntity entity = new StringEntity(json);
+            httpPatch.setEntity(entity);
+            httpPatch.setHeader("Accept", "application/json");
+            httpPatch.setHeader("Content-type", "application/json");
+
+            CloseableHttpResponse response = httpClient.execute(httpPatch);
+            System.out.println(response);
+            System.out.println(notification_id);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
     }
 }

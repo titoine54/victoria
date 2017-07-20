@@ -53,12 +53,12 @@ describe('WithApStatsPipe', () => {
   it('get should display "{note}/{total} {percentage}%" for notes in GEN 500', () => {
     var ap = output[1];
     var stats: Dict<any> = ap.stats;
-    expect(stats.string).toEqual('70/120 (58,33%)');
-    expect(stats.percent).toEqual('58,33%');
+    expect(stats.string).toEqual('70/120 (58%)');
+    expect(stats.percent).toEqual('58%');
     expect(stats.points).toEqual(70);
     expect(stats.total).toEqual(120);
     expect(stats.remaining).toEqual(40);
-    expect(stats.remainingPercent).toEqual('75,00%');
+    expect(stats.remainingPercent).toEqual('75%');
     delete ap.stats;
 
     for (var property in ap) {
@@ -69,12 +69,12 @@ describe('WithApStatsPipe', () => {
   it('get should display "{note}/{total} {percentage}%" with for all notes in GEN 510', () => {
     var ap = output[2];
     var stats: Dict<any> = ap.stats;
-    expect(stats.string).toEqual('120/140 (85,71%)');
-    expect(stats.percent).toEqual('85,71%');
+    expect(stats.string).toEqual('120/140 (86%)');
+    expect(stats.percent).toEqual('86%');
     expect(stats.points).toEqual(120);
     expect(stats.total).toEqual(140);
     expect(stats.remaining).toEqual(0);
-    expect(stats.remainingPercent).toEqual('100,00%');
+    expect(stats.remainingPercent).toEqual('100%');
     delete ap.stats;
 
     for (var property in ap) {
