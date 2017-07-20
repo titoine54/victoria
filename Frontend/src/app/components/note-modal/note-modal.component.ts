@@ -47,8 +47,10 @@ export class NoteModalComponent {
      */
     show(evaluationTitle: string) {
         this.evaluationTitle = evaluationTitle;
-        
-        if (this.notesService.getSelectedEvaluation(this.evaluationTitle)) {
+        var evaluation = this.notesService.getSelectedEvaluation(evaluationTitle);
+
+        if (evaluation) {
+            this.notesService.dismissAssociatedNotification(evaluation);
             this.modalActions.emit({ action: "modal", params: ['open'] });
         }
     }

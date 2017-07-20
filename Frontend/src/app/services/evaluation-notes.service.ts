@@ -28,12 +28,17 @@ export class EvaluationNotesService {
         return null;
     }
 
+    /** Tell the server that an notification has been viewed
+     * @param {Evaluation} evaluation The selected "Evaluation"
+     */
     dismissAssociatedNotification(evaluation: Evaluation) {
         if (evaluation) {
             for (let nouvelle of this.global.nouvelles) {
                 if (nouvelle.evaluationId == evaluation.evaluationId) {
-                    console.log(`TODO: Dismissing evaluation "${evaluation.titre}"...`);
-                    this.api.markNotificationAsRead(nouvelle.notificationId);
+                    console.log(`Dismissing evaluation "${evaluation.titre}"...`);
+                    this.api.markNotificationAsRead(nouvelle.notificationId).subscribe(
+                        (data: any) => {}
+                    );
                 }
             }
         }
