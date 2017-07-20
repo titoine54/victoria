@@ -33,6 +33,7 @@ export class AppComponent {
       (data: any) => {
         this.global.apList = [];
         this.global.evaluations = [];
+        this.global.nouvelles = [];
 
         for (let ap of data.aps) {
           this.global.apList.push(new Ap(ap.apCode, ap.titre, ap.competences, ap.description, ap.credit));
