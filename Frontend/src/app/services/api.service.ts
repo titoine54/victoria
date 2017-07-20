@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Http, URLSearchParams, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { environment } from '../../environments/environment';
 import { MockUser } from "app/services/api-mocking-tests/user.mock";
@@ -13,13 +13,26 @@ export class ApiService {
   /** This class will be used to make all the requests with the backend */
   constructor(private http: Http) { }
 
-  /** Generate the valid headers for all API calls
-   * @return {Headers} The headers
+  /** Generate the valid headers and query string for all API calls
+   * @return {RequestOptions} The RequestOptions
    */
-  private getHeaders(token?: String, noToken?: boolean) {
+  private getRequestOptions(searchParams?: URLSearchParams) {
     let headers: Headers = new Headers();
     headers.append("Content-Type", "application/json");
-    return new RequestOptions({ headers: headers, withCredentials: true });
+
+    let params = new URLSearchParams(window.location.search.substr(1));
+    if(searchParams) { params.appendAll(searchParams); }
+
+    return new RequestOptions({ params: params, headers: headers, withCredentials: true });
+  }
+
+  private handleError(error: any) {
+    if (error.status == 401) {
+      window.location.replace("https://cas.usherbrooke.ca/login?service=" + window.location.protocol + "//" + window.location.host);
+      return Observable.empty();
+    } else {
+      return Observable.throw(error || 'Server error');
+    }
   }
 
   /** Fetch all the user data from the server
@@ -30,9 +43,10 @@ export class ApiService {
     if (environment.production == false && environment.useOfflineMocks) {
       return Observable.of(MockUser);
     }
-    return this.http.get(`${environment.apiUrl}/user`, this.getHeaders())
+
+    return this.http.get(`${environment.apiUrl}/user`, this.getRequestOptions())
       .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error || 'Server error'));
+      .catch(this.handleError);
   }
 
   /** Fetch all note of the user for the user
@@ -46,11 +60,10 @@ export class ApiService {
     }
 
     var url = `${environment.apiUrl}/v2/notes`;
-    if (trimestre) { url += `?trimestre=${trimestre}` }
 
-    return this.http.get(url, this.getHeaders())
+    return this.http.get(url, this.getRequestOptions(trimestre? new URLSearchParams(`trimestre=${trimestre}`) : null))
       .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error._body || 'Server error'));
+      .catch(this.handleError);
   }
 
   /** Collect stats for "moyenne" and "ecart-type" of each evaluations
@@ -63,11 +76,10 @@ export class ApiService {
     }
 
     var url = `${environment.apiUrl}/v2/statistiques`;
-    if (trimestre) { url += `?trimestre=${trimestre}` }
 
-    return this.http.get(url, this.getHeaders())
+    return this.http.get(url, this.getRequestOptions(trimestre? new URLSearchParams(`trimestre=${trimestre}`) : null))
       .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error._body || 'Server error'));
+      .catch(this.handleError);
   }
 
   /** Warn api that the user has viewed a notification
@@ -75,9 +87,9 @@ export class ApiService {
    * @return {Observable} The observable for the caller
    */
   public markEvaluationAsRead(notificationId: number): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/notify/${notificationId}`, this.getHeaders())
+    return this.http.get(`${environment.apiUrl}/notify/${notificationId}`, this.getRequestOptions())
       .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error._body || 'Server error'));
+      .catch(this.handleError);
   }
 
 }
