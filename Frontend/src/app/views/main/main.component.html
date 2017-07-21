@@ -17,11 +17,12 @@
       <ul *ngIf="apList.length > 0" materialize="collapsible" class="collapsible" data-collapsible="expandable">
         <li *ngFor="let ap of apList">
           <div class="collapsible-header waves-effect">
-            <b>{{ ap.apCode }}</b> - {{ ap.titre }} ({{ ap.credit }} cr.)
-            <span *ngIf="ap.stats.remaining > 0" class="badge blue-badge">Points à combler: {{ ap.stats.remaining }}</span>
-            <span class="badge">{{ ap.stats.string }}</span>
-            <span class="new" *ngIf="ap | hasNewEvaluation:global.evaluations">&bull;</span>
-
+            <div class="apTitle">
+              <b>{{ ap.apCode }}</b><span class="hide-on-med-and-down"> - {{ ap.titre }} ({{ ap.credit }} cr.)</span>
+              <span *ngIf="ap.stats.remaining > 0" class="badge blue-badge">Points à combler: {{ ap.stats.remaining }}</span>
+              <span class="badge">{{ ap.stats.string }}</span>
+              <span class="new" *ngIf="ap | hasNewEvaluation:global.evaluations">&bull;</span>
+            </div>
             <div class="progress">
               <div class="ap-progress determinate" [style.width]="ap.stats.remainingPercent" [attr.data-tooltip]="ap.stats.string" materialize="tooltip"
                 data-delay="30" data-position="top"></div>

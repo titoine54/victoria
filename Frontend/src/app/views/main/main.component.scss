@@ -12,7 +12,6 @@ nav {
     }
 }
 
-
 .collapsible {
     margin: 15px;
 
@@ -48,18 +47,21 @@ nav {
 .progress {
     background-color: #dedede;
     margin: 0 0 1rem 0;
-    height: 5px;
+    overflow: visible;   
+    height: 6px; 
 
     .bareme-progress {
         background-color: red;
-        $barem-width: 0.5rem;
+        $barem-width: 0.6rem;
         width: $barem-width;
         margin-left: -$barem-width;
+        margin-top: -2px;
+        height: 10px;
     }
 
     .user-progress {
         background-color: #416c58;
-        pointer-events: none;
+        pointer-events: none;;
     }
 
     .ap-progress {
@@ -67,3 +69,6 @@ nav {
     }
 }
 
+.apTitle {
+    overflow: auto;
+}

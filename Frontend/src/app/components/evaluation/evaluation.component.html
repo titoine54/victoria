@@ -1,5 +1,5 @@
-<li class="collection-header">
-    <b>{{ apCode }}</b> - {{ notesService.getSelectedAp(apCode).titre }}
+<li class="collection-header headerColor">
+    <b>{{ apCode }}</b><span class="hide-on-med-and-down"> - {{ notesService.getSelectedAp(apCode).titre }}</span>
     <span *ngIf="notesService.getApStats(apCode, evaluation); let apStats"> 
         <span *ngIf="apStats.accumulatedPoints; else elseBlock" materialize="tooltip" data-delay="50" class="badge"
         data-position="left" [attr.data-tooltip]="'Moyenne: ' + apStats.groupMean + ' Écart-type: ' + apStats.standardDeviation"
@@ -10,7 +10,7 @@
     </span>
 </li>
 <li *ngFor="let note of evaluation.associatedAps[apCode]" class="collection-item">
-    <b>Compétence {{ note.competenceNumero }}<i materialize="tooltip" data-delay="50" class="material-icons" data-position="bottom" [attr.data-tooltip]="notesService.getCompetenceDescription(apCode, note.competenceNumero)">info_outline</i></b>
+    <b>Compétence {{ note.competenceNumero }}<i *ngIf="notesService.getCompetenceDescription(apCode, note.competenceNumero)" materialize="tooltip" data-delay="50" class="material-icons" data-position="bottom" [attr.data-tooltip]="notesService.getCompetenceDescription(apCode, note.competenceNumero)">info_outline</i></b>
     <span *ngIf="note.note; else elseBlock" materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: ' + note.moyenne + ' Écart-type: ' + note.ecartType">
         {{ note.note }}/{{ note.ponderation }} <b>({{ (note.note/note.ponderation) * 100 | number : '1.0-2' }}%)</b>
     </span>
