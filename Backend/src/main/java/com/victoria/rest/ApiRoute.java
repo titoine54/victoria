@@ -183,7 +183,7 @@ public class ApiRoute {
 
 
     @GET
-    @Path("/user")
+    @Path("/utilisateur")
     @Produces(MediaType.APPLICATION_JSON)
     public String getUsers(@Context HttpServletRequest req, @Context HttpServletResponse res) {
 
@@ -326,12 +326,12 @@ public class ApiRoute {
     @Produces(MediaType.APPLICATION_JSON)
     public String getStatistics(@Context HttpServletRequest req, @Context HttpServletResponse res){
 
-        try{
-                URL url =  new URL("http://localhost:9090/v_statistiques_etudiants?cip=eq." + req.getRemoteUser()+"&trimestre=eq.H17");
-                InputStream is = url.openStream();
+        try {
+            URL url =  new URL("http://localhost:9090/v_statistiques_etudiants?cip=eq." + req.getRemoteUser()+"&trimestre=eq.H17");
+            InputStream is = url.openStream();
 
-                JSONParser jsonParser = new JSONParser();
-                JSONArray statisticsResponse = (JSONArray)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
+            JSONParser jsonParser = new JSONParser();
+            JSONArray statisticsResponse = (JSONArray)jsonParser.parse(new InputStreamReader(is, "UTF-8"));
 
             if(statisticsResponse.size() == 0){
                 return "null";
@@ -382,5 +382,13 @@ public class ApiRoute {
             e.printStackTrace();
         }
 
+    }
+
+
+    @GET
+    @Path("/v2/utilisateur")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getUsers_v2(@Context HttpServletRequest req, @Context HttpServletResponse res) {
+        return getUsers(req, res);
     }
 }

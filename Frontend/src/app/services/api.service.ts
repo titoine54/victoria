@@ -45,7 +45,7 @@ export class ApiService {
       return Observable.of(MockUser);
     }
 
-    return this.http.get(`${environment.apiUrl}/user`, this.getRequestOptions())
+    return this.http.get(`${environment.apiUrl}/v2/utilisateur`, this.getRequestOptions())
       .map((res: Response) => res.json())
       .catch(this.handleError);
   }
