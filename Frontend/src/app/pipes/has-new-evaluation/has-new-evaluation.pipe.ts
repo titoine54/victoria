@@ -3,7 +3,8 @@ import { Evaluation } from "app/classes/evaluation";
 import { Ap } from "app/classes/ap";
 
 @Pipe({
-    name: 'hasNewEvaluation'
+    name: 'hasNewEvaluation',
+    pure: false
 })
 export class HasNewEvaluationPipe implements PipeTransform {
 
