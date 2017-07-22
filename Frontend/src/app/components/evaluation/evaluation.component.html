@@ -1,5 +1,7 @@
 <li class="collection-header headerColor">
-    <b>{{ apCode }}</b><span class="hide-on-med-and-down"> - {{ notesService.getSelectedAp(apCode).titre }}</span>
+    <b>{{ apCode }}</b>
+    <span class="hide-on-med-and-down"> - {{ notesService.getSelectedAp(apCode).titre }}</span>
+    <span class="hide-on-large-only"><i materialize="tooltip" data-delay="50" class="material-icons" data-position="bottom" [attr.data-tooltip]="notesService.getSelectedAp(apCode).titre">info_outline</i></span>
     <span *ngIf="notesService.getApStats(apCode, evaluation); let apStats"> 
         <span *ngIf="apStats.accumulatedPoints; else elseBlock" materialize="tooltip" data-delay="50" class="badge"
         data-position="left" [attr.data-tooltip]="'Moyenne: ' + apStats.groupMean + ' Écart-type: ' + apStats.standardDeviation"

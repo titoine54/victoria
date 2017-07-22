@@ -18,9 +18,12 @@
         <li *ngFor="let ap of apList">
           <div class="collapsible-header waves-effect">
             <div class="apTitle">
-              <b>{{ ap.apCode }}</b><span class="hide-on-med-and-down"> - {{ ap.titre }} ({{ ap.credit }} cr.)</span>
+              <b>{{ ap.apCode }}</b>
+              -
+              <span class="hide-on-med-and-down">{{ ap.titre }} ({{ ap.credit }} cr.)</span>
+              <span class="hide-on-large-only">{{ ap.credit }} cr.</span>
               <span *ngIf="ap.stats.remaining > 0" class="badge blue-badge">Points à combler: {{ ap.stats.remaining }}</span>
-              <span class="badge">{{ ap.stats.string }}</span>
+              <span class="badge no-left-margin">{{ ap.stats.string }}</span>
               <span class="new" *ngIf="ap | hasNewEvaluation:global.evaluations">&bull;</span>
             </div>
             <div class="progress">
@@ -33,6 +36,7 @@
           </div>
 
           <div class="collapsible-body active grey lighten-4">
+            <p class="hide-on-large-only"><b>{{ ap.titre }}</b></p>
             <blockquote class="caption">
               {{ ap.description }}
             </blockquote>

@@ -3,6 +3,9 @@
   <li *ngFor="let nouvelle of global.nouvelles">
     <a [routerLink]="'/note/'+nouvelle.nomEvaluation">{{nouvelle.description}}</a>
   </li>
+  <li *ngIf="global.nouvelles?.length == 0">
+    <a class="grey-text">Aucune nouvelle notification</a>
+  </li>
 </ul>
 
 <!--Parameters dropdown-->
@@ -36,6 +39,9 @@
   </li>
   <li *ngFor="let nouvelle of global.nouvelles">
     <a [routerLink]="'/note/'+nouvelle.nomEvaluation" class="waves-effect notification">{{nouvelle.description}}</a>
+  </li>
+  <li *ngIf="global.nouvelles?.length == 0">
+    <a class="grey-text">Aucune nouvelle notification</a>
   </li>
   
   <li class="divider"></li>
