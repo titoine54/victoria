@@ -1,7 +1,7 @@
 <div class="row">
   <div *ngFor="let competence of ap.competences" class="col {{ gridLayout }} marginBotton">
     <ul class="collection with-header z-depth-1">
-      <li class="collection-header">
+      <li class="collection-header headerColor">
         <b>Compétence {{ competence.competenceNumero }}</b>
         <i *ngIf="competence.description" materialize="tooltip" data-delay="50" class="material-icons" data-position="bottom" [attr.data-tooltip]="competence.description">info_outline</i>
         <span materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="competence | CompetenceTooltipInfoPipe:global.evaluations:ap.apCode">{{ competence | getCompetenceTotal:ap.apCode:global.evaluations }}</span>

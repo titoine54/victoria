@@ -12,7 +12,6 @@ nav {
     }
 }
 
-
 .collapsible {
     margin: 15px;
 
@@ -40,30 +39,41 @@ nav {
         background-color: #fafafa !important;
 
         .caption {
+            margin-top: 10px;
             font-style: italic;
         }
+    }
+
+    .no-left-margin {
+        margin-left: 0;
     }
 }
 
 .progress {
     background-color: #dedede;
     margin: 0 0 1rem 0;
-    height: 5px;
+    overflow: visible;   
+    height: 6px; 
 
     .bareme-progress {
         background-color: red;
-        $barem-width: 0.5rem;
+        $barem-width: 0.25rem;
         width: $barem-width;
         margin-left: -$barem-width;
+        margin-top: -4px;
+        height: 14px;
     }
 
     .user-progress {
-        background-color: #416c58;
+        background-color: #109a5d;
         pointer-events: none;
     }
 
     .ap-progress {
-        background-color: #92b3a4;
+        background-color: #9dbdaf;
     }
 }
 
+.apTitle {
+    overflow: auto;
+}
