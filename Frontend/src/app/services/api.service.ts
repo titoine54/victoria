@@ -22,6 +22,10 @@ export class ApiService {
     headers.append("Content-Type", "application/json");
 
     let params = new URLSearchParams(window.location.search.substr(1));
+    if(params.has('ticket')) {
+      window.history.pushState({}, '', window.location.href.replace(window.location.search, ''));
+      params.append('service', window.location.href);
+    }
     if(searchParams) { params.appendAll(searchParams); }
 
     return new RequestOptions({ params: params, headers: headers, withCredentials: true });
@@ -29,7 +33,7 @@ export class ApiService {
 
   private handleError(error: any) {
     if (error.status == 401) {
-      window.location.replace("https://cas.usherbrooke.ca/login?service=" + window.location.protocol + "//" + window.location.host);
+      window.location.replace("https://cas.usherbrooke.ca/login?service=" + window.location.href);
       return Observable.empty();
     } else {
       return Observable.throw(error || 'Server error');
