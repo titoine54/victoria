@@ -209,7 +209,7 @@ public class Mock {
                 "            \"GIF560\": [{ \"competenceNumero\": 1, \"note\": 22, \"ponderation\": 40 }, { \"competenceNumero\": 2, \"note\": 63, \"ponderation\": 70 }]\n" +
                 "        }\n" +
                 "    }\n" +
-                "  ]\n" +
+                "  ],\n" +
                 "  \"notifications\": [\n" +
                 "        { \"evaluationID\": 8637, \"notificationID\": 0, \"cip\": \"mera2411\", \"descriptionNotification\": \"Nouvelle note : GEI794 Site scrum\", \"evaluationNom\": \"GEI794 Site scrum\" },\n" +
                 "        { \"evaluationID\": 8452, \"notificationID\": 1, \"cip\": \"mera2411\", \"descriptionNotification\": \"Nouvelle note : Examens finaux gi-GEN230-GEN210 (APP1)\", \"evaluationNom\": \"Examens finaux gi-GEN230-GEN210 (APP1)\" },\n" +
