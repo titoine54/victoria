@@ -112,9 +112,17 @@ public class Mock {
         return "{\"message\": \"ok\"}";
     }
 
-
-
-
+    
+    @GET
+    @Path("/v2/utilisateur")
+    public String getUtilisateur() {
+        return "{\n" +
+                "  \"cip\": \"grab1337\",\n" +
+                "  \"firstName\": \"Bob\",\n" +
+                "  \"lastName\": \"Gratton\",\n" +
+                "  \"email\": \"bob.gratton.v2@usherbrooke.ca\"\n" +
+                "}";
+    }
 
     @GET
     @Path("/v2/notes")
@@ -201,7 +209,15 @@ public class Mock {
                 "            \"GIF560\": [{ \"competenceNumero\": 1, \"note\": 22, \"ponderation\": 40 }, { \"competenceNumero\": 2, \"note\": 63, \"ponderation\": 70 }]\n" +
                 "        }\n" +
                 "    }\n" +
-                "]\n" +
+                "  ]\n" +
+                "  \"notifications\": [\n" +
+                "        { \"evaluationID\": 8637, \"notificationID\": 0, \"cip\": \"mera2411\", \"descriptionNotification\": \"Nouvelle note : GEI794 Site scrum\", \"evaluationNom\": \"GEI794 Site scrum\" },\n" +
+                "        { \"evaluationID\": 8452, \"notificationID\": 1, \"cip\": \"mera2411\", \"descriptionNotification\": \"Nouvelle note : Examens finaux gi-GEN230-GEN210 (APP1)\", \"evaluationNom\": \"Examens finaux gi-GEN230-GEN210 (APP1)\" },\n" +
+                "        { \"evaluationID\": 8570, \"notificationID\": 2, \"cip\": \"mera2411\", \"descriptionNotification\": \"Nouvelle note : Droit - Examen sommatif - 4\", \"evaluationNom\": \"Droit - Examen sommatif - 4\" },\n" +
+                "        { \"evaluationID\": 8576, \"notificationID\": 3, \"cip\": \"mera2411\", \"descriptionNotification\": \"Nouvelle note : GEN700 - Examen sommatif #1\", \"evaluationNom\": \"GEN700 - Examen sommatif #1\" },\n" +
+                "        { \"evaluationID\": 123, \"notificationID\": 8, \"cip\": \"mera2411\", \"descriptionNotification\": \"Nouvelle note : Rapport de l'APP 1\", \"evaluationNom\": \"Rapport de l'APP 1\" },\n" +
+                "        { \"evaluationID\": 456, \"notificationID\": 5, \"cip\": \"mera2411\", \"descriptionNotification\": \"Nouvelle note : Examen sommatif APP 1\", \"evaluationNom\": \"Examen sommatif 1 Projet\" }\n" +
+                "  ]\n" +
                 "}";
     }
 
