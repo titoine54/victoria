@@ -11,6 +11,12 @@ import { Statistiques } from "app/classes/statistiques.interface";
 import { Nouvelle } from "app/classes/nouvelle";
 declare var Materialize: any;
 
+class VisibleError extends Error {
+  constructor(m: string) {
+    super(m);
+  }
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -22,17 +28,19 @@ export class AppComponent {
   constructor(private apiService: ApiService, public global: GlobalVariablesService) {
     (async () => {
       try {
-        await this.loadUserInfo();
+        await this.loadUserData();
         await this.loadUserNotes();
-        this.loadNotesStats();
+        await this.loadNotesStats();
       }
       catch(err) {
-        Materialize.toast(err.message, 4000);
+        console.log(err);
+        if (err instanceof VisibleError)
+          this.global.errorMessage = err.message;
       }
     })();
   }
 
-  async loadUserInfo() {
+  async loadUserData() {
     try {
       let data = await this.apiService.getUserData().toPromise();
       this.global.user = new User(data.cip, data.firstName, data.lastName, data.email);
@@ -70,7 +78,7 @@ export class AppComponent {
     }
     catch(err) {
       this.global.apList = [];
-      throw new Error('Une erreur s\'est produite lors du téléchargement des notes.');
+      throw new VisibleError('Une erreur s\'est produite lors du téléchargement des notes.');
     }
   }
 
@@ -103,7 +111,7 @@ export class AppComponent {
     }
     catch(err) {
       this.global.apList = [];
-      throw new Error('Une erreur s\'est produite lors du téléchargement des notes.');
+      throw new VisibleError('Une erreur s\'est produite lors du téléchargement des notes.');
     }
   }
 }

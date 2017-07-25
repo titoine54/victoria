@@ -55,12 +55,13 @@
   </ng-container>
 
   <!--When loading notes-->
-  <loading *ngIf="global.apList == undefined"></loading>
+  <loading *ngIf="global.apList == undefined && !global.errorMessage"></loading>
 
   <!--When api call failed-->
-  <div *ngIf="global.apList?.length == 0" class="container">
+  <div *ngIf="global.errorMessage" class="container">
+  <!-- *ngIf="global.apList?.length == 0" -->
     <br>
-    <h5>Un problème est survenu lors de la récupération de vos notes.</h5>
+    <h5>{{ global.errorMessage }}</h5>
     <p>Veuillez réessayer plus tard.</p>
   </div>
 </div>

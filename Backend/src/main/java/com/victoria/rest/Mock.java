@@ -106,9 +106,9 @@ public class Mock {
     }
 
     @GET
-    @Path("/notify/{id}")
+    @Path("/notification/{notification_id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String notify(@Context HttpServletRequest req) {
+    public String markNotification(@Context HttpServletRequest req) {
         return "{\"message\": \"ok\"}";
     }
 

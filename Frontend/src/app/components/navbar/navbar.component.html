@@ -62,13 +62,17 @@
     <!--Hamburger menu-->
     <a href="javascript:void(0)" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
     <!--UdeS logo-->
-    <a [routerLink]="['/notes']" class="brand-logo">
+    <a routerLink="/notes" class="brand-logo">
       <img class="logo material-icons" src="/assets/img/logo-udes.png">
     </a>
-    <!--Title-->
-    <span class="brand-logo" *ngIf="global.user">
-        Notes <span class="hide-on-small-only">de {{ global.user.fullName }}</span>
-    </span>
+
+    <a routerLink="/notes">
+      <!--Title-->
+      <span class="brand-logo" *ngIf="global.user">
+          Notes <span class="hide-on-small-only">de {{ global.user.fullName }}</span>
+      </span>
+    </a>
+    
     <ul class="right" [class.dark]="useBlackIcon">
       <!--Trimestre selection dropdown-->
       <li *ngIf="global.selectedTrimestre">
@@ -80,7 +84,7 @@
         </a>
       </li>
       <!--Search-->
-      <li *ngIf="global.user && router.url === '/notes'" [class.selected]="global.showSearchBar">
+      <li *ngIf="global.user && router.url.startsWith('/note')" [class.selected]="global.showSearchBar">
         <a (click)="toggleSearchBar()">
         <i class="material-icons">search</i>
         </a>
