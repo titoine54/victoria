@@ -89,22 +89,18 @@ export class AppComponent {
       if (data.statistiques != undefined) {
         var stats: Statistiques[] = data.statistiques;
         for (let stat of stats) {
-          loop:
-          for (let evaluation of this.global.evaluations) {
-            if (evaluation.evaluationId == stat.evaluationId) {
-              for (var apCode in evaluation.associatedAps) {
-                if (apCode == stat.apCode) {
-                  for (let note of evaluation.associatedAps[apCode]) {
-                    if (note.competenceNumero == stat.competenceNumero) {
-                      note.moyenne = stat.moyenne;
-                      note.ecartType = stat.ecartType;
-                      break loop;
-                    }
-                  }
-                }
-              }
-            }
-          }
+          let evals = this.global.evaluations.filter((ev) => ev.evaluationId == stat.evaluationId);
+          if (evals.length == 0)
+            continue;
+
+          let aps = evals[0].associatedAps;
+          let notes = aps[stat.apCode].filter((note) => note.competenceNumero == stat.competenceNumero);
+          if (notes.length == 0)
+            continue;
+
+          let note = notes[0];
+          note.moyenne = stat.moyenne;
+          note.ecartType = stat.ecartType;
         }
       }
       this.global.evaluations = [...this.global.evaluations];
