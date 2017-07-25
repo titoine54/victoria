@@ -25,7 +25,7 @@ export class AppComponent {
         global.user = new User(data.cip, data.firstName, data.lastName, data.email);
         this.loadUserNotes();
       },
-      err => Materialize.toast('Une erreur s\'est produite lors du téléchargement des donnees de l\'utilisateur.', 4000));
+      err => global.errorMessage = 'Une erreur s\'est produite lors du téléchargement des donnees de l\'utilisateur.');
   }
 
   loadUserNotes() {
@@ -57,7 +57,7 @@ export class AppComponent {
       },
       err => {
         this.global.apList = [];
-        Materialize.toast('Une erreur s\'est produite lors du téléchargement des notes.', 4000);
+        this.global.errorMessage = 'Une erreur s\'est produite lors du téléchargement des notes.';
       });
   }
 
@@ -89,7 +89,7 @@ export class AppComponent {
       },
       err => {
         this.global.apList = [];
-        Materialize.toast('Une erreur s\'est produite lors du téléchargement des notes.', 4000);
+        this.global.errorMessage = 'Une erreur s\'est produite lors du téléchargement des notes.';
       });
   }
 }

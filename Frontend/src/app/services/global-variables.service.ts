@@ -30,4 +30,6 @@ export class GlobalVariablesService {
   showSearchBar: boolean = false;
   searchValue: string = '';
 
+  // Error
+  errorMessage: string;
 }
