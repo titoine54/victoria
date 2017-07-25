@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ApiService } from "app/services/api.service";
 import { GlobalVariablesService } from "app/services/global-variables.service";
 import { environment } from '../environments/environment';
@@ -19,7 +19,7 @@ declare var Materialize: any;
 export class AppComponent {
   currentYear: number = new Date().getFullYear();
 
-  constructor(private apiService: ApiService, public global: GlobalVariablesService) {
+  constructor(private cdr: ChangeDetectorRef, private apiService: ApiService, public global: GlobalVariablesService) {
     apiService.getUserData().subscribe(
       (data: any) => {
         global.user = new User(data.cip, data.firstName, data.lastName, data.email);
@@ -53,6 +53,7 @@ export class AppComponent {
           }
         }
 
+        this.cdr.detectChanges(); // detect changes
         this.loadNotesStats();
       },
       err => {
