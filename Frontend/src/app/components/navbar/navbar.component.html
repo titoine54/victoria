@@ -80,7 +80,7 @@
         </a>
       </li>
       <!--Search-->
-      <li *ngIf="global.user && router.url !== '/m/note' && router.url !== '/404'" [class.selected]="global.showSearchBar">
+      <li *ngIf="global.user && router.url.startsWith('/note')" [class.selected]="global.showSearchBar">
         <a (click)="toggleSearchBar()">
         <i class="material-icons">search</i>
         </a>
