@@ -20,15 +20,16 @@ export class AppComponent {
   currentYear: number = new Date().getFullYear();
 
   constructor(private apiService: ApiService, public global: GlobalVariablesService) {
-    try {
-      this.loadUserInfo();
-      this.loadUserNotes();
-      this.loadNotesStats();
-    }
-    catch(err) {
-      this.global.apList = null;
-      Materialize.toast(err.message, 4000);
-    }
+    (async () => {
+      try {
+        await this.loadUserInfo();
+        await this.loadUserNotes();
+        this.loadNotesStats();
+      }
+      catch(err) {
+        Materialize.toast(err.message, 4000);
+      }
+    })();
   }
 
   async loadUserInfo() {
@@ -68,6 +69,7 @@ export class AppComponent {
       }
     }
     catch(err) {
+      this.global.apList = [];
       throw new Error('Une erreur s\'est produite lors du téléchargement des notes.');
     }
   }
@@ -100,6 +102,7 @@ export class AppComponent {
       this.global.evaluations = [...this.global.evaluations];
     }
     catch(err) {
+      this.global.apList = [];
       throw new Error('Une erreur s\'est produite lors du téléchargement des notes.');
     }
   }
