@@ -111,6 +111,14 @@
     </context-param>
 
     <filter>
+        <filter-name>Latin1ToUtf8Filter</filter-name>
+        <filter-class>com.victoria.filters.Latin1ToUtf8Filter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Latin1ToUtf8Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
         <filter-name>XsrfFilter</filter-name>
         <filter-class>com.victoria.filters.XsrfPreventionFilter</filter-class>
         <init-param>
