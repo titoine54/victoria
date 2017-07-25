@@ -89,16 +89,15 @@ export class AppComponent {
       if (data.statistiques != undefined) {
         var stats: Statistiques[] = data.statistiques;
         for (let stat of stats) {
-          let evals = this.global.evaluations.filter((ev) => ev.evaluationId == stat.evaluationId);
-          if (evals.length == 0)
+          let evaluation = this.global.evaluations.find((ev) => ev.evaluationId == stat.evaluationId);
+          if (!evaluation)
             continue;
 
-          let aps = evals[0].associatedAps;
-          let notes = aps[stat.apCode].filter((note) => note.competenceNumero == stat.competenceNumero);
-          if (notes.length == 0)
+          let aps = evaluation.associatedAps;
+          let note = aps[stat.apCode].find((note) => note.competenceNumero == stat.competenceNumero);
+          if (!note)
             continue;
 
-          let note = notes[0];
           note.moyenne = stat.moyenne;
           note.ecartType = stat.ecartType;
         }
