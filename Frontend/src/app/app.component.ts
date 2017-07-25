@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ApiService } from "app/services/api.service";
 import { GlobalVariablesService } from "app/services/global-variables.service";
 import { environment } from '../environments/environment';
@@ -25,11 +25,12 @@ class VisibleError extends Error {
 export class AppComponent {
   currentYear: number = new Date().getFullYear();
 
-  constructor(private apiService: ApiService, public global: GlobalVariablesService) {
+  constructor(private cdr: ChangeDetectorRef, private apiService: ApiService, public global: GlobalVariablesService) {
     (async () => {
       try {
         await this.loadUserData();
         await this.loadUserNotes();
+        this.cdr.detectChanges(); // detect changes
         await this.loadNotesStats();
       }
       catch(err) {
