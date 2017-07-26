@@ -30,7 +30,11 @@ export class AppComponent {
       try {
         await this.loadUserData();
         await this.loadUserNotes();
-        this.cdr.detectChanges(); // detect changes
+        
+        if (!environment.useOfflineMocks) {
+          this.cdr.detectChanges(); // detect changes
+        }
+        
         await this.loadNotesStats();
       }
       catch(err) {
