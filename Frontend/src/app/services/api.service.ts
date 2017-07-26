@@ -92,9 +92,17 @@ export class ApiService {
    * @return {Observable} The observable for the caller
    */
   public markNotificationAsRead(notificationId: number): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/notification/${notificationId}`, this.getRequestOptions())
+    return this.http.post(`${environment.apiUrl}/notification/${notificationId}`, null, this.getRequestOptions())
       .map((res: Response) => res.json())
       .catch(this.handleError);
+  }
+
+  /** End api session
+   */
+  public logout() {
+    this.http.post(`${environment.apiUrl}/deconnexion`, null, this.getRequestOptions())
+      .catch(this.handleError)
+      .subscribe(() => window.location.replace("https://cas.usherbrooke.ca/logout"), () => {});
   }
 
 }

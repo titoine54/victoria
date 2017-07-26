@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URI;
@@ -361,11 +362,11 @@ public class ApiRoute {
         return "null";
     }
 
-    @GET
+    @POST
     @Path("/notification/{notification_id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void markNotificationAsRead(@PathParam("notification_id") Integer notification_id){
-        try{
+    public Response markNotificationAsRead(@PathParam("notification_id") Integer notification_id) {
+        try {
             CloseableHttpClient httpClient = HttpClients.createDefault();
             HttpPatch httpPatch = new HttpPatch(new URI("http://localhost:9090/notification?notification_id=eq." + notification_id));
 
@@ -376,14 +377,22 @@ public class ApiRoute {
             httpPatch.setHeader("Content-type", "application/json");
 
             CloseableHttpResponse response = httpClient.execute(httpPatch);
-            System.out.println(response);
+
+            return Response.status(response.getStatusLine().getStatusCode()).build();
         }
-        catch(Exception e){
+        catch(Exception e) {
             e.printStackTrace();
+            return Response.serverError().build();
         }
 
     }
 
+    @POST
+    @Path("/v2/notification/{notification_id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response markNotificationAsRead_v2(@PathParam("notification_id") Integer notification_id) {
+        return markNotificationAsRead(notification_id);
+    }
 
     @GET
     @Path("/v2/utilisateur")
