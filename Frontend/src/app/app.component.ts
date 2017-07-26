@@ -53,7 +53,9 @@ export class AppComponent {
           }
         }
 
-        this.cdr.detectChanges(); // detect changes
+        if (!environment.useOfflineMocks) {
+          this.cdr.detectChanges(); // detect changes
+        }
         this.loadNotesStats();
       },
       err => {
