@@ -30,8 +30,8 @@ export class NoteModalComponent {
     /** Detect clicks outside the modal
      * @param {Event} e the clicked event
      */
-    onClickedOutside(e: Event) {
-        if (e.srcElement.tagName.toLowerCase() !== 'a') { // Check if event target is hyperlink
+    onClickedOutside(e) {
+        if (e.target.tagName.toLowerCase() !== 'a') { // Check if event target is a hyperlink
             this.hide();
         }
     }
