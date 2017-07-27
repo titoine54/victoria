@@ -1,5 +1,5 @@
 <div class="row">
-  <div *ngFor="let competence of ap.competences" class="col {{ gridLayout }} marginBotton">
+  <div *ngFor="let competence of ap.competences | sortBy:'competenceNumero'" class="col {{ gridLayout }} marginBotton">
     <ul class="collection with-header z-depth-1">
       <li class="collection-header headerColor">
         <b>Compétence {{ competence.competenceNumero }}</b>
