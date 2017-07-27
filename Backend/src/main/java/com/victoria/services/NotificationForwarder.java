@@ -44,10 +44,11 @@ public class NotificationForwarder implements Runnable{
         datePlusOneDay.setTime(date.getTime() + (1 * 24 * 60 * 60 * 1000));
 
         JSONObject o = new JSONObject();
+        String titre = ((String) currentLine.get("titre")).trim();
         o.put("cip", currentLine.get("cip"));
-        o.put("title", "Nouvelle note pour : " + currentLine.get("titre"));
+        o.put("title", "Nouvelle note pour : " + titre);
         o.put("description", "Sent at " + hourFormat.format(date));
-        o.put("url", "https://s6ie1704.gel.usherbrooke.ca/note/" + currentLine.get("titre"));
+        o.put("url", "https://s6ie1704.gel.usherbrooke.ca/note/" + titre);
         o.put("idChannel", "1");
         o.put("idCategory", "8");
         o.put("dateEmitted", dateFormat.format(date));
