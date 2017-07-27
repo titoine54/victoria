@@ -236,12 +236,12 @@ public class ApiRoute {
 //    }
 
     @GET
-    @Path("/v2/notes")
+    @Path("/v2/notes/{trimestre}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getNotes_v2(@Context HttpServletRequest req, @Context HttpServletResponse res) {
+    public String getNotes_v2(@PathParam("trimestre") String trimestre, @Context HttpServletRequest req, @Context HttpServletResponse res) {
 
         try {
-            URL url = new URL("http://localhost:9090/v2_notes_etudiants?cip=eq." + req.getRemoteUser() + "&trimestre=eq.H17");
+            URL url = new URL("http://localhost:9090/v2_notes_etudiants?cip=eq." + req.getRemoteUser() + "&trimestre=eq." + trimestre);
             InputStream is = url.openStream();
 
             JSONParser jsonParser = new JSONParser();
