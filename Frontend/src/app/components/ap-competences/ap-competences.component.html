@@ -7,14 +7,14 @@
         <span materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="competence | CompetenceTooltipInfoPipe:global.evaluations:ap.apCode">{{ competence | getCompetenceTotal:ap.apCode:global.evaluations }}</span>
       </li>
 
-      <ng-container *ngFor="let evaluation of global.evaluations"> 
+      <ng-container *ngFor="let evaluation of global.evaluations">
         <ng-container *ngIf="evaluation.getNote(ap.apCode, competence.competenceNumero); let note">
-          <li class="collection-item" [class.new]="evaluation.estNouveau">
+          <li class="collection-item">
             <a href="javascript:void(0)" (click)="showEvaluationNotes(evaluation.titre)">{{evaluation.titre}}</a>
             <i class="material-icons">
               {{ evaluation.individuel ? 'person' : 'group' }}
             </i>
-            <span class="new" *ngIf="evaluation.estNouveau">&bull;</span>
+            <i *ngIf="evaluation.estNouveau" class="material-icons new">new_releases</i>
             <span *ngIf="note.note; else elseBlock" materialize="tooltip" data-delay="50" class="badge" data-position="left" [attr.data-tooltip]="'Moyenne: ' + note.moyenne + ' Écart-type: ' + note.ecartType">{{note.note}}/{{note.ponderation}}
                     <b>({{ (note.note / note.ponderation) * 100 | number : '1.0-0' }}%)</b></span>
             <ng-template #elseBlock><span class="badge tooltipped" data-position="left">--/{{ note.ponderation }}</span></ng-template>

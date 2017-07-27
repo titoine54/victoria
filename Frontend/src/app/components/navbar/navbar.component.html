@@ -38,12 +38,12 @@
     <i class="material-icons">{{ global.nouvelles?.length > 0 ? 'notifications' : 'notifications_none' }}</i>Nouvelles</a>
   </li>
   <li *ngFor="let nouvelle of global.nouvelles">
-    <a [routerLink]="'/note/'+nouvelle.nomEvaluation" class="waves-effect notification">{{nouvelle.description}}</a>
+    <a [routerLink]="'/note/'+nouvelle.nomEvaluation" class="waves-effect notification truncate" [title]="nouvelle.description">{{nouvelle.description}}</a>
   </li>
   <li *ngIf="global.nouvelles?.length == 0">
     <a class="grey-text">Aucune nouvelle notification</a>
   </li>
-  
+
   <li class="divider"></li>
   <li><a (click)="logout()">
     <i class="material-icons">exit_to_app</i>Déconnexion</a>
@@ -72,7 +72,7 @@
           Notes <span class="hide-on-small-only">de {{ global.user.fullName }}</span>
       </span>
     </a>
-    
+
     <ul class="right" [class.dark]="useBlackIcon">
       <!--Trimestre selection dropdown-->
       <li *ngIf="global.selectedTrimestre">
@@ -91,9 +91,10 @@
       </li>
       <!--Notifications Dropdown-->
       <li *ngIf="global.user" class="hide-on-med-and-down">
-        <a materialize="dropdown" class="dropdown-button" data-activates="notifs" data-belowOrigin="true" data-alignment="right"
+        <a materialize="dropdown" class="dropdown-button icon-badge" data-activates="notifs" data-belowOrigin="true" data-alignment="right"
           data-constrainWidth="false">
-        <i class="material-icons">{{ global.nouvelles?.length > 0 ? 'notifications' : 'notifications_none' }}</i>
+          <i class="material-icons">{{ global.nouvelles?.length > 0 ? 'notifications' : 'notifications_none' }}</i>
+          <span class="notification-badge">{{ global.nouvelles?.length || '' }}</span>
         </a>
       </li>
       <!--Options-->

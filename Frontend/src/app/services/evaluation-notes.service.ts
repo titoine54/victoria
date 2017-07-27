@@ -37,8 +37,12 @@ export class EvaluationNotesService {
                 if (nouvelle.evaluationId == evaluation.evaluationId) {
                     console.log(`Dismissing evaluation "${evaluation.titre}"...`);
                     this.api.markNotificationAsRead(nouvelle.notificationId).subscribe(
-                        (data: any) => evaluation.estNouveau = false
+                        (data: any) => {
+                            evaluation.estNouveau = false;
+                            this.global.nouvelles = this.global.nouvelles.filter(n => n != nouvelle);
+                        }
                     );
+                    break;
                 }
             }
         }
