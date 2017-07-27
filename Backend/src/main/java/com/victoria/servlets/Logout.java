@@ -6,13 +6,13 @@ import javax.servlet.http.*;
 
 public class Logout extends HttpServlet {
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
     throws IOException, ServletException
     {
         HttpSession session = request.getSession(false);
         if(session != null)
             session.invalidate();
-        response.sendRedirect("https://cas.usherbrooke.ca/logout");
+        response.setStatus(response.SC_NO_CONTENT);
     }
 
 }

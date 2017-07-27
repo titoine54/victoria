@@ -3,6 +3,7 @@ import { GlobalVariablesService } from "app/services/global-variables.service";
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
 import { Dict } from "app/classes/dict.interface";
+import { ApiService } from "app/services/api.service";
 declare var $: any;
 
 @Component({
@@ -15,7 +16,7 @@ export class NavbarComponent implements AfterViewInit {
   useBlackIcon: boolean = false;
   selectOptions: string[] = ['Trimestre e17', 'Trimestre a16', 'Trimestre h17'];
 
-  constructor(public global: GlobalVariablesService, public router: Router) { }
+  constructor(private apiService: ApiService, public global: GlobalVariablesService, public router: Router) { }
 
   @HostListener('window:resize') onResize() {
     var header = document.getElementById('navBar').parentElement.parentElement;
@@ -35,6 +36,10 @@ export class NavbarComponent implements AfterViewInit {
     if (!this.global.showSearchBar) {
       this.global.searchValue = '';
     }
+  }
+
+  logout() {
+    this.apiService.logout();
   }
 
   ngAfterViewInit(): void {
