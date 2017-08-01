@@ -32,7 +32,8 @@ export class ApiService {
   }
 
   private handleError(error: any) {
-    if (error.status == 401) {
+    if ( error.status == 401 ||
+        (error.status == 500 && error.text().includes("TicketValidationException"))) {
       window.location.replace("https://cas.usherbrooke.ca/login?service=" + window.location.href);
       return Observable.empty();
     } else {

@@ -173,10 +173,11 @@ public class ApiRoute {
             //JSONObject notification = (ArrayList) notifications.get(notifID);
 
             JSONObject notification = new JSONObject();
+            String titre = ((String) currentLine.get("titre")).trim();
             notification.put("notificationID", currentLine.get("notification_id"));
             notification.put("evaluationID", currentLine.get("evaluation_id"));
-            notification.put("evaluationNom", currentLine.get("titre"));
-            notification.put("descriptionNotification", "Nouvelle note : " + currentLine.get("titre"));
+            notification.put("evaluationNom", titre);
+            notification.put("descriptionNotification", "Nouvelle note : " + titre);
             notification.put("cip", currentLine.get("cip"));
             notifications.add(notification);
         }
@@ -300,7 +301,7 @@ public class ApiRoute {
         if (evaluation == null) {
             evaluation = new JSONObject();
             evaluation.put("evaluationId", evalID);
-            evaluation.put("nom", currentLine.get("evaluation"));
+            evaluation.put("nom", ((String) currentLine.get("evaluation")).trim());
             evaluation.put("individuel", currentLine.get("individuel"));
             evaluation.put("activites", new JSONObject());
 
