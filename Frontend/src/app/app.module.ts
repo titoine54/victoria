@@ -25,6 +25,7 @@ import { WithApStatsPipe } from "app/pipes/with-ap-stats/with-ap-stats.pipe";
 import { FilterApsPipe } from "app/pipes/filter-aps/filter-aps.pipe";
 import { MobileGuard } from 'app/common/mobile.guard'
 import { DesktopGuard } from 'app/common/desktop.guard'
+import { SortByPipe } from "app/pipes/sort-by/sort-by.pipe";
 
 const appRoutes: Routes = [
     { path: '', redirectTo: '/notes', pathMatch: 'full' },
@@ -51,7 +52,8 @@ const appRoutes: Routes = [
     HasNewEvaluationPipe,
     LoadingComponent,
     WithApStatsPipe,
-    FilterApsPipe
+    FilterApsPipe,
+    SortByPipe
   ],
   imports: [
     BrowserModule,

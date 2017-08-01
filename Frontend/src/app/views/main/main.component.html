@@ -25,7 +25,7 @@
               <span class="hide-on-large-only">{{ ap.credit }} cr.</span>
               <span *ngIf="ap.stats.remaining > 0" class="badge blue-badge">Points à combler: {{ ap.stats.remaining }}</span>
               <span class="badge no-left-margin">{{ ap.stats.string }}</span>
-              <span class="new" *ngIf="ap | hasNewEvaluation:global.evaluations">&bull;</span>
+              <i *ngIf="ap | hasNewEvaluation:global.evaluations" class="material-icons new" data-tooltip="Nouvelle note" materialize="tooltip" data-position="right">new_releases</i>
             </div>
             <div class="progress">
               <div class="ap-progress determinate" [style.width]="ap.stats.remainingPercent" [attr.data-tooltip]="ap.stats.string" materialize="tooltip"
