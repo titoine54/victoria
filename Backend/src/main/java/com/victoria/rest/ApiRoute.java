@@ -19,6 +19,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URI;
@@ -239,10 +240,14 @@ public class ApiRoute {
     @GET
     @Path("/v2/notes")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getNotes_v2(@Context HttpServletRequest req, @Context HttpServletResponse res) {
+    public String getNotes_v2(@Context HttpServletRequest req, @Context HttpServletResponse res, @Context UriInfo info) {
 
         try {
-            URL url = new URL("http://localhost:9090/v2_notes_etudiants?cip=eq." + req.getRemoteUser() + "&trimestre=eq.H17");
+            String trimestre = info.getQueryParameters().getFirst("trimestre");
+            if (trimestre == null || trimestre.length() != 3) {
+                trimestre = "H17";
+            }
+            URL url = new URL("http://localhost:9090/v2_notes_etudiants?cip=eq." + req.getRemoteUser() + "&trimestre=eq." + trimestre);
             InputStream is = url.openStream();
 
             JSONParser jsonParser = new JSONParser();
@@ -326,10 +331,14 @@ public class ApiRoute {
     @GET
     @Path("/v2/statistiques")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getStatistics(@Context HttpServletRequest req, @Context HttpServletResponse res){
+    public String getStatistics(@Context HttpServletRequest req, @Context HttpServletResponse res, @Context UriInfo info){
 
         try {
-            URL url =  new URL("http://localhost:9090/v_statistiques_etudiants?cip=eq." + req.getRemoteUser()+"&trimestre=eq.H17");
+            String trimestre = info.getQueryParameters().getFirst("trimestre");
+            if (trimestre == null || trimestre.length() != 3) {
+                trimestre = "H17";
+            }
+            URL url =  new URL("http://localhost:9090/v_statistiques_etudiants?cip=eq." + req.getRemoteUser()+ "&trimestre=eq." + trimestre);
             InputStream is = url.openStream();
 
             JSONParser jsonParser = new JSONParser();
