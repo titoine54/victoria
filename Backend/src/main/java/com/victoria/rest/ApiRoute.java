@@ -366,10 +366,10 @@ public class ApiRoute {
     @POST
     @Path("/notification/{notification_id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response markNotificationAsRead(@PathParam("notification_id") Integer notification_id) {
+    public Response markNotificationAsRead(@PathParam("notification_id") Integer notification_id, @Context HttpServletRequest req) {
         try {
             CloseableHttpClient httpClient = HttpClients.createDefault();
-            HttpPatch httpPatch = new HttpPatch(new URI("http://localhost:9090/notification?notification_id=eq." + notification_id));
+            HttpPatch httpPatch = new HttpPatch(new URI("http://localhost:9090/notification?notification_id=eq." + notification_id + "&cip=eq." + req.getRemoteUser()));
 
             JSONObject json = new JSONObject();
             json.put("est_lu", true);
@@ -391,8 +391,8 @@ public class ApiRoute {
     @POST
     @Path("/v2/notification/{notification_id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response markNotificationAsRead_v2(@PathParam("notification_id") Integer notification_id) {
-        return markNotificationAsRead(notification_id);
+    public Response markNotificationAsRead_v2(@PathParam("notification_id") Integer notification_id, @Context HttpServletRequest req) {
+        return markNotificationAsRead(notification_id, req);
     }
 
     @GET
